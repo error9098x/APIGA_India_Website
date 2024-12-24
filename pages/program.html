@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Schedule - APIGA India 2024</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation (same as index.html) -->
+    <nav class="bg-white shadow-lg fixed w-full z-50">
+        <!-- ... navigation code ... -->
+    </nav>
+
+    <!-- Header -->
+    <section class="pt-24 pb-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-4xl font-bold mb-4" data-aos="fade-up">Program Schedule</h1>
+            <p class="text-xl" data-aos="fade-up" data-aos-delay="100">Two days of intensive learning and networking</p>
+        </div>
+    </section>
+
+    <!-- Schedule Tabs -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Day Selection Tabs -->
+            <div class="flex space-x-4 mb-8" data-aos="fade-up">
+                <button onclick="showDay(1)" 
+                        class="day-tab active px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold">
+                    Day 1 - August 30
+                </button>
+                <button onclick="showDay(2)" 
+                        class="day-tab px-6 py-3 rounded-lg bg-gray-200 hover:bg-blue-600 hover:text-white transition">
+                    Day 2 - August 31
+                </button>
+            </div>
+
+            <!-- Day 1 Schedule -->
+            <div id="day1" class="schedule-content" data-aos="fade-up">
+                <div class="space-y-6">
+                    <!-- Time Slot -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div class="mb-4 md:mb-0">
+                                <span class="text-blue-600 font-semibold">8:30 - 9:00</span>
+                                <h3 class="text-xl font-bold mt-2">Registration / Tea Coffee</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opening Ceremony -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">9:00 - 10:15</span>
+                                <h3 class="text-xl font-bold mt-2">Opening Ceremony & Keynote Speech</h3>
+                                <div class="mt-4 space-y-2">
+                                    <p class="flex items-center">
+                                        <span class="w-4 h-4 inline-block bg-blue-100 rounded-full mr-2"></span>
+                                        Mr. Ranjit Kumar Poddar, President, CAN Federation
+                                    </p>
+                                    <p class="flex items-center">
+                                        <span class="w-4 h-4 inline-block bg-blue-100 rounded-full mr-2"></span>
+                                        Hon. Ms. Sumana Shrestha, Member of House of Representative
+                                    </p>
+                                    <!-- Add other speakers -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Continue with other sessions... -->
+                </div>
+            </div>
+
+            <!-- Day 2 Schedule -->
+            <div id="day2" class="schedule-content hidden" data-aos="fade-up">
+                <!-- Similar structure as Day 1 but with Day 2 content -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <!-- ... footer code ... -->
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Tab switching functionality
+        function showDay(day) {
+            const tabs = document.querySelectorAll('.day-tab');
+            const contents = document.querySelectorAll('.schedule-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.add('hidden'));
+
+            const selectedTab = document.querySelector(`.day-tab[onclick="showDay(${day})"]`);
+            const selectedContent = document.querySelector(`#day${day}`);
+
+            selectedTab.classList.add('active');
+            selectedContent.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html> 
