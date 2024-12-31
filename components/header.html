@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<nav class="bg-white shadow-lg fixed w-full z-50">
+<nav id="header" class="bg-white shadow-lg fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center">
@@ -28,13 +28,13 @@
                     <i class="fas fa-sign-in-alt mr-1"></i> Registration
                 </a>
             </div>
-            <button class="md:hidden text-gray-700 focus:outline-none" id="mobile-menu-button">
+            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
     </div>
     <!-- Mobile menu -->
-    <div class="md:hidden hidden" id="mobile-menu">
+    <div id="mobile-menu" class="md:hidden hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
             <a href="/" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
                 <i class="fas fa-home mr-2"></i> Home

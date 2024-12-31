@@ -1,6 +1,3 @@
-// Main JavaScript File 
-
-// Handle mobile menu toggle
 document.addEventListener('DOMContentLoaded', function() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -20,6 +17,16 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.text())
             .then(html => {
                 headerContainer.innerHTML = html;
+
+                // Reinitialize mobile menu button after loading header
+                const newMobileMenuButton = document.getElementById('mobile-menu-button');
+                const newMobileMenu = document.getElementById('mobile-menu');
+
+                if (newMobileMenuButton && newMobileMenu) {
+                    newMobileMenuButton.addEventListener('click', () => {
+                        newMobileMenu.classList.toggle('hidden');
+                    });
+                }
             });
     }
 
@@ -30,4 +37,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 footerContainer.innerHTML = html;
             });
     }
-}); 
+});
