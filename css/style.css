@@ -1,5 +1,6 @@
 /* Main Stylesheet */ 
 
+/* Existing styles */
 .carousel {
     width: 100%;
     overflow: hidden;
@@ -21,3 +22,20 @@
         height: 400px;
     }
 } 
+
+/* Additional styles */
+.day-tab.active {
+    background-color: #2563EB; /* Blue-600 */
+    color: white;
+}
+
+.schedule-content.hidden {
+    display: none;
+}
+
+/* Hover effect for cards */
+.card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom styles for information page */

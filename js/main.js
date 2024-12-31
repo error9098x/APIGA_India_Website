@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/components/header.html')
             .then(response => response.text())
             .then(html => {
-                headerContainer.innerHTML = html.replace(/APIGA Nepal 2024/g, 'APIGA India 2025');
+                headerContainer.innerHTML = html;
             });
     }
 
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/components/footer.html')
             .then(response => response.text())
             .then(html => {
-                footerContainer.innerHTML = html.replace(/APIGA Nepal 2024/g, 'APIGA India 2025');
+                footerContainer.innerHTML = html;
             });
     }
 }); 
