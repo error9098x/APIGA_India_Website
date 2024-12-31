@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Host - APIGA India 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        .host-image {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Include Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Hero Section with Image -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center">
+                <img src="/images/localhost.png" 
+                     alt="Local Host Logos" 
+                     class="host-image"
+                     data-aos="fade-up">
+            </div>
+        </div>
+
+        <!-- University Description -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="content-section" data-aos="fade-up">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">About Our Local Host</h1>
+                <div class="prose max-w-none text-gray-600 leading-relaxed">
+                    <p class="mb-4">
+                        O.P. Jindal Global University (JGU), a private deemed-to-be university located in Sonipat, Haryana, 
+                        near New Delhi, was established in 2009 as a philanthropic initiative by its founding chancellor, 
+                        Naveen Jindal, in memory of O.P. Jindal.
+                    </p>
+                    <p class="mb-4">
+                        Recognized as an Institute of Eminence by the UGC in 2020, JGU offers 45 multidisciplinary programs 
+                        across law, liberal arts, life sciences, and business. Guided by its mission to develop future leaders 
+                        and professionals, JGU emphasizes experiential learning, global collaborations, and innovation to 
+                        prepare students for real-world challenges.
+                    </p>
+                    <p>
+                        With a commitment to academic freedom, ethical integrity, social responsibility, and inclusive access, 
+                        JGU fosters a holistic educational environment. It strives to cultivate industry-ready talent, promote 
+                        sustainable development, and empower students to become globally competent leaders who drive societal 
+                        transformation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Load header and footer
+        fetch('/components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+                // Initialize mobile menu after header is loaded
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenuButton && mobileMenu) {
+                    mobileMenuButton.addEventListener('click', () => {
+                        mobileMenu.classList.toggle('hidden');
+                    });
+                }
+            });
+
+        fetch('/components/footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+        });
+    </script>
+</body>
+</html>

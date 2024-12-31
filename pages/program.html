@@ -28,55 +28,354 @@
             <div class="flex space-x-4 mb-8" data-aos="fade-up">
                 <button onclick="showDay(1)" 
                         class="day-tab active px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold">
-                    Day 1 - August 30
+                    Day 1
                 </button>
                 <button onclick="showDay(2)" 
                         class="day-tab px-6 py-3 rounded-lg bg-gray-200 hover:bg-blue-600 hover:text-white transition">
-                    Day 2 - August 31
+                    Day 2
                 </button>
+            </div>
+
+            <!-- Date and MC Info -->
+            <div class="mb-6 text-gray-700">
+                <strong>Date: TBC</strong><br>
             </div>
 
             <!-- Day 1 Schedule -->
             <div id="day1" class="schedule-content" data-aos="fade-up">
                 <div class="space-y-6">
-                    <!-- Time Slot -->
+                    <!-- Registration -->
                     <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
                         <div class="flex flex-col md:flex-row md:items-center justify-between">
                             <div class="mb-4 md:mb-0">
-                                <span class="text-blue-600 font-semibold">8:30 - 9:00</span>
-                                <h3 class="text-xl font-bold mt-2">Registration / Tea Coffee</h3>
+                                <span class="text-blue-600 font-semibold">08:30-09:00 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Registration</h3>
+                                <p class="text-gray-600 mt-2">Registration + Networking</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Opening Ceremony -->
+                    <!-- Opening Ceremony and Keynote Speech -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">09:00-10:00 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Opening Ceremony and Keynote Speech: Local APIGA - India, 2025!</h3>
+                                <p class="text-gray-600 mt-2">Come join us for an interactive opening session to kickstart local APIGA - India 2025!</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> OC, JGU, NIXI, Sponser</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tea and Coffee Break -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">10:00 -10:15 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Tea and Coffee Break</h3>
+                                <p class="text-gray-600 mt-2">Refreshments + Networking</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> NA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Internet Governance 101 -->
                     <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
                         <div class="flex flex-col md:flex-row md:items-start justify-between">
                             <div>
-                                <span class="text-blue-600 font-semibold">9:00 - 10:15</span>
-                                <h3 class="text-xl font-bold mt-2">Opening Ceremony & Keynote Speech</h3>
-                                <div class="mt-4 space-y-2">
-                                    <p class="flex items-center">
-                                        <span class="w-4 h-4 inline-block bg-blue-100 rounded-full mr-2"></span>
-                                        Mr. Ranjit Kumar Poddar, President, CAN Federation
-                                    </p>
-                                    <p class="flex items-center">
-                                        <span class="w-4 h-4 inline-block bg-blue-100 rounded-full mr-2"></span>
-                                        Hon. Ms. Sumana Shrestha, Member of House of Representative
-                                    </p>
-                                    <!-- Add other speakers -->
-                                </div>
+                                <span class="text-blue-600 font-semibold">10:15-11:30 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Internet Governance 101: Navigating the Global Landscape</h3>
+                                <p class="text-gray-600 mt-2">Overview of the multi-stakeholder model, digital policy trends, and emerging areas.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Yash Agarwal and Team</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Continue with other sessions... -->
+                    <!-- Decoding the Internet -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">11:30-12:45 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Decoding the Internet: Understanding DNS and ICANN</h3>
+                                <p class="text-gray-600 mt-2">A deep dive into the Domain Name System and its challenges.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Samiran Gupta and Amrita, APNIC</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lunch Break -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">12:45-1:30 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Lunch Break</h3>
+                                <p class="text-gray-600 mt-2">Lunch + Networking</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> NA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- APNIC and the PDP -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">01:30-02:15 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">APNIC and the Policy Development Process</h3>
+                                <p class="text-gray-600 mt-2">How IP addresses and ASNs are distributed in the Asia Pacific.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> APNIC resource persons</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ICANN Composition: SOs and ACs -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">02:15-03:00 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">ICANN Composition: Roles of Supporting Orgs & Advisory Committees</h3>
+                                <p class="text-gray-600 mt-2">How policy recommendations are formed and advised at ICANN.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> OC Team</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ICANN's PDP -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">03:00-03:45 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">ICANN's Policy Development Process: From Proposal to Implementation</h3>
+                                <p class="text-gray-600 mt-2">A deeper look into how ICANN's PDP converts community ideas into reality.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Vivek Goyal</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tea Break -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">03:45-04:15 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Tea Break</h3>
+                                <p class="text-gray-600 mt-2">Refreshments + Photo session + Networking</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> NA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Internet Governance: Indian Landscape -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">04:15-05:00 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Internet Governance: Indian Landscape</h3>
+                                <p class="text-gray-600 mt-2">Discussion on IG policies and laws in India.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Neelesh, Yug, Barkha, Yash</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model ICANN Format -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">05:00-05:45 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Model ICANN Format: Briefing & Day One Recap</h3>
+                                <p class="text-gray-600 mt-2">Introducing the 3 stakeholder groups (GAC, GNSO, ALAC) and conference topic.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Sameer Gahlot, Barkha Manral, Yash Agarwal and Yug Desai</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Day 2 Schedule -->
             <div id="day2" class="schedule-content hidden" data-aos="fade-up">
-                <!-- Similar structure as Day 1 but with Day 2 content -->
+                <div class="space-y-6">
+                    <!-- IDNs and UASG -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">09:00-10:00 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">IDNs and UASG: Advancing Digital Inclusion</h3>
+                                <p class="text-gray-600 mt-2">Introduction to IDNs and the Universal Acceptance Steering Group.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Satish Babu and Anil Jain</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tea Break -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">10:00-10:15 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Tea Break</h3>
+                                <p class="text-gray-600 mt-2">Refreshments + Networking</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> NA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preparing for the ICANN Model Conference -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">10:15-11:30 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Preparing for the ICANN Model Conference</h3>
+                                <p class="text-gray-600 mt-2">Mentors work with their respective stakeholder groups.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Sameer Gahlot, Barkha Manral, Yash Agarwal and Yug Desai</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model ICANN Conference: PART 1 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">11:30-12:45 A.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Model ICANN Conference: PART 1</h3>
+                                <p class="text-gray-600 mt-2">Hands-on simulation of ICANN's processes.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Sameer Gahlot, Barkha Manral, Yash Agarwal and Yug Desai</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lunch Break -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">12:45-01:15 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Lunch Break</h3>
+                                <p class="text-gray-600 mt-2">Lunch + Networking</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> NA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model ICANN Conference: PART 2 -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">01:30-04:10 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Model ICANN Conference: PART 2</h3>
+                                <p class="text-gray-600 mt-2">Continued simulation and conclusion.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Sameer Gahlot, Barkha Manral, Yash Agarwal and Yug Desai</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Photo Session -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">04:10-04:25 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Photo Session</h3>
+                            </div>
+                            <div>
+                                <p><strong>Speakers:</strong> NA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tea Break -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">04:25-04:45 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Tea Break</h3>
+                                <p class="text-gray-600 mt-2">Refreshments + Networking</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> NA</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Way Forward -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">04:45-05:10 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Way Forward: How to get involved and contribute to Internet Governance</h3>
+                                <p class="text-gray-600 mt-2">ICANN, IGF, and opportunities for Youth</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> TBD</p>
+                                <p><strong>Speakers:</strong> TBD</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Closing Ceremony -->
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+                        <div class="flex flex-col md:flex-row md:items-start justify-between">
+                            <div>
+                                <span class="text-blue-600 font-semibold">05:10-05:45 P.M.</span>
+                                <h3 class="text-xl font-bold mt-2">Closing Ceremony and Certificate Distribution</h3>
+                                <p class="text-gray-600 mt-2">Closing ceremony and certificates for participants.</p>
+                            </div>
+                            <div>
+                                <p><strong>Facilitator:</strong> On-spot volunteers / TBD</p>
+                                <p><strong>Speakers:</strong> Sameer Gahlot and Barkha Manral</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -105,4 +404,5 @@
     </script>
     <script src="/js/main.js"></script>
 </body>
-</html> 
+</html>
+
