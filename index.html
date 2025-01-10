@@ -54,11 +54,11 @@
                                             animation: shine 2s ease-in-out infinite;
                                         }
                                         </style>
-                                        <p class="text-white font-bold mt-4 text-xl lg:text-2xl" style="text-shadow: 1px 1px 0 #4ecaff;">Apply before Jan 26th 11:59 AM IST</p>
-                                        <div id="countdown" class="text-2xl lg:text-3xl font-light mb-4  professional-title"></div>
+                                        <p class="""text-white font-bold mt-4 text-xl lg:text-2xl" style="text-shadow: 1px 1px 0 #4ecaff;">Apply before Jan 15th 11:59 PM IST</p>
+                                        <div id="countdown" class="text-2xl lg:text-3xl font-light mb-4 professional-title"></div>
                                         <script>
                                             function updateCountdown() {
-                                                const eventDate = new Date('January 26, 2025 11:59:00').getTime();
+                                                const eventDate = new Date('January 15, 2025 23:59:00').getTime();
                                                 const now = new Date().getTime();
                                                 const distance = eventDate - now;
 
@@ -75,6 +75,7 @@
                                                     document.getElementById('countdown').innerHTML = "EXPIRED";
                                                 }
                                             }
+
 
                                             const countdownInterval = setInterval(updateCountdown, 1000);
                                         </script>
