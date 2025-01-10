@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APIGA India 2025</title>
+    <title>APIGA India 2025 - Empowering Future Internet Leaders</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Font Awesome -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <meta name="description" content="APIGA India 2025 - Empowering future generations of Internet governance leaders. Join us to shape the digital future.">
+    <meta name="keywords" content="APIGA, ICANN, Internet Governance, India, DNS, domain, tech, workshop">
+    <meta name="author" content="APIGA India 2025 Organizing Committee">
+    <meta property="og:title" content="APIGA India 2025 - Empowering Future Internet Leaders">
+    <meta property="og:description" content="Join APIGA India 2025 to empower the next generation of Internet governance leaders in the Asia Pacific region.">
+    <meta property="og:image" content="https://yourdomain.com/images/home_page_logo.png">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="APIGA India 2025 - Empowering Future Internet Leaders">
+    <meta name="twitter:description" content="Join APIGA India 2025 to empower the next generation of Internet governance leaders in the Asia Pacific region.">
+    <meta name="twitter:image" content="https://yourdomain.com/images/home_page_logo.png">
+    <link rel="canonical" href="https://yourdomain.com">
 </head>
 <body class="bg-gray-50">
     <div id="header"></div>
@@ -24,17 +35,68 @@
                     <div class="carousel-item">
                         <img src="/images/home_page_logo.png" alt="APIGA Conference" class="w-full h-[600px] object-cover">
                         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
-                            <div class="max-w-7xl mx-auto px-4 text-white">
-                                <h1 class="text-5xl font-bold mb-4 animate-title professional-title" 
-                                    data-aos="flip-left" 
-                                    data-aos-duration="1500">
-                                    APIGA India 2025
-                                </h1>
-                                <p class="text-xl mb-8 max-w-2xl">Empowering the next generation of Internet governance leaders</p>
-                                <button onclick="throwConfetti()" 
-                                   class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                                    Registrations Starting Soon!
-                                </button>
+                            <div class="max-w-7xl mx-auto px-4 text-white w-full">
+                                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+                                    <div class="mb-8 lg:mb-0">
+                                        <h1 class="text-4xl lg:text-5xl font-bold mb-4 animate-title professional-title" 
+                                            data-aos="flip-left" 
+                                            data-aos-duration="1500">
+                                            APIGA India 2025
+                                        </h1>
+                                        <p class="text-lg lg:text-xl mb-8 max-w-2xl">Empowering the next generation of Internet governance leaders</p>
+                                        <style>
+                                        @keyframes shine {
+                                            0% { box-shadow: 0 0 0px yellow; }
+                                            50% { box-shadow: 0 0 30px 10px yellow; }
+                                            100% { box-shadow: 0 0 0px yellow; }
+                                        }
+                                        .shine-animate {
+                                            animation: shine 2s ease-in-out infinite;
+                                        }
+                                        </style>
+                                        <p class="text-white font-bold mt-4 text-xl lg:text-2xl" style="text-shadow: 1px 1px 0 #4ecaff;">Apply before Jan 26th 11:59 AM IST</p>
+                                        <div id="countdown" class="text-2xl lg:text-3xl font-light mb-4  professional-title"></div>
+                                        <script>
+                                            function updateCountdown() {
+                                                const eventDate = new Date('January 26, 2025 11:59:00').getTime();
+                                                const now = new Date().getTime();
+                                                const distance = eventDate - now;
+
+                                                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                                document.getElementById('countdown').innerHTML = 
+                                                    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                                                if (distance < 0) {
+                                                    clearInterval(countdownInterval);
+                                                    document.getElementById('countdown').innerHTML = "EXPIRED";
+                                                }
+                                            }
+
+                                            const countdownInterval = setInterval(updateCountdown, 1000);
+                                        </script>
+
+                                        <a href="https://forms.gle/mpfHepMTEv1WxVQy6" 
+                                             onclick="throwConfetti(); this.classList.add('shine-animate'); setTimeout(() => this.classList.remove('shine-animate'), 1000)" 
+                                             class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                                             Register Now!
+                                        </a>
+                                    </div>
+                                    
+                                    <!-- QR Code Container -->
+                                    <!-- <div style="display: flex; align-items: center; justify-content: flex-end;">
+                                        <a href="https://forms.gle/mpfHepMTEv1WxVQy6" target="_blank">
+                                            <img
+                                                src="images/qr.png"
+                                                alt="Registration QR Code"
+                                                style="max-width: 200px; height: auto;"
+                                            />
+                                        </a>
+                                    </div> -->
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,22 +104,19 @@
             </div>
         </section>
 
-        <!-- New Content Sections -->
+        <!-- Content Sections -->
         <section class="py-16">
             <div class="max-w-7xl mx-auto px-4">
-                <!-- Local Host Information -->
-               
-
                 <!-- About APIGA -->
                 <div class="mb-12">
                     <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">
                         <i class="fas fa-info-circle text-blue-600 mr-2"></i>About APIGA
                     </h2>
                     <p class="text-gray-700 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                        The Asia Pacific Internet Governance Academy (APIGA) is a renowned capacity-building program jointly organized by the Internet Corporation for Assigned Names and Numbers (ICANN) and the Korea Internet Security Agency (KISA). Its primary goal is to foster awareness and active participation in key Internet governance matters, with a special focus on the Asia Pacific (APAC) region. Building on this global initiative, Local APIGA India 2025 aims to offer undergraduate and graduate students in India an immersive experience to understand Internet governance, ICANN’s policies, and the multistakeholder model in depth.
+                        The Asia Pacific Internet Governance Academy (APIGA) is a renowned capacity-building program jointly organized by the Internet Corporation for Assigned Names and Numbers (ICANN) and the Korea Internet Security Agency (KISA). Its primary goal is to foster awareness and active participation in key Internet governance matters, with a special focus on the Asia Pacific (APAC) region. Building on this global initiative, Local APIGA India 2025 aims to offer undergraduate and graduate students in India an immersive experience to understand Internet governance, ICANN's policies, and the multistakeholder model in depth.
                     </p>
                     <p class="text-gray-700 leading-relaxed mt-4" data-aos="fade-up" data-aos-delay="200">
-                        Aligned with the broader objectives of APIGA, the Local APIGA India 2025, spearheaded by prominent organizations in India's Internet governance ecosystem, will be a two-day intensive workshop tailored to address India’s unique challenges and opportunities in the digital sphere. This localized program will facilitate discussions, hands-on learning, and capacity building on Internet governance topics relevant to India’s rapidly evolving digital landscape. The event will feature keynote presentations, expert-led panels, interactive sessions, and a model ICANN simulation, providing a vibrant environment for participants to learn, engage, and connect with experts and peers in the field.
+                        Aligned with the broader objectives of APIGA, the Local APIGA India 2025, spearheaded by prominent organizations in India's Internet governance ecosystem, will be a two-day intensive workshop tailored to address India's unique challenges and opportunities in the digital sphere. This localized program will facilitate discussions, hands-on learning, and capacity building on Internet governance topics relevant to India's rapidly evolving digital landscape. The event will feature keynote presentations, expert-led panels, interactive sessions, and a model ICANN simulation, providing a vibrant environment for participants to learn, engage, and connect with experts and peers in the field.
                     </p>
                 </div>
 
@@ -70,17 +129,22 @@
                         The Internet Corporation for Assigned Names and Numbers (ICANN) is a nonprofit, global, multi-stakeholder organization based in the United States. Its primary role is to manage and coordinate critical technical functions that ensure the secure and stable operation of the Internet. ICANN oversees the administration of key databases related to Internet namespaces and numerical identifiers, working under the framework of the Internet Assigned Numbers Authority (IANA) functions.
                     </p>
                     <p class="text-gray-700 leading-relaxed mt-4" data-aos="fade-up" data-aos-delay="200">
-                        ICANN’s responsibilities include managing the global Domain Name System (DNS), facilitating the development of policies for DNS internationalization, introducing new generic top-level domains (TLDs), and overseeing the operation of root name servers. It also allocates Internet Protocol (IP) address spaces for both IPv4 and IPv6, delegating address blocks to regional Internet registries, and maintains key registries for Internet Protocol identifiers.
+                        ICANN's responsibilities include managing the global Domain Name System (DNS), facilitating the development of policies for DNS internationalization, introducing new generic top-level domains (TLDs), and overseeing the operation of root name servers. It also allocates Internet Protocol (IP) address spaces for both IPv4 and IPv6, delegating address blocks to regional Internet registries, and maintains key registries for Internet Protocol identifiers.
                     </p>
                     <p class="text-gray-700 leading-relaxed mt-4" data-aos="fade-up" data-aos-delay="300">
                         At its core, ICANN is guided by principles that prioritize the operational stability of the Internet, encourage competition, ensure inclusive representation from the global Internet community, and develop policies through collaborative, bottom-up, and consensus-driven approaches.
                     </p>
                 </div>
 
-                <!-- Button to Program Schedule -->
-                <div class="text-center mt-12" data-aos="fade-up">
-                    <a href="/pages/program.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-12" data-aos="fade-up">
+                    <a href="/pages/program.html" 
+                       class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-center">
                         View Program Schedule
+                    </a>
+                    <a href="https://forms.gle/mpfHepMTEv1WxVQy6" 
+                       class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-center">
+                       Register Now
                     </a>
                 </div>
             </div>
