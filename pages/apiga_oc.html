@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIGA India 2025 Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <style>
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .team-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .team-logo {
+            max-width: 220px;
+            margin-bottom: 20px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .member-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .member-photo {
+            transform: scale(1.05);
+        }
+        
+        .member-info {
+            padding: 20px 15px;
+            background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+        }
+        
+        .member-name {
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .member-role {
+            color: #0056b3;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Page transition effect */
+        body {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Include Header -->
+    <div id="header"></div>
+    
+    <!-- Main Content -->
+    <section class="pt-24 pb-16">
+        <div class="team-container">
+            <div class="team-header" data-aos="fade-up">
+                <img src="../images/apiga_logo.png" alt="APIGA Logo" class="team-logo mx-auto" >
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Local APIGA India 2025 Team</h1>
+                <p class="text-gray-600">Meet the dedicated individuals working to make APIGA India 2025 a success</p>
+            </div>
+            
+            <div class="team-grid" data-aos="fade-up" data-aos-delay="100">
+                <!-- Team Lead -->
+                <div class="team-member">
+                    <img src="../images/team/sameer.jpeg" alt="Sameer Gahlot" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Sameer Gahlot</div>
+                        <div class="member-role">Team Lead</div>
+                    </div>
+                </div>
+                
+                <!-- Programme Coordinator -->
+                <div class="team-member">
+                    <img src="../images/team/Barkha.jpg" alt="Barkha Manral" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Barkha Manral</div>
+                        <div class="member-role">Programme Coordinator</div>
+                    </div>
+                </div>
+                
+                <!-- Programme Committee -->
+                <div class="team-member">
+                    <img src="../images/team/Yash.png" alt="Yash Agarwal" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Yash Agarwal</div>
+                        <div class="member-role">Programme Committee</div>
+                    </div>
+                </div>
+                
+                <!-- Fellowship Committee Members -->
+                <div class="team-member">
+                    <img src="../images/team/Ankita.jpg" alt="Ankita Rathi" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Ankita Rathi</div>
+                        <div class="member-role">Fellowship Committee</div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="../images/team/Yug.png" alt="Yug Desai" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Yug Desai</div>
+                        <div class="member-role">Fellowship Committee</div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="../images/team/Ihita.jpeg" alt="Ihita Gangavarapu" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Ihita Gangavarapu</div>
+                        <div class="member-role">Fellowship Committee</div>
+                    </div>
+                </div>
+                
+                <!-- Website and Designing -->
+                <div class="team-member">
+                    <img src="../images/team/aviral.jpeg" alt="Aviral Kaintura" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Aviral Kainturia</div>
+                        <div class="member-role">Website and Designing</div>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="../images/team/Vinayak Bhardwaz.jpeg" alt="Vinayak Bhardwaz" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Vinayak Bhardwaz</div>
+                        <div class="member-role">Website and Designing</div>
+                    </div>
+                </div>
+                
+                <!-- Sponsorship Team -->
+                <div class="team-member">
+                    <img src="../images/team/Nitish.jpeg" alt="Nitish Reddy" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Nitish Reddy</div>
+                        <div class="member-role">Sponsorship Team</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Include Footer -->
+    <div id="footer"></div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/js/main_component.js"></script>
+   
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>
