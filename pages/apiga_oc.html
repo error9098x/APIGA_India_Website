@@ -47,14 +47,18 @@
         }
         
         .member-photo {
-            width: 100%;
-            height: 250px;
+            width: 200px;  /* Fixed width */
+            height: 200px; /* Equal height for perfect circle */
             object-fit: cover;
             transition: transform 0.5s ease;
+            border-radius: 50%; /* Makes the image circular */
+            margin: 20px auto; /* Centers the image horizontally and adds vertical spacing */
+            object-position: center center; /* Centers the image content */
+            border: 5px solid #eaeaea; /* Optional: adds a subtle border */
         }
-        
         .team-member:hover .member-photo {
-            transform: scale(1.05);
+            border-color: #0056b3;
+            transform: scale(1.10);
         }
         
         .member-info {
