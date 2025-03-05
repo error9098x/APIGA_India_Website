@@ -29,11 +29,11 @@
 
     <main>
         <!-- Hero Section with Image Slider -->
-        <section class="pt-16">
-            <div class="relative">
-                <div class="carousel relative" data-aos="fade-up">
-                    <div class="carousel-item">
-                        <img src="images/home_page_logo.png" alt="APIGA Conference" class="w-full h-[600px] object-cover">
+        <section class="relative h-screen"> <!-- Changed from pt-16 to h-screen and added relative -->
+            <div class="relative h-full"> <!-- Added h-full -->
+                <div class="carousel relative h-full" data-aos="fade-up">
+                    <div class="carousel-item h-full"> <!-- Added h-full -->
+                        <img src="images/home_page_logo.png" alt="APIGA Conference" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
                             <div class="max-w-7xl mx-auto px-4 text-white w-full">
                                 <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
