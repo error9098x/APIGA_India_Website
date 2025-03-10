@@ -3,7 +3,7 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APIGA India 2025 - Empowering Future Internet Leaders</title>
+    <title>Empowering Future Internet Leaders - APIGA India 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -28,31 +28,33 @@
     <div id="header"></div>
 
     <main>
-        <!-- Hero Section with Image Slider -->
-        <section class="min-h-[50vh] md:min-h-screen"> <!-- Changed to 50vh for mobile -->
-            <div class="fixed inset-0 -z-10">
-                <div class="h-full" data-aos="fade-up">
-                    <div class="h-full">
-                        <img src="images/home_page_logo.png" alt="APIGA Conference" class="w-full h-[50vh] md:h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent">
-                            <div class="max-w-7xl mx-auto px-4 text-white w-full h-full flex items-center">
-                                <div class="pt-10 md:pt-20"> <!-- Reduced padding for mobile -->
-                                    <h1 class="text-3xl md:text-6xl lg:text-7xl font-bold mb-4 animate-title professional-title" 
-                                        data-aos="flip-left" 
-                                        data-aos-duration="1500">
-                                        APIGA India 2025
-                                    </h1>
-                                    <p class="text-lg md:text-xl lg:text-2xl mb-8 max-w-2xl">Empowering the next generation of Internet governance leaders</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
         <!-- Content Sections -->
-        <section class="relative z-10 bg-gray-50 mt-screen pt-8 pb-24 border-t-8 border-[#2463EB] min-h-screen"> <!-- Added pb-24 and min-h-screen -->
+        <!-- Fix hero section for mobile -->
+        <section class="relative min-h-[60vh] md:min-h-screen"> <!-- Changed from fixed to relative and adjusted height -->
+        <div class="relative w-full h-full"> <!-- Changed from fixed to relative -->
+        <div class="h-full" data-aos="fade-up">
+        <div class="h-full">
+        <img src="images/home_page_logo.png" alt="APIGA Conference" class="w-full h-[60vh] md:h-screen object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent">
+        <div class="max-w-7xl mx-auto px-4 text-white w-full h-full flex items-center">
+        <div class="pt-16 md:pt-20"> <!-- Increased padding top for mobile -->
+        <h1 class="text-2xl md:text-6xl lg:text-7xl font-bold mb-4 animate-title professional-title" 
+        data-aos="flip-left" 
+        data-aos-duration="1500">
+        APIGA India 2025
+        </h1>
+        <p class="text-base md:text-xl lg:text-2xl mb-8 max-w-2xl">Empowering Future Internet Leaders</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        
+        <!-- Fix content section spacing -->
+        <section class="relative z-10 bg-gray-50 pt-8 pb-24 border-t-8 border-[#2463EB]"> <!-- Removed mt-screen -->
             <div class="max-w-7xl mx-auto px-4">
             <!-- About APIGA - Comprehensive Content -->
             <div class="mb-12">
