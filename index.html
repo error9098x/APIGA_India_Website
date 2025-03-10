@@ -3,7 +3,7 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APIGA India 2025 - Empowering Future Internet Leaders</title>
+    <title>Empowering Future Internet Leaders - APIGA India 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -28,91 +28,40 @@
     <div id="header"></div>
 
     <main>
-        <!-- Hero Section with Image Slider -->
-        <section class="pt-16">
-            <div class="relative">
-                <div class="carousel relative" data-aos="fade-up">
-                    <div class="carousel-item">
-                        <img src="images/home_page_logo.png" alt="APIGA Conference" class="w-full h-[600px] object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent flex items-center">
-                            <div class="max-w-7xl mx-auto px-4 text-white w-full">
-                                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-                                    <div class="mb-8 lg:mb-0">
-                                        <h1 class="text-4xl lg:text-5xl font-bold mb-4 animate-title professional-title" 
-                                            data-aos="flip-left" 
-                                            data-aos-duration="1500">
-                                            APIGA India 2025
-                                        </h1>
-                                        <p class="text-lg lg:text-xl mb-8 max-w-2xl">Empowering the next generation of Internet governance leaders</p>
-                                        <!-- <style>
-                                        @keyframes shine {
-                                            0% { box-shadow: 0 0 0px yellow; }
-                                            50% { box-shadow: 0 0 30px 10px yellow; }
-                                            100% { box-shadow: 0 0 0px yellow; }
-                                        }
-                                        .shine-animate {
-                                            animation: shine 2s ease-in-out infinite;
-                                        }
-                                        </style>
-                                        <p class="text-white font-bold mt-4 text-xl lg:text-2xl" style="text-shadow: 1px 1px 0 #4ecaff;">Apply before Jan 30th 11:59 PM IST</p>
-                                        <div id="countdown" class="text-2xl lg:text-3xl font-light mb-4 professional-title"></div>
-                                        <script>
-                                            function updateCountdown() {
-                                                const eventDate = new Date('January 30, 2025 23:59:00 GMT+0530').getTime();
-                                                const now = new Date().getTime();
-                                                const distance = eventDate - now;
-
-                                                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                                                document.getElementById('countdown').innerHTML = 
-                                                    `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-                                                if (distance < 0) {
-                                                    clearInterval(countdownInterval);
-                                                    document.getElementById('countdown').innerHTML = "EXPIRED";
-                                                    document.getElementById('countdown').style.display = 'none';
-                                                }
-                                            }
-
-                                            const countdownInterval = setInterval(updateCountdown, 1000);
-                                        </script>
-                                        <a href="https://forms.gle/mpfHepMTEv1WxVQy6" 
-                                             onclick="throwConfetti(); this.classList.add('shine-animate'); setTimeout(() => this.classList.remove('shine-animate'), 1000)" 
-                                             class="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                                             Registeration Closed! Stay Tuned 
-                                        </a> -->
-                                    </div>
-                                    
-                                    <!-- QR Code Container -->
-                                    <!-- <div style="display: flex; align-items: center; justify-content: flex-end;">
-                                        <a href="https://forms.gle/mpfHepMTEv1WxVQy6" target="_blank">
-                                            <img
-                                                src="images/qr.png"
-                                                alt="Registration QR Code"
-                                                style="max-width: 200px; height: auto;"
-                                            />
-                                        </a>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
 
         <!-- Content Sections -->
-        <section class="py-16">
+        <!-- Fix hero section for mobile -->
+        <section class="relative min-h-[60vh] md:min-h-screen"> <!-- Changed from fixed to relative and adjusted height -->
+        <div class="relative w-full h-full"> <!-- Changed from fixed to relative -->
+        <div class="h-full" data-aos="fade-up">
+        <div class="h-full">
+        <img src="images/home_page_logo.png" alt="APIGA Conference" class="w-full h-[60vh] md:h-screen object-cover">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent">
+        <div class="max-w-7xl mx-auto px-4 text-white w-full h-full flex items-center">
+        <div class="pt-16 md:pt-20"> <!-- Increased padding top for mobile -->
+        <h1 class="text-2xl md:text-6xl lg:text-7xl font-bold mb-4 animate-title professional-title" 
+        data-aos="flip-left" 
+        data-aos-duration="1500">
+        APIGA India 2025
+        </h1>
+        <p class="text-base md:text-xl lg:text-2xl mb-8 max-w-2xl">Empowering Future Internet Leaders</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+        
+        <!-- Fix content section spacing -->
+        <section class="relative z-10 bg-gray-50 pt-8 pb-24 border-t-8 border-[#2463EB]"> <!-- Removed mt-screen -->
             <div class="max-w-7xl mx-auto px-4">
             <!-- About APIGA - Comprehensive Content -->
             <div class="mb-12">
                 <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">
+                
                 <i class="fas fa-info-circle text-blue-600 mr-2"></i>About APIGA
                 </h2>
-                
                 <!-- Introduction -->
                 <div class="grid grid-cols-1 gap-8 mb-8">
                 <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
@@ -335,8 +284,7 @@
        
     </main>
 
-    <div id="footer"></div>
-
+    <div id="footer" class="relative z-10 bg-gray-50"></div> <!-- Added bg-gray-50 and z-10 -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>
     <script>
