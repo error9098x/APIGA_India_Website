@@ -233,4 +233,35 @@
                             <h3 class="text-xl font-semibold text-gray-800">05:30 PM</h3>
                             <p class="text-gray-700 mt-1">Departure towards Haiderpur Badli Metro Station</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        
+        function showDay(dayId) {
+            // Hide all day contents
+            document.querySelectorAll('.day-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(tab => {
+                tab.classList.remove('tab-active');
+            });
+            
+            // Show selected day content
+            document.getElementById(dayId).classList.remove('hidden');
+            
+            // Add active class to clicked tab
+            event.currentTarget.classList.add('tab-active');
+        }
+    </script>
+</body>
+</html>
                                 
