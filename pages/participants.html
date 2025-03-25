@@ -21,18 +21,9 @@
                 The following individuals have been selected as participants for APIGA India 2025. We look forward to meeting you.
             </p>
             
-            <!-- Search Box -->
-            <div class="mb-8 max-w-md mx-auto" data-aos="fade-up" data-aos-delay="150">
-                <div class="relative">
-                    <input type="text" id="searchInput" placeholder="Search participants..." 
-                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
-                </div>
-            </div>
-            
             <!-- Participants Table -->
             <div class="overflow-x-auto mb-16" data-aos="fade-up" data-aos-delay="200">
-                <table id="participantsTable" class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
+                <table class="min-w-full bg-white rounded-lg overflow-hidden shadow-sm">
                     <thead class="bg-blue-100">
                         <tr>
                             <th class="px-4 py-3 text-left text-gray-700 font-semibold">Name</th>
@@ -97,7 +88,7 @@
                             <td class="px-4 py-3 border-t">Male</td>
                         </tr>
                         <tr class="bg-white hover:bg-blue-50">
-                            <td class="px-4 py-3 border-t">Kumar Utsav</td>
+                            <td class="px-4 py-3 border-t">Kumar utsav</td>
                             <td class="px-4 py-3 border-t">Male</td>
                         </tr>
                         <tr class="bg-blue-50 hover:bg-blue-100">
@@ -141,7 +132,7 @@
                             <td class="px-4 py-3 border-t">Male</td>
                         </tr>
                         <tr class="bg-blue-50 hover:bg-blue-100">
-                            <td class="px-4 py-3 border-t">Siddharth Gupta</td>
+                            <td class="px-4 py-3 border-t">Siddharth gupta</td>
                             <td class="px-4 py-3 border-t">Male</td>
                         </tr>
                         <tr class="bg-white hover:bg-blue-50">
@@ -159,71 +150,19 @@
                     </tbody>
                 </table>
             </div>
-            
-            <!-- No Results Message -->
-            <div id="noResults" class="hidden text-center py-8 text-gray-500" data-aos="fade-up">
-                No participants found matching your search.
-            </div>
-            
-            <!-- Additional Information -->
-            <div class="bg-white p-6 rounded-lg shadow-sm mb-12" data-aos="fade-up" data-aos-delay="300">
-                <h2 class="text-2xl font-semibold mb-4">Important Information</h2>
-                <p class="mb-4">All selected participants will receive detailed information about the program, including schedule, accommodation details, and preparation guidelines via email.</p>
-                <p class="mb-4">If you have any questions, please contact us at <a href="mailto:apiga2025@example.com" class="text-blue-600 hover:underline">apiga2025@example.com</a>.</p>
-            </div>
         </div>
     </section>
 
     <!-- Include Footer -->
     <div id="footer"></div>
 
-    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS
         AOS.init({
             duration: 800,
             once: true
         });
-        
-        // Load header and footer
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('header.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('header').innerHTML = data;
-                });
-                
-            fetch('footer.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('footer').innerHTML = data;
-                });
-        });
-        
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('keyup', function() {
-            const searchValue = this.value.toLowerCase();
-            const table = document.getElementById('participantsTable');
-            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-            let resultsFound = false;
-            
-            for (let i = 0; i < rows.length; i++) {
-                const nameCell = rows[i].getElementsByTagName('td')[0];
-                if (nameCell) {
-                    const name = nameCell.textContent || nameCell.innerText;
-                    if (name.toLowerCase().indexOf(searchValue) > -1) {
-                        rows[i].style.display = "";
-                        resultsFound = true;
-                    } else {
-                        rows[i].style.display = "none";
-                    }
-                }
-            }
-            
-            // Show/hide no results message
-            document.getElementById('noResults').style.display = resultsFound ? 'none' : 'block';
-        });
     </script>
+    <script src="/js/main_component.js"></script>
 </body>
 </html>
