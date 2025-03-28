@@ -23,10 +23,16 @@
         }
         
         .gallery-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
-        }
+    /* You'll need to adjust this value based on the actual height of your header */
+    padding-top: 80px; /* Example value - change as needed */
+
+    /* Keep your existing styles */
+    max-width: 1200px;
+    margin: 2rem auto; /* The auto margin might need adjustment if you use margin-top instead of padding-top */
+    padding-left: 1.5rem; /* Keep existing side padding */
+    padding-right: 1.5rem; /* Keep existing side padding */
+    padding-bottom: 0; /* Add if needed, but keep top padding */
+}
         
         h1 {
             text-align: center;
@@ -471,9 +477,9 @@
         }
     </style>
 </head>
-<div id="header"></div>
-<body>
 
+<body>
+    <div id="header"></div>
     <div class="gallery-container">
        
         <h1>APIGA Photo Gallery</h1>
