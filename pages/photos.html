@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIGA Photo Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .gallery-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            border-radius: 2px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background-color: white;
+            padding: 1.25rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .search-container input {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 3rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .search-container input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .search-container i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 1.2rem;
+        }
+        
+        .sort-container select {
+            padding: 0.9rem 2.5rem 0.9rem 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .sort-container select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            background-color: #f0f0f0;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        
+        .gallery-item .error-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .gallery-item .error-overlay button {
+            margin-top: 1rem;
+            padding: 0.7rem 1.5rem;
+            background-color: #3498db;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .gallery-item .error-overlay button:hover {
+            background-color: #2980b9;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .modal.show {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-image-container {
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            /* Make image container take full height since we're removing metadata */
+            height: 100%;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 85vh; /* Increased from 70vh since we don't need space for metadata */
+            object-fit: contain;
+            transition: opacity 0.3s ease;
+        }
+        
+      
+        .modal-controls {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            gap: 0.8rem;
+        }
+        
+        .modal-controls button {
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .modal-controls button:hover {
+            background-color: rgba(52, 152, 219, 0.9);
+            transform: translateY(-3px);
+        }
+        
+         /* Remove the modal-info styles or hide it */
+         .modal-info {
+            display: none; /* Hide the metadata section */
+        }
+        
+        .modal-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+        
+        .modal-info p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            display: flex;
+            align-items: center;
+        }
+        
+        .modal-info p::before {
+            content: '•';
+            margin-right: 0.5rem;
+            color: #3498db;
+            font-size: 1.2rem;
+        }
+        
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            transform: translateY(-50%);
+        }
+        
+        .modal-nav button {
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.6rem;
+        }
+        
+        .modal-nav button:hover:not(:disabled) {
+            background-color: rgba(52, 152, 219, 0.9);
+            transform: scale(1.1);
+        }
+        
+        .modal-nav button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        /* Spinner */
+        
+        .close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: white;
+            font-size: 2.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1010;
+            transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .close:hover {
+            background-color: rgba(231, 76, 60, 0.8);
+            transform: rotate(90deg);
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+            flex-direction: column;
+            grid-column: 1/-1;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+        
+        .loading-text {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            gap: 0.5rem;
+        }
+        
+        .pagination button {
+            padding: 0.7rem 1.2rem;
+            border: 1px solid #e0e0e0;
+            background-color: white;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            min-width: 40px;
+        }
+        
+        .pagination button.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .pagination button:hover:not(.active):not(:disabled) {
+            background-color: #f5f5f5;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+            
+            .modal-content {
+                max-width: 95%;
+            }
+            
+            .modal-nav button {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .search-container {
+                max-width: 100%;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .modal-info h3 {
+                font-size: 1.2rem;
+            }
+            
+            .modal-info p {
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Add focus styles for accessibility */
+        button:focus, input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.4);
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div class="gallery-container">
+        <h1>APIGA Photo Gallery</h1>
+        
+        <div class="controls">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search images..." aria-label="Search images">
+            </div>
+            <div class="sort-container">
+                <select id="sort-select" aria-label="Sort images">
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="date-new">Date (Newest First)</option>
+                    <option value="date-old">Date (Oldest First)</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="gallery" id="gallery">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p class="loading-text">Loading gallery...</p>
+            </div>
+        </div>
+        
+        <div class="pagination" id="pagination">
+            <!-- Pagination will be added here -->
+        </div>
+    </div>
+    
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+        <span class="close" aria-label="Close modal">&times;</span>
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img id="modal-image" class="modal-image" src="" alt="">
+                <div class="modal-nav">
+                    <button id="prev-button" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+                    <button id="next-button" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="modal-controls">
+                    <button id="download-button" aria-label="Download image"><i class="fas fa-download"></i></button>
+                    <button id="share-button" aria-label="Share image"><i class="fas fa-share-alt"></i></button>
+                    <button id="zoom-button" aria-label="Toggle zoom"><i class="fas fa-search-plus"></i></button>
+                </div>
+            </div>
+            <div class="modal-info" id="modal-info">
+                <h3 id="modal-title">Image Title</h3>
+                <!-- Image info will be loaded here -->
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main_component.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+    <script>
+        // Base URL for Hugging Face dataset images
+        const BASE_URL = 'https://huggingface.co/datasets/procodec/APIGA_2025/resolve/main/';
+        
+        // List of image filenames from the dataset 
+        const imageFiles = [
+            '3M3A5162.JPG', '3M3A5163.JPG', '3M3A5164.JPG', '3M3A5165.JPG', '3M3A5166.JPG', '3M3A5167.JPG', '3M3A5168.JPG', '3M3A5169.JPG', '3M3A5170.JPG', '3M3A5171.JPG', '3M3A5172.JPG', '3M3A5173.JPG', '3M3A5174.JPG', '3M3A5175.JPG', '3M3A5176.JPG', '3M3A5177.JPG', '3M3A5178.JPG', '3M3A5179.JPG', '3M3A5180.JPG', '3M3A5181.JPG', '3M3A5182.JPG', '3M3A5183.JPG', '3M3A5184.JPG', '3M3A5185.JPG', '3M3A5186.JPG', '3M3A5188.JPG', '3M3A5189.JPG', '3M3A5190.JPG', '3M3A5191.JPG', '3M3A5193.JPG', '3M3A5194.JPG', '3M3A5195.JPG', '3M3A5196.JPG', '3M3A5198.JPG', '3M3A5199.JPG', '3M3A5201.JPG', '3M3A5202.JPG', '3M3A5203.JPG', '3M3A5204.JPG', '3M3A5205.JPG', '3M3A5206.JPG', '3M3A5207.JPG', '3M3A5208.JPG', '3M3A5209.JPG', '3M3A5210.JPG', '3M3A5211.JPG', '3M3A5212.JPG', '3M3A5213.JPG', '3M3A5214.JPG', '3M3A5215.JPG', '3M3A5216.JPG', '3M3A5217.JPG', '3M3A5218.JPG', '3M3A5219.JPG', '3M3A5220.JPG', '3M3A5221.JPG', '3M3A5222.JPG', '3M3A5223.JPG', '3M3A5224.JPG', '3M3A5225.JPG', '3M3A5226.JPG', '3M3A5227.JPG', '3M3A5228.JPG', '3M3A5229.JPG', '3M3A5230.JPG', '3M3A5231.JPG', '3M3A5232.JPG', '3M3A5233.JPG', '3M3A5234.JPG', '3M3A5235.JPG', '3M3A5236.JPG', '3M3A5237.JPG', '3M3A5238.JPG', '3M3A5239.JPG', '3M3A5240.JPG', '3M3A5241.JPG', '3M3A5242.JPG', '3M3A5243.JPG', '3M3A5244.JPG', '3M3A5245.JPG', '3M3A5246.JPG', '3M3A5247.JPG', '3M3A5249.JPG', '3M3A5250.JPG', '3M3A5251.JPG', '3M3A5252.JPG', '3M3A5253.JPG', '3M3A5254.JPG', '3M3A5255.JPG', '3M3A5256.JPG', '3M3A5259.JPG', '3M3A5260.JPG', '3M3A5261.JPG', '3M3A5262.JPG', '3M3A5263.JPG', '3M3A5264.JPG', '3M3A5265.JPG', '3M3A5266.JPG', '3M3A5267.JPG', '3M3A5268.JPG', '3M3A5270.JPG', '3M3A5271.JPG', '3M3A5272.JPG', '3M3A5273.JPG', '3M3A5274.JPG', '3M3A5275.JPG', '3M3A5277.JPG', '3M3A5278.JPG', '3M3A5279.JPG', '3M3A5280.JPG', '3M3A5281.JPG', '3M3A5282.JPG', '3M3A5283.JPG', '3M3A5284.JPG', '3M3A5285.JPG', '3M3A5286.JPG', '3M3A5287.JPG', '3M3A5289.JPG', '3M3A5290.JPG', '3M3A5291.JPG', '3M3A5292.JPG', '3M3A5293.JPG', '3M3A5294.JPG', '3M3A5295.JPG', '3M3A5296.JPG', '3M3A5297.JPG', '3M3A5298.JPG', '3M3A5299.JPG', '3M3A5301.JPG', '3M3A5302.JPG', '3M3A5303.JPG', '3M3A5304.JPG', '3M3A5305.JPG', '3M3A5306.JPG', '3M3A5307.JPG', '3M3A5310.JPG', '3M3A5311.JPG', '3M3A5312.JPG', '3M3A5314.JPG', '3M3A5316.JPG', '3M3A5317.JPG', '3M3A5318.JPG', '3M3A5320.JPG', '3M3A5321.JPG', '3M3A5322.JPG', '3M3A5323.JPG', '3M3A5324.JPG', '3M3A5326.JPG', '3M3A5327.JPG', '3M3A5330.JPG', '3M3A5331.JPG', '3M3A5333.JPG', '3M3A5334.JPG', '3M3A5335.JPG', '3M3A5336.JPG', '3M3A5337.JPG', '3M3A5338.JPG', '3M3A5339.JPG', '3M3A5340.JPG', '3M3A5341.JPG', '3M3A5342.JPG', '3M3A5343.JPG', '3M3A5344.JPG', '3M3A5349.JPG', '3M3A5350.JPG', '3M3A5351.JPG', '3M3A5352.JPG', '3M3A5353.JPG', '3M3A5355.JPG', '3M3A5356.JPG', '3M3A5357.JPG', '3M3A5358.JPG', '3M3A5359.JPG', '3M3A5360.JPG', '3M3A5361.JPG', '3M3A5362.JPG', '3M3A5363.JPG', '3M3A5364.JPG', '3M3A5365.JPG', '3M3A5366.JPG', '3M3A5367.JPG', '3M3A5368.JPG', '3M3A5369.JPG', '3M3A5370.JPG', '3M3A5371.JPG', '3M3A5373.JPG', '3M3A5374.JPG', '3M3A5375.JPG', '3M3A5376.JPG', '3M3A5377.JPG', '3M3A5378.JPG', 'IMG-20250323-WA0020.jpg', 'IMG-20250323-WA0028.jpg', 'IMG-20250323-WA0029.jpg', 'IMG-20250323-WA0030.jpg', 'IMG-20250323-WA0032.jpg', 'IMG-20250323-WA0035.jpg', 'IMG-20250323-WA0037.jpg', 'IMG-20250323-WA0038.jpg', 'IMG-20250323-WA0039.jpg', 'IMG-20250323-WA0040.jpg', 'IMG-20250323-WA0041.jpg', 'IMG-20250323-WA0042.jpg', 'LM1A9234.JPG', 'LM1A9236.JPG', 'LM1A9237.JPG', 'LM1A9238.JPG', 'LM1A9241.JPG', 'LM1A9242.JPG', 'LM1A9244.JPG', 'LM1A9245.JPG', 'LM1A9246.JPG', 'LM1A9247.JPG', 'LM1A9248.JPG', 'LM1A9249.JPG', 'LM1A9250.JPG', 'LM1A9251.JPG', 'LM1A9252.JPG', 'LM1A9254.JPG', 'LM1A9255.JPG', 'LM1A9256.JPG', 'LM1A9257.JPG', 'LM1A9258.JPG', 'LM1A9259.JPG', 'LM1A9260.JPG', 'LM1A9261.JPG', 'LM1A9262.JPG', 'LM1A9263.JPG', 'LM1A9264.JPG', 'LM1A9265.JPG', 'LM1A9266.JPG', 'LM1A9267.JPG', 'LM1A9268.JPG', 'LM1A9269.JPG', 'LM1A9270.JPG', 'LM1A9271.JPG', 'LM1A9275.JPG', 'LM1A9278.JPG', 'LM1A9280.JPG', 'LM1A9281.JPG', 'LM1A9282.JPG', 'LM1A9285.JPG', 'LM1A9286.JPG', 'LM1A9287.JPG', 'LM1A9288.JPG', 'LM1A9289.JPG', 'LM1A9290.JPG', 'PXL_20250321_035642477.jpg', 'PXL_20250321_050602853.jpg', 'PXL_20250321_050611857.jpg', 'PXL_20250321_050626712.jpg', 'PXL_20250321_050635981.jpg', 'PXL_20250321_050643541.jpg', 'PXL_20250321_050746044.jpg', 'PXL_20250321_050754163.jpg', 'PXL_20250321_050757456.jpg', 'PXL_20250321_050940170.jpg', 'PXL_20250321_050947245.jpg', 'PXL_20250321_050956854.jpg', 'PXL_20250321_051504318.jpg', 'PXL_20250321_051522446.jpg', 'PXL_20250321_051532260.jpg', 'PXL_20250321_051550449.jpg', 'PXL_20250321_051553871.jpg', 'PXL_20250321_051607648.jpg', 'PXL_20250321_051621010.jpg', 'PXL_20250321_051710747.jpg', 'PXL_20250321_051720940.jpg', 'PXL_20250321_051725811.jpg', 'PXL_20250321_051731284.jpg', 'PXL_20250321_051741235.jpg', 'PXL_20250321_051742546.jpg', 'PXL_20250321_052119748.jpg', 'PXL_20250321_052126081.jpg', 'PXL_20250321_052142611.jpg', 'PXL_20250321_052146060.jpg', 'PXL_20250321_052242469.jpg', 'PXL_20250321_052256551.jpg', 'PXL_20250321_052303149.jpg', 'PXL_20250321_052304179.jpg', 'PXL_20250321_060345660.jpg', 'PXL_20250321_060948427.jpg', 'PXL_20250321_060951781.jpg', 'PXL_20250321_060952503.jpg', 'PXL_20250321_060955307.jpg', 'PXL_20250321_060956038.jpg', 'PXL_20250321_060956667.jpg', 'PXL_20250321_061033975.jpg', 'PXL_20250321_061035123.jpg', 'PXL_20250321_061037228.jpg', 'PXL_20250321_061045453.jpg', 'PXL_20250321_061053532.jpg', 'PXL_20250321_061056498.jpg', 'PXL_20250321_061057745.jpg', 'PXL_20250321_061058970.jpg', 'PXL_20250321_061059658.jpg', 'PXL_20250321_061517382.jpg', 'PXL_20250321_061518985.jpg', 'PXL_20250321_061521786.jpg', 'PXL_20250321_061948370.jpg', 'PXL_20250321_071617323.jpg', 'PXL_20250321_072220156.jpg', 'PXL_20250321_083909635.jpg', 'PXL_20250321_084005011.jpg', 'PXL_20250321_091825788.jpg', 'PXL_20250321_091827986.jpg', 'PXL_20250321_091833033.jpg', 'PXL_20250321_091842061.jpg', 'PXL_20250321_091844104.jpg', 'PXL_20250321_091853048.jpg', 'PXL_20250321_091906732.jpg', 'PXL_20250321_091907950.jpg', 'PXL_20250321_091957604.jpg', 'PXL_20250321_092832362.jpg', 'PXL_20250321_092833489.jpg', 'PXL_20250321_092838944.jpg', 'PXL_20250321_092840339.jpg', 'PXL_20250321_092843338.jpg', 'PXL_20250321_092845086.jpg', 'PXL_20250321_093156601.jpg', 'PXL_20250321_093208851.jpg', 'PXL_20250321_093411380.jpg', 'PXL_20250321_093416440.jpg', 'PXL_20250321_093424268.jpg', 'PXL_20250321_093454720.jpg', 'PXL_20250321_094944212.jpg', 'PXL_20250321_102544158.jpg', 'PXL_20250321_102552153.jpg', 'PXL_20250321_102553333.jpg', 'PXL_20250321_114427218.jpg', 'PXL_20250321_114428419.jpg', 'PXL_20250321_114430774.jpg', 'PXL_20250321_114844303.jpg', 'PXL_20250321_124413015.jpg', 'PXL_20250321_124415244.jpg', 'PXL_20250321_124415697.jpg', 'PXL_20250321_131349888.jpg', 'PXL_20250321_133002446.jpg'];
+    
+        // Add simulated metadata for each image (in a real app, you'd extract this from EXIF)
+        const imageMetadata = {};
+      
+        
+        // Gallery state
+        let currentImages = [...imageFiles];
+        let currentPage = 1;
+        const imagesPerPage = 20;
+        let currentImageIndex = 0;
+        let isZoomed = false;
+        
+        // DOM elements
+        const gallery = document.getElementById('gallery');
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalInfo = document.getElementById('modal-info');
+        const closeBtn = document.querySelector('.close');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const downloadButton = document.getElementById('download-button');
+        const shareButton = document.getElementById('share-button');
+        const zoomButton = document.getElementById('zoom-button');
+        const searchInput = document.getElementById('search-input');
+        const sortSelect = document.getElementById('sort-select');
+        const pagination = document.getElementById('pagination');
+        
+        // Filter and sort images
+               // Filter and sort images
+        function filterAndSortImages() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const sortOption = sortSelect.value;
+            
+            // Filter images
+            currentImages = imageFiles.filter(filename => 
+                filename.toLowerCase().includes(searchTerm)
+            );
+            
+            // Sort images
+            switch(sortOption) {
+                case 'name-asc':
+                    currentImages.sort();
+                    break;
+                case 'name-desc':
+                    currentImages.sort().reverse();
+                    break;
+                case 'date-new':
+                    // Since we don't have real metadata, just sort by filename
+                    currentImages.sort().reverse();
+                    break;
+                case 'date-old':
+                    // Since we don't have real metadata, just sort by filename
+                    currentImages.sort();
+                    break;
+            }
+            
+            currentPage = 1;
+            loadGallery();
+            updatePagination();
+        }
+        // Load gallery images with pagination
+        function loadGallery() {
+            gallery.innerHTML = '';
+            
+            if (currentImages.length === 0) {
+                gallery.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 2rem;">No images found matching your search.</p>';
+                return;
+            }
+            
+            const startIndex = (currentPage - 1) * imagesPerPage;
+            const endIndex = Math.min(startIndex + imagesPerPage, currentImages.length);
+            
+            for (let i = startIndex; i < endIndex; i++) {
+                const filename = currentImages[i];
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.setAttribute('role', 'button');
+                item.setAttribute('aria-label', `View ${filename}`);
+                item.setAttribute('tabindex', '0');
+                
+                const img = document.createElement('img');
+                // Create thumbnail URL (in a real app, you'd have actual thumbnails)
+                img.src = `${BASE_URL}${filename}`;
+                img.loading = 'lazy';
+                img.alt = filename;
+                
+                // Handle image loading errors
+                img.onerror = () => {
+                    img.style.display = 'none';
+                    const errorOverlay = document.createElement('div');
+                    errorOverlay.className = 'error-overlay';
+                    errorOverlay.innerHTML = `
+                        <p>Failed to load image</p>
+                        <button class="retry-button">Retry</button>
+                    `;
+                    item.appendChild(errorOverlay);
+                    
+                    const retryButton = errorOverlay.querySelector('.retry-button');
+                    retryButton.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        img.src = `${BASE_URL}${filename}?t=${new Date().getTime()}`;
+                        img.style.display = 'block';
+                        errorOverlay.remove();
+                    });
+                };
+                
+                // Preload high-res image
+                const preloadImage = new Image();
+                preloadImage.src = `${BASE_URL}${filename}`;
+                
+                // Open modal when clicking on image
+                item.addEventListener('click', () => openModal(i - startIndex, startIndex));
+                
+                // Keyboard accessibility
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openModal(i - startIndex, startIndex);
+                    }
+                });
+                
+                item.appendChild(img);
+                gallery.appendChild(item);
+            }
+        }
+        
+        // Update pagination controls
+        function updatePagination() {
+            pagination.innerHTML = '';
+            
+            const totalPages = Math.ceil(currentImages.length / imagesPerPage);
+            
+            if (totalPages <= 1) {
+                return;
+            }
+            
+            // Previous button
+            const prevPageBtn = document.createElement('button');
+            prevPageBtn.innerHTML = '&laquo;';
+            prevPageBtn.setAttribute('aria-label', 'Previous page');
+            prevPageBtn.disabled = currentPage === 1;
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    loadGallery();
+                    updatePagination();
+                    window.scrollTo(0, 0);
+                }
+            });
+            pagination.appendChild(prevPageBtn);
+            
+            // Page buttons
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.className = i === currentPage ? 'active' : '';
+                pageBtn.setAttribute('aria-label', `Page ${i}`);
+                pageBtn.setAttribute('aria-current', i === currentPage ? 'page' : 'false');
+                
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    loadGallery();
+                    updatePagination();
+                    window.scrollTo(0, 0);
+                });
+                
+                pagination.appendChild(pageBtn);
+            }
+            
+            // Next button
+            const nextPageBtn = document.createElement('button');
+            nextPageBtn.innerHTML = '&raquo;';
+            nextPageBtn.setAttribute('aria-label', 'Next page');
+            nextPageBtn.disabled = currentPage === totalPages;
+            nextPageBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    loadGallery();
+                    updatePagination();
+                    window.scrollTo(0, 0);
+                }
+            });
+            pagination.appendChild(nextPageBtn);
+        }
+        
+        // Open modal with high-res image
+        function openModal(index, startIndex) {
+            currentImageIndex = startIndex + index;
+            updateModalImage();
+            
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+            
+            // Trap focus in modal
+            trapFocus(modal);
+            
+            // Disable body scroll
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Update modal image and info
+                // Update modal image and info
+         function updateModalImage() {
+            const filename = currentImages[currentImageIndex];
+            modalImage.src = '';
+            modalImage.alt = filename;
+            
+            // Show loading state
+            modalImage.style.opacity = '0.5';
+            
+            // Load high-res image
+            const img = new Image();
+            img.onload = () => {
+                modalImage.src = img.src;
+                modalImage.style.opacity = '1';
+                
+                // Remove all metadata display
+                modalInfo.innerHTML = `
+                    <h3 id="modal-title">${filename}</h3>
+                `;
+            };
+            
+            img.onerror = () => {
+                modalImage.style.opacity = '1';
+                modalImage.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22600%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15e8b8346ac%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15e8b8346ac%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.9296875%22%20y%3D%22317.7%22%3EImage%20Not%20Available%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E';
+                
+                modalInfo.innerHTML = `
+                    <h3 id="modal-title">${filename}</h3>
+                    <p>Failed to load image</p>
+                    <button id="retry-modal-image" style="padding: 0.5rem 1rem; background-color: #3498db; border: none; border-radius: 4px; color: white; margin-top: 0.5rem; cursor: pointer;">Retry</button>
+                `;
+                
+                document.getElementById('retry-modal-image').addEventListener('click', () => {
+                    updateModalImage();
+                });
+            };
+            
+            img.src = `${BASE_URL}${filename}`;
+            
+            // Update navigation buttons state
+            prevButton.disabled = currentImageIndex === 0;
+            nextButton.disabled = currentImageIndex === currentImages.length - 1;
+        }
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                // Re-enable body scroll
+                document.body.style.overflow = '';
+                // Reset zoom
+                isZoomed = false;
+                modalImage.style.transform = '';
+            }, 300);
+        }
+
+
+                        // Close modal
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                // Re-enable body scroll
+                document.body.style.overflow = '';
+                // Reset zoom
+                isZoomed = false;
+                modalImage.style.transform = '';
+            }, 300);
+        }
+        
+        // Trap focus in modal for accessibility
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstFocusableElement = focusableElements[0];
+            const lastFocusableElement = focusableElements[focusableElements.length - 1];
+            
+            element.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusableElement) {
+                            lastFocusableElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusableElement) {
+                            firstFocusableElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+                
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+            
+            firstFocusableElement.focus();
+        }
+        
+        // Toggle zoom on image
+        function toggleZoom() {
+            isZoomed = !isZoomed;
+            if (isZoomed) {
+                modalImage.style.transform = 'scale(1.5)';
+                modalImage.style.cursor = 'grab';
+                zoomButton.innerHTML = '<i class="fas fa-search-minus"></i>';
+            } else {
+                modalImage.style.transform = '';
+                modalImage.style.cursor = '';
+                zoomButton.innerHTML = '<i class="fas fa-search-plus"></i>';
+            }
+        }
+        
+        // Download current image
+        function downloadImage() {
+            const filename = currentImages[currentImageIndex];
+            const link = document.createElement('a');
+            link.href = `${BASE_URL}${filename}`;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Share current image
+        function shareImage() {
+            const filename = currentImages[currentImageIndex];
+            const url = `${BASE_URL}${filename}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: `APIGA Photo - ${filename}`,
+                    text: 'Check out this photo from APIGA!',
+                    url: url
+                }).catch(console.error);
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Image URL copied to clipboard!');
+                }).catch(err => {
+                    console.error('Could not copy URL: ', err);
+                });
+            }
+        }
+        
+        // Navigate to previous image
+        function prevImage() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateModalImage();
+            }
+        }
+        
+        // Navigate to next image
+        function nextImage() {
+            if (currentImageIndex < currentImages.length - 1) {
+                currentImageIndex++;
+                updateModalImage();
+            }
+        }
+        
+        // Event listeners
+        closeBtn.addEventListener('click', closeModal);
+        prevButton.addEventListener('click', prevImage);
+        nextButton.addEventListener('click', nextImage);
+        downloadButton.addEventListener('click', downloadImage);
+        shareButton.addEventListener('click', shareImage);
+        zoomButton.addEventListener('click', toggleZoom);
+        searchInput.addEventListener('input', filterAndSortImages);
+        sortSelect.addEventListener('change', filterAndSortImages);
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') {
+                    prevImage();
+                } else if (e.key === 'ArrowRight') {
+                    nextImage();
+                } else if (e.key === 'Escape') {
+                    closeModal();
+                }
+            }
+        });
+        
+        // Handle swipe gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        modalImage.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        modalImage.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextImage(); // Swipe left, go to next
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                prevImage(); // Swipe right, go to previous
+            }
+        }
+        
+        // Initialize gallery
+        window.addEventListener('load', () => {
+            // Populate the complete image list
+            // In a real app, you might fetch this from an API
+        
+
+            const completeImageList = [
+            "3M3A5162.JPG", "3M3A5163.JPG", "3M3A5164.JPG", "3M3A5165.JPG", "3M3A5166.JPG",
+            "3M3A5167.JPG", "3M3A5168.JPG", "3M3A5169.JPG", "3M3A5170.JPG", "3M3A5171.JPG",
+            "3M3A5172.JPG", "3M3A5173.JPG", "3M3A5174.JPG", "3M3A5175.JPG", "3M3A5176.JPG",
+            "3M3A5177.JPG", "3M3A5178.JPG", "3M3A5179.JPG", "3M3A5180.JPG", "3M3A5181.JPG",
+            "3M3A5182.JPG", "3M3A5183.JPG", "3M3A5184.JPG", "3M3A5185.JPG", "3M3A5186.JPG",
+            "3M3A5188.JPG", "3M3A5189.JPG", "3M3A5190.JPG", "3M3A5191.JPG", "3M3A5193.JPG",
+            "3M3A5194.JPG", "3M3A5195.JPG", "3M3A5196.JPG", "3M3A5198.JPG", "3M3A5199.JPG",
+            "3M3A5201.JPG", "3M3A5202.JPG", "3M3A5203.JPG", "3M3A5204.JPG", "3M3A5205.JPG",
+            "3M3A5206.JPG", "3M3A5207.JPG", "3M3A5208.JPG", "3M3A5209.JPG", "3M3A5210.JPG",
+            "3M3A5211.JPG", "3M3A5212.JPG", "3M3A5213.JPG", "3M3A5214.JPG", "3M3A5215.JPG",
+            "3M3A5216.JPG", "3M3A5217.JPG", "3M3A5218.JPG", "3M3A5219.JPG", "3M3A5220.JPG",
+            "3M3A5221.JPG", "3M3A5222.JPG", "3M3A5223.JPG", "3M3A5224.JPG", "3M3A5225.JPG",
+            "3M3A5226.JPG", "3M3A5227.JPG", "3M3A5228.JPG", "3M3A5229.JPG", "3M3A5230.JPG",
+            "3M3A5231.JPG", "3M3A5232.JPG", "3M3A5233.JPG", "3M3A5234.JPG", "3M3A5235.JPG",
+            "3M3A5236.JPG", "3M3A5237.JPG", "3M3A5238.JPG", "3M3A5239.JPG", "3M3A5240.JPG",
+            "3M3A5241.JPG", "3M3A5242.JPG", "3M3A5243.JPG", "3M3A5244.JPG", "3M3A5245.JPG",
+            "3M3A5246.JPG", "3M3A5247.JPG", "3M3A5249.JPG", "3M3A5250.JPG", "3M3A5251.JPG",
+            "3M3A5252.JPG", "3M3A5253.JPG", "3M3A5254.JPG", "3M3A5255.JPG", "3M3A5256.JPG",
+            "3M3A5259.JPG", "3M3A5260.JPG", "3M3A5261.JPG", "3M3A5262.JPG", "3M3A5263.JPG",
+            "3M3A5264.JPG", "3M3A5265.JPG", "3M3A5266.JPG", "3M3A5267.JPG", "3M3A5268.JPG",
+            "3M3A5270.JPG", "3M3A5271.JPG", "3M3A5272.JPG", "3M3A5273.JPG", "3M3A5274.JPG",
+            "3M3A5275.JPG", "3M3A5277.JPG", "3M3A5278.JPG", "3M3A5279.JPG", "3M3A5280.JPG",
+            "3M3A5281.JPG", "3M3A5282.JPG", "3M3A5283.JPG", "3M3A5284.JPG", "3M3A5285.JPG",
+            "3M3A5286.JPG", "3M3A5287.JPG", "3M3A5289.JPG", "3M3A5290.JPG", "3M3A5291.JPG",
+            "3M3A5292.JPG", "3M3A5293.JPG", "3M3A5294.JPG", "3M3A5295.JPG", "3M3A5296.JPG",
+            "3M3A5297.JPG", "3M3A5298.JPG", "3M3A5299.JPG", "3M3A5301.JPG", "3M3A5302.JPG",
+            "3M3A5303.JPG", "3M3A5304.JPG", "3M3A5305.JPG", "3M3A5306.JPG", "3M3A5307.JPG",
+            "3M3A5310.JPG", "3M3A5311.JPG", "3M3A5312.JPG", "3M3A5314.JPG", "3M3A5316.JPG",
+            "3M3A5317.JPG", "3M3A5318.JPG", "3M3A5320.JPG", "3M3A5321.JPG", "3M3A5322.JPG",
+            "3M3A5323.JPG", "3M3A5324.JPG", "3M3A5326.JPG", "3M3A5327.JPG", "3M3A5330.JPG",
+            "3M3A5331.JPG", "3M3A5333.JPG", "3M3A5334.JPG", "3M3A5335.JPG", "3M3A5336.JPG",
+            "3M3A5337.JPG", "3M3A5338.JPG", "3M3A5339.JPG", "3M3A5340.JPG", "3M3A5341.JPG",
+            "3M3A5342.JPG", "3M3A5343.JPG", "3M3A5344.JPG", "3M3A5349.JPG", "3M3A5350.JPG",
+            "3M3A5351.JPG", "3M3A5352.JPG", "3M3A5353.JPG", "3M3A5355.JPG", "3M3A5356.JPG",
+            "3M3A5357.JPG", "3M3A5358.JPG", "3M3A5359.JPG", "3M3A5360.JPG", "3M3A5361.JPG",
+            "3M3A5362.JPG", "3M3A5363.JPG", "3M3A5364.JPG", "3M3A5365.JPG", "3M3A5366.JPG",
+            "3M3A5367.JPG", "3M3A5368.JPG", "3M3A5369.JPG", "3M3A5370.JPG", "3M3A5371.JPG",
+            "3M3A5373.JPG", "3M3A5374.JPG", "3M3A5375.JPG", "3M3A5376.JPG", "3M3A5377.JPG",
+            "3M3A5378.JPG", "IMG-20250323-WA0020.jpg", "IMG-20250323-WA0028.jpg",
+            "IMG-20250323-WA0029.jpg", "IMG-20250323-WA0030.jpg", "IMG-20250323-WA0032.jpg",
+            "IMG-20250323-WA0035.jpg", "IMG-20250323-WA0037.jpg", "IMG-20250323-WA0038.jpg",
+            "IMG-20250323-WA0039.jpg", "IMG-20250323-WA0040.jpg", "IMG-20250323-WA0041.jpg",
+            "IMG-20250323-WA0042.jpg", "LM1A9234.JPG", "LM1A9236.JPG", "LM1A9237.JPG",
+            "LM1A9238.JPG", "LM1A9241.JPG", "LM1A9242.JPG", "LM1A9244.JPG", "LM1A9245.JPG",
+            "LM1A9246.JPG", "LM1A9247.JPG", "LM1A9248.JPG", "LM1A9249.JPG", "LM1A9250.JPG",
+            "LM1A9251.JPG", "LM1A9252.JPG", "LM1A9254.JPG", "LM1A9255.JPG", "LM1A9256.JPG",
+            "LM1A9257.JPG", "LM1A9258.JPG", "LM1A9259.JPG", "LM1A9260.JPG", "LM1A9261.JPG",
+            "LM1A9262.JPG", "LM1A9263.JPG", "LM1A9264.JPG", "LM1A9265.JPG", "LM1A9266.JPG",
+            "LM1A9267.JPG", "LM1A9268.JPG", "LM1A9269.JPG", "LM1A9270.JPG", "LM1A9271.JPG",
+            "LM1A9275.JPG", "LM1A9278.JPG", "LM1A9280.JPG", "LM1A9281.JPG", "LM1A9282.JPG",
+            "LM1A9285.JPG", "LM1A9286.JPG", "LM1A9287.JPG", "LM1A9288.JPG", "LM1A9289.JPG",
+            "LM1A9290.JPG", "PXL_20250321_035642477.jpg", "PXL_20250321_050602853.jpg",
+            "PXL_20250321_050611857.jpg", "PXL_20250321_050626712.jpg", "PXL_20250321_050635981.jpg",
+            "PXL_20250321_050643541.jpg", "PXL_20250321_050746044.jpg", "PXL_20250321_050754163.jpg",
+            "PXL_20250321_050757456.jpg", "PXL_20250321_050940170.jpg", "PXL_20250321_050947245.jpg",
+            "PXL_20250321_050956854.jpg", "PXL_20250321_051504318.jpg", "PXL_20250321_051522446.jpg",
+            "PXL_20250321_051532260.jpg", "PXL_20250321_051550449.jpg", "PXL_20250321_051553871.jpg",
+            "PXL_20250321_051607648.jpg", "PXL_20250321_051621010.jpg", "PXL_20250321_051710747.jpg",
+            "PXL_20250321_051720940.jpg", "PXL_20250321_051725811.jpg", "PXL_20250321_051731284.jpg",
+            "PXL_20250321_051741235.jpg", "PXL_20250321_051742546.jpg", "PXL_20250321_052119748.jpg",
+            "PXL_20250321_052126081.jpg", "PXL_20250321_052142611.jpg", "PXL_20250321_052146060.jpg",
+            "PXL_20250321_052242469.jpg", "PXL_20250321_052256551.jpg", "PXL_20250321_052303149.jpg",
+            "PXL_20250321_052304179.jpg", "PXL_20250321_060345660.jpg", "PXL_20250321_060948427.jpg",
+            "PXL_20250321_060951781.jpg", "PXL_20250321_060952503.jpg", "PXL_20250321_060955307.jpg",
+            "PXL_20250321_060956038.jpg", "PXL_20250321_060956667.jpg", "PXL_20250321_061033975.jpg",
+            "PXL_20250321_061035123.jpg", "PXL_20250321_061037228.jpg", "PXL_20250321_061045453.jpg",
+            "PXL_20250321_061053532.jpg", "PXL_20250321_061056498.jpg", "PXL_20250321_061057745.jpg",
+            "PXL_20250321_061058970.jpg", "PXL_20250321_061059658.jpg", "PXL_20250321_061517382.jpg",
+            "PXL_20250321_061518985.jpg", "PXL_20250321_061521786.jpg", "PXL_20250321_061948370.jpg",
+            "PXL_20250321_071617323.jpg", "PXL_20250321_072220156.jpg", "PXL_20250321_083909635.jpg",
+            "PXL_20250321_084005011.jpg", "PXL_20250321_091825788.jpg", "PXL_20250321_091827986.jpg",
+            "PXL_20250321_091833033.jpg", "PXL_20250321_091842061.jpg", "PXL_20250321_091844104.jpg",
+            "PXL_20250321_091853048.jpg", "PXL_20250321_091906732.jpg", "PXL_20250321_091907950.jpg",
+            "PXL_20250321_091957604.jpg", "PXL_20250321_092832362.jpg", "PXL_20250321_092833489.jpg",
+            "PXL_20250321_092838944.jpg", "PXL_20250321_092840339.jpg"];
+            
+            // Replace the placeholder list with the complete list
+            imageFiles.length = 0;
+            imageFiles.push(...completeImageList);
+            
+            // Initialize the gallery
+            filterAndSortImages();
+            
+            // Remove initial loading spinner
+            const loadingElement = document.querySelector('.loading');
+            if (loadingElement) {
+                loadingElement.remove();
+            }
+        });
+    </script>
+    <div id="footer"></div>
+   
+</body>
+</html>
