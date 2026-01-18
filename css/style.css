@@ -445,13 +445,13 @@ footer a:hover {
   pointer-events: none;
   
   /* The Breathing Animation */
-  animation: grid-breathe 8s ease-in-out infinite;
+  animation: grid-breathe 6s ease-in-out infinite;
   will-change: mask-image, opacity;
 }
 
 @keyframes grid-breathe {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 0.4; }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 @keyframes float-aurora-1 {
