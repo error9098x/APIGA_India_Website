@@ -41,7 +41,28 @@
             <div class="relative z-10 max-w-7xl mx-auto px-4 w-full flex flex-col justify-center h-full pt-20">
                 <div class="max-w-4xl">
                     <h1 class="hero-title mb-8 text-5xl md:text-7xl leading-tight" data-aos="fade-down" data-aos-duration="1000">
-                        APIGA India 2026
+                        APIGA 
+                        <svg class="india-flag-svg" viewBox="0 0 280 100" preserveAspectRatio="xMidYMid meet">
+                            <defs>
+                                <!-- Animated Wave Pattern -->
+                                <pattern id="indiaWavePattern" patternUnits="userSpaceOnUse" width="300" height="100" x="0" y="0">
+                                    <animate attributeName="x" from="0" to="-300" dur="4s" repeatCount="indefinite"/>
+                                    
+                                    <!-- Saffron Section with wavy bottom -->
+                                    <path d="M0,20 L600,20 L600,58 Q550,66 500,58 Q450,50 400,58 Q350,66 300,58 Q250,50 200,58 Q150,66 100,58 Q50,50 0,58 Z" fill="#FF9933"/>
+                                    
+                                    <!-- White Section with wavy top and bottom (reduced height) -->
+                                    <path d="M0,58 Q50,50 100,58 Q150,66 200,58 Q250,50 300,58 Q350,66 400,58 Q450,50 500,58 Q550,66 600,58 L600,82 Q550,90 500,82 Q450,74 400,82 Q350,90 300,82 Q250,74 200,82 Q150,90 100,82 Q50,74 0,82 Z" fill="#FFFFFF"/>
+                                    
+                                    <!-- Green Section with wavy top -->
+                                    <path d="M0,82 Q50,74 100,82 Q150,90 200,82 Q250,74 300,82 Q350,90 400,82 Q450,74 500,82 Q550,90 600,82 L600,120 L0,120 Z" fill="#138808"/>
+                                </pattern>
+                            </defs>
+                            
+                            <!-- The Text filled with the wave pattern -->
+                            <text x="50%" y="100" text-anchor="middle" font-size="95" font-weight="800" font-family="'Space Grotesk', sans-serif" fill="url(#indiaWavePattern)">INDIA</text>
+                        </svg>
+                        2026
                     </h1>
                     <p class="text-xl md:text-2xl lg:text-3xl mb-10 text-blue-100 font-light max-w-2xl" 
                        data-aos="fade-up" data-aos-delay="200" 

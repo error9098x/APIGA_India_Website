@@ -496,6 +496,29 @@ footer a:hover {
 }
 
 /* ============================================
+   INDIA FLAG WAVE TEXT ANIMATION (SVG)
+   ============================================ */
+.india-flag-svg {
+  display: inline-block;
+  /* Match the line height of the h1 */
+  height: 1.1em;
+  width: auto;
+  /* Align with text baseline */
+  vertical-align: baseline;
+  margin: 0 0.05em;
+  /* Glow effect */
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Responsive sizing */
+@media (max-width: 768px) {
+  .india-flag-svg {
+    height: 1em;
+    margin: 0 0.02em;
+  }
+}
+
+/* ============================================
    8. SECTION STYLING
    ============================================ */
 
