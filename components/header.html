@@ -1,8 +1,8 @@
 
 <nav id="header" class="raycast-header">
     <div class="header-container flex justify-center items-center h-full">
-        <!-- Centered Navigation Items -->
-        <div class="flex items-center space-x-2 md:space-x-4">
+        <!-- Desktop: Centered Navigation Items -->
+        <div class="hidden md:flex items-center space-x-4">
             <a href="/" class="nav-item">
                 <i class="fas fa-home text-xl"></i>
                 <span class="nav-tooltip">Home</span>
@@ -33,13 +33,20 @@
             </a>
         </div>
         
-        <!-- Mobile Menu Button (Visible only on small screens) -->
-        <button id="mobile-menu-button" class="md:hidden absolute right-4 text-gray-700 focus:outline-none">
-            <i class="fas fa-bars text-xl"></i>
-        </button>
+        <!-- Mobile: Simplified View (Home + Menu) -->
+        <div class="md:hidden flex items-center justify-between w-full px-2">
+            <a href="/" class="text-gray-800 font-bold text-lg flex items-center gap-2">
+                <i class="fas fa-home text-blue-600"></i>
+                <span>APIGA India</span>
+            </a>
+            
+            <button id="mobile-menu-button" class="text-gray-700 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
     </div>
 
-    <!-- Mobile menu -->
+    <!-- Mobile menu (Dropdown below the floating bar) -->
    <div id="mobile-menu" class="md:hidden hidden mt-2 bg-white/95 rounded-xl border border-gray-100 shadow-xl backdrop-blur-md">
     <div class="px-2 pt-2 pb-3 space-y-1">
         <a href="/" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
