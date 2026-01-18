@@ -1,50 +1,47 @@
 
-<nav id="header" class="bg-white shadow-lg fixed w-full z-50 top-0 left-0">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between items-center h-16">
-            <div class="flex items-center">
-                <a href="/" class="flex items-center space-x-2">
-                    <!-- Replace PNG with SVG and adjust height/width as needed -->
-                    <img src="/images/header_logo.svg" 
-                         alt="APIGA India Logo" 
-                         class="h-12 w-auto"
-                         width="auto"
-                         height="48"
-                         loading="eager">
-                </a>
-            </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="/" class="text-gray-700 hover:text-blue-600 transition">
-                    <i class="fas fa-home mr-1"></i> Home
-                </a>
-                <a href="/pages/information.html" class="text-gray-700 hover:text-blue-600 transition">
-                    <i class="fas fa-info-circle mr-1"></i> About
-                </a>
-                <a href="/pages/coming_soon.html" class="text-gray-700 hover:text-blue-600 transition">
-                    <i class="fas fa-calendar-alt mr-1"></i> Program Schedule
-                </a>
-                <a href="/pages/coming_soon.html" class="text-gray-700 hover:text-blue-600 transition">
-                    <i class="fas fa-users mr-1"></i> Selected Participants
-                </a>
-                <a href="/pages/coming_soon.html" class="text-gray-700 hover:text-blue-600 transition">
-                    <i class="fas fa-handshake-angle mr-1"></i> Local Host
-                </a>
-                <a href="/pages/coming_soon.html" class="text-gray-700 hover:text-blue-600 transition">
-                    <i class="fas fa-handshake mr-1"></i> Supported By
-                </a>
-                <a href="/pages/apiga_oc.html" class="text-gray-700 hover:text-blue-600 transition">
-                    <i class="fas fa-user-graduate mr-2"></i> APIGA OC
-               </a>
-             
-            </div>
-            <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+<nav id="header" class="raycast-header">
+    <div class="header-container flex justify-center items-center h-full">
+        <!-- Centered Navigation Items -->
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <a href="/" class="nav-item">
+                <i class="fas fa-home text-xl"></i>
+                <span class="nav-tooltip">Home</span>
+            </a>
+            <a href="/pages/information.html" class="nav-item">
+                <i class="fas fa-info-circle text-xl"></i>
+                <span class="nav-tooltip">About</span>
+            </a>
+            <a href="/pages/coming_soon.html" class="nav-item">
+                <i class="fas fa-calendar-alt text-xl"></i>
+                <span class="nav-tooltip">Program</span>
+            </a>
+            <a href="/pages/coming_soon.html" class="nav-item">
+                <i class="fas fa-users text-xl"></i>
+                <span class="nav-tooltip">Participants</span>
+            </a>
+            <a href="/pages/coming_soon.html" class="nav-item">
+                <i class="fas fa-handshake-angle text-xl"></i>
+                <span class="nav-tooltip">Host</span>
+            </a>
+            <a href="/pages/coming_soon.html" class="nav-item">
+                <i class="fas fa-handshake text-xl"></i>
+                <span class="nav-tooltip">Partners</span>
+            </a>
+            <a href="/pages/apiga_oc.html" class="nav-item">
+                <i class="fas fa-user-graduate text-xl"></i>
+                <span class="nav-tooltip">Team</span>
+            </a>
         </div>
+        
+        <!-- Mobile Menu Button (Visible only on small screens) -->
+        <button id="mobile-menu-button" class="md:hidden absolute right-4 text-gray-700 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
     </div>
+
     <!-- Mobile menu -->
-   <div id="mobile-menu" class="md:hidden hidden">
-    <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+   <div id="mobile-menu" class="md:hidden hidden mt-2 bg-white/95 rounded-xl border border-gray-100 shadow-xl backdrop-blur-md">
+    <div class="px-2 pt-2 pb-3 space-y-1">
         <a href="/" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
             <i class="fas fa-home mr-2"></i> Home
         </a>

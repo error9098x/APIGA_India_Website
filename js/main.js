@@ -12,6 +12,30 @@ document.addEventListener('DOMContentLoaded', function() {
     const headerContainer = document.getElementById('header');
     const footerContainer = document.getElementById('footer');
 
+    // Hero Section Interactive Grid Logic
+    const heroSection = document.querySelector('.hero-section');
+    const heroGrid = document.querySelector('.hero-bg-grid');
+    
+    if (heroSection && heroGrid) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Efficiently update CSS variables
+            requestAnimationFrame(() => {
+                heroGrid.style.setProperty('--mouse-x', `${x}px`);
+                heroGrid.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+        
+        // Handle mouse leaving the section (reset center)
+        heroSection.addEventListener('mouseleave', () => {
+            heroGrid.style.setProperty('--mouse-x', '50%');
+            heroGrid.style.setProperty('--mouse-y', '50%');
+        });
+    }
+
     if (headerContainer) {
         fetch('components/header.html')
             .then(response => response.text())

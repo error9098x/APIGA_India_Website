@@ -1,39 +1,51 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<footer class="bg-gray-800 text-white py-12">
+<footer class="bg-gradient-to-b from-blue-50 to-blue-100 text-gray-800 py-16 border-t border-blue-200">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="grid md:grid-cols-4 gap-8">
-            <!-- Existing footer content -->
-            <div>
-                <h3 class="text-xl font-bold mb-4">Contact Us</h3>
-                <p>APIGA India</p>
-                <p>Email: apigaindia@gmail.com</p>
+        <div class="grid md:grid-cols-4 gap-12">
+            <!-- Contact Section -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-blue-600 uppercase tracking-wide">Contact Us</h3>
+                <div class="space-y-2 text-sm">
+                    <p class="font-semibold text-gray-800">APIGA India</p>
+                    <p class="text-gray-600">Email: <a href="mailto:apigaindia@gmail.com" class="text-blue-600 hover:text-blue-700 transition">apigaindia@gmail.com</a></p>
+                    
+                    <p class="pt-3 font-semibold text-gray-800">Participation Inquiries:</p>
+                    <p><a href="mailto:fellowship@apigaindia.in" class="text-blue-600 hover:text-blue-700 transition">fellowship@apigaindia.in</a></p>
                 
-                <p class="mt-4">Participation Inquiries:</p>
-                <p>fellowship@apigaindia.in</p>
-            
-                <p class="mt-4">Program Coordinator:</p>
-                <p>Ms. Barkha Manral</p>
-                <p>barkha.manral12@gmail.com</p>
-            
-                <p class="mt-4">Team Lead:</p>
-                <p>Mr. Sameer Gahlot</p>
-                <p>gahlot.legal@gmail.com</p>
+                    <p class="pt-3 font-semibold text-gray-800">Program Coordinator:</p>
+                    <p>Ms. Barkha Manral</p>
+                    <p><a href="mailto:barkha.manral12@gmail.com" class="text-blue-600 hover:text-blue-700 transition">barkha.manral12@gmail.com</a></p>
+                
+                    <p class="pt-3 font-semibold text-gray-800">Team Lead:</p>
+                    <p>Mr. Sameer Gahlot</p>
+                    <p><a href="mailto:gahlot.legal@gmail.com" class="text-blue-600 hover:text-blue-700 transition">gahlot.legal@gmail.com</a></p>
+                </div>
             </div>
+            
+            <!-- Event Details -->
             <div>
-                <h3 class="text-xl font-bold mb-4">Event Details</h3>
-                <p>Dates: To be decided</p>
+                <h3 class="text-lg font-bold text-blue-600 uppercase tracking-wide mb-4">Event Details</h3>
+                <div class="bg-white/80 backdrop-blur p-4 rounded-lg border border-blue-200">
+                    <p class="text-gray-700"><span class="font-semibold">Dates:</span> To be decided</p>
+                    <p class="text-gray-700 mt-2"><span class="font-semibold">Duration:</span> 2 Days</p>
+                    <p class="text-gray-700 mt-2"><span class="font-semibold">Time:</span> 9:00 AM - 5:45 PM</p>
+                </div>
             </div>
+            
+            <!-- Quick Links -->
             <div>
-                <h3 class="text-xl font-bold mb-4">Quick Links</h3>
-                <ul class="space-y-2">
-                    <li><a href="/pages/coming_soon.html" class="hover:text-blue-400">Program Schedule</a></li>
-                    <li><a href="/pages/photos.html" class="hover:text-blue-400">APIGA India 2025 Photos</a></li>
-                    <!-- <li><a href="/pages/registration.html" class="hover:text-blue-400">Registration</a></li> -->
+                <h3 class="text-lg font-bold text-blue-600 uppercase tracking-wide mb-4">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a href="/pages/coming_soon.html" class="text-gray-700 hover:text-blue-600 transition flex items-center"><i class="fas fa-arrow-right text-blue-600 mr-2 text-sm"></i>Program Schedule</a></li>
+                    <li><a href="/pages/photos.html" class="text-gray-700 hover:text-blue-600 transition flex items-center"><i class="fas fa-arrow-right text-blue-600 mr-2 text-sm"></i>APIGA India 2025 Photos</a></li>
+                    <li><a href="/pages/coming_soon.html" class="text-gray-700 hover:text-blue-600 transition flex items-center"><i class="fas fa-arrow-right text-blue-600 mr-2 text-sm"></i>Learn More</a></li>
                 </ul>
             </div>
+            
+            <!-- Location -->
             <div>
-                <h3 class="text-xl font-bold mb-4">Location</h3>
-                <div class="rounded-lg overflow-hidden">
+                <h3 class="text-lg font-bold text-blue-600 uppercase tracking-wide mb-4">Location</h3>
+                <div class="rounded-lg overflow-hidden shadow-md">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11163.577155474444!2d77.04343307020997!3d28.92614181491787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390daeffe1e6caed%3A0xf84c61ebc78fe3fd!2sO.P.%20Jindal%20Global%20University!5e0!3m2!1sen!2sin!4v1735743077465!5m2!1sen!2sin"
                         width="100%"
@@ -45,17 +57,22 @@
                     </iframe>
                 </div>
             </div>
-            <!-- Social Media Links -->
-            <div>
-                <h3 class="text-xl font-bold mb-4">Follow Us</h3>
-                <div class="flex space-x-4">
-                    <a href="https://www.linkedin.com/company/105339260/admin/dashboard/" target="_blank" class="text-white hover:text-blue-400">
+        </div>
+        
+        <!-- Social Media Links -->
+        <div class="mt-12 pt-12 border-t border-blue-200">
+            <div class="flex flex-col sm:flex-row justify-between items-center">
+                <div>
+                    <h3 class="text-lg font-bold text-blue-600 uppercase tracking-wide mb-4 sm:mb-0">Follow Us</h3>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.linkedin.com/company/105339260/admin/dashboard/" target="_blank" class="text-blue-600 hover:text-blue-700 transition transform hover:scale-110">
                         <i class="fab fa-linkedin fa-2x"></i>
                     </a>
-                    <a href="https://www.facebook.com/share/49X39JS2P5LygZML/?mibextid=wwXIfr" target="_blank" class="text-white hover:text-blue-400">
+                    <a href="https://www.facebook.com/share/49X39JS2P5LygZML/?mibextid=wwXIfr" target="_blank" class="text-blue-600 hover:text-blue-700 transition transform hover:scale-110">
                         <i class="fab fa-facebook fa-2x"></i>
                     </a>
-                    <a href="https://www.instagram.com/apigaindia?igsh=eG5rNmxmeHRtYjM5" target="_blank" class="text-white hover:text-blue-400">
+                    <a href="https://www.instagram.com/apigaindia?igsh=eG5rNmxmeHRtYjM5" target="_blank" class="text-blue-600 hover:text-blue-700 transition transform hover:scale-110">
                         <i class="fab fa-instagram fa-2x"></i>
                     </a>
                 </div>
@@ -63,8 +80,8 @@
         </div>
         
         <!-- Copyright Section -->
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2026 APIGA India. All rights reserved.</p>
+        <div class="border-t border-blue-200 mt-12 pt-8 text-center text-gray-600">
+            <p>&copy; 2026 APIGA India. All rights reserved. | <a href="#" class="text-blue-600 hover:text-blue-700 transition">Privacy Policy</a> | <a href="#" class="text-blue-600 hover:text-blue-700 transition">Terms of Service</a></p>
         </div>
     </div>
 </footer>

@@ -6,6 +6,8 @@
     <title>Empowering Future Internet Leaders - APIGA India 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -13,7 +15,7 @@
     <meta name="description" content="APIGA India 2026 - Empowering future generations of Internet governance leaders. Join us to shape the digital future.">
     <meta name="keywords" content="APIGA, ICANN, Internet Governance, India, DNS, domain, tech, workshop">
     <meta name="author" content="APIGA India 2026 Organizing Committee">
-    <meta property="og:title" content="APIGA India 2026 - Empowering Future Internet Leaders">>
+    <meta property="og:title" content="APIGA India 2026 - Empowering Future Internet Leaders">
     <meta property="og:description" content="Join APIGA India 2026 to empower the next generation of Internet governance leaders in the Asia Pacific region.">
     <meta property="og:image" content="https://apigaindia.in/images/home_page_logo.png">
     <meta property="og:url" content="https://apigaindia.in">
@@ -24,143 +26,145 @@
     <meta name="twitter:image" content="https://apigaindia.in/images/home_page_logo.png">
     <link rel="canonical" href="https://apigaindia.in">
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50" style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
     <div id="header"></div>
 
     <main>
-        
-
-        <!-- Content Sections -->
-        <!-- Fix hero section for mobile -->
-        <section class="relative min-h-[60vh] md:min-h-screen"> <!-- Changed from fixed to relative and adjusted height -->
-        <div class="relative w-full h-full"> <!-- Changed from fixed to relative -->
-        <div class="h-full" data-aos="fade-up">
-        <div class="h-full">
-        <img src="images/home_page_logo.png" alt="APIGA Conference" class="w-full h-[60vh] md:h-screen object-cover">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/70 to-transparent">
-        <div class="max-w-7xl mx-auto px-4 text-white w-full h-full flex items-center">
-        <div class="pt-16 md:pt-20"> <!-- Increased padding top for mobile -->
-        <h1 class="text-2xl md:text-6xl lg:text-7xl font-bold mb-4 animate-title professional-title" 
-        data-aos="flip-left" 
-        data-aos-duration="1500">
-        APIGA India 2026
-        </h1>
-        <p class="text-base md:text-xl lg:text-2xl mb-8 max-w-2xl">Empowering Future Internet Leaders</p>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
+        <!-- Hero Section - Awesome Design -->
+        <section class="relative min-h-[80vh] md:min-h-screen hero-section flex items-center">
+            <!-- Background Enhancements -->
+            <div class="hero-bg-grid"></div>
+            
+            <!-- Subtle Image Overlay (Controlled by CSS Variable) -->
+            <img src="images/home_page_logo.png" alt="APIGA Background" class="hero-bg-logo">
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-4 w-full flex flex-col justify-center h-full pt-20">
+                <div class="max-w-4xl">
+                    <h1 class="hero-title mb-8 text-5xl md:text-7xl leading-tight" data-aos="fade-down" data-aos-duration="1000">
+                        APIGA India 2026
+                    </h1>
+                    <p class="text-xl md:text-2xl lg:text-3xl mb-10 text-blue-100 font-light max-w-2xl" 
+                       data-aos="fade-up" data-aos-delay="200" 
+                       style="text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+                        Empowering Future Internet Leaders
+                    </p>
+                    
+                    <!-- Call to Action Buttons -->
+                    <div class="flex flex-wrap gap-4" data-aos="fade-up" data-aos-delay="400">
+                        <a href="#about" class="btn btn-primary shadow-2xl shadow-blue-500/30">
+                            Explore More <i class="fas fa-arrow-down ml-2 animate-bounce"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </section>
         
-        <!-- Fix content section spacing -->
-        <section class="relative z-10 bg-gray-50 pt-8 pb-24 border-t-8 border-[#2463EB]"> <!-- Removed mt-screen -->
+        <!-- Content Section with Modern Design -->
+        <section class="relative z-10 bg-gray-50 pt-12 pb-24 section-divider">
             <div class="max-w-7xl mx-auto px-4">
-            <!-- About APIGA - Comprehensive Content -->
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">
-                
-                <i class="fas fa-info-circle text-blue-600 mr-2"></i>About APIGA
-                </h2>
-                <!-- Introduction -->
-                <div class="grid grid-cols-1 gap-8 mb-8">
-                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
-                    <p class="text-gray-700 leading-relaxed">
-                    The Asia Pacific Internet Governance Academy (APIGA) is a prestigious capacity development workshop conducted by Internet Corporation for Assigned Names and Numbers (ICANN) in partnership with Korea Internet Security Agency (KISA) aimed at nurturing understanding and engagement with critical Internet governance issues, particularly within the Asia Pacific (APAC) region. In continuation of this regional APIGA initiative, the Local APIGA India 2026 will provide a unique opportunity for tertiary undergraduate and graduate students in India to delve into the intricacies of Internet governance, ICANN policies, and the multistakeholder model.
-                    </p>
-                    <img src="images/apiga_global.png" alt="APIGA Logo" class="my-8 mx-auto w-full md:max-w-md">            
-                    </div>
-
-                    <!-- Local APIGA India -->
-                    <div class="grid grid-cols-1 gap-8 mb-8">
-                        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
-                            <h3 class="text-2xl font-semibold mb-4">APIGA India 2026</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                <span class="text-blue-600 font-bold">APIGA India 2026 is a two-day capacity development workshop focused on Internet governance-related topics to be held in 2026 (Dates to be decided). This localized version brings together stakeholders from the Internet Governance ecosystem to discuss, share knowledge, and build capacity.</span>
+                <!-- About APIGA -->
+                <div class="mb-20">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8" data-aos="fade-up" style="font-family: 'Space Grotesk', sans-serif;">
+                        <i class="fas fa-info-circle text-blue-600 mr-3"></i>About APIGA
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 gap-8 mb-12">
+                        <div class="card-modern" data-aos="fade-up">
+                            <p class="text-gray-700 leading-relaxed text-lg">
+                                The Asia Pacific Internet Governance Academy (APIGA) is a prestigious capacity development workshop conducted by Internet Corporation for Assigned Names and Numbers (ICANN) in partnership with Korea Internet Security Agency (KISA) aimed at nurturing understanding and engagement with critical Internet governance issues, particularly within the Asia Pacific (APAC) region. In continuation of this regional APIGA initiative, the Local APIGA India 2026 will provide a unique opportunity for tertiary undergraduate and graduate students in India to delve into the intricacies of Internet governance, ICANN policies, and the multistakeholder model.
                             </p>
-                            <p class="text-gray-700 leading-relaxed mt-4">
+                            <img src="images/apiga_global.png" alt="APIGA Logo" class="my-8 mx-auto w-full md:max-w-md">            
+                        </div>
+
+                        <!-- Local APIGA India -->
+                        <div class="card-modern" data-aos="fade-up" data-aos-delay="100">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-4" style="font-family: 'Space Grotesk', sans-serif;">APIGA India 2026</h3>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                <span class="text-blue-600 font-bold text-lg">APIGA India 2026 is a two-day capacity development workshop focused on Internet governance-related topics to be held in 2026 (Dates to be decided).</span> This localized version brings together stakeholders from the Internet Governance ecosystem to discuss, share knowledge, and build capacity.
+                            </p>
+                            <p class="text-gray-700 leading-relaxed">
                                 Through dynamic workshops, real-world simulations, and expert-led sessions, you'll gain practical insights into:
-                                <ul class="list-disc pl-6 mt-2">
-                                    <li>The evolving landscape of Internet policy</li>
-                                    <li>Critical issues in digital rights and cybersecurity</li>
-                                    <li>Multi-stakeholder approach to Internet Governance</li>
-                                    <li>Youth representation in policy and advocacy</li>
-                                </ul>
                             </p>
-                        </div>
-                    </div>
-
-                  
-                    
-                        <h2 class="text-3xl font-bold text-center my-8" data-aos="fade-up">OBJECTIVES</h2>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            <div class="bg-[#3eb6ff] p-6 rounded-lg shadow-md" data-aos="fade-up">
-                                <h3 class="text-xl font-bold text-white mb-3">Enhanced Youth Representation</h3>
-                                <p class="text-white leading-relaxed">
-                                    Foster active involvement of youth in Internet governance policy discussions and ICANN remit areas.
-                                </p>
-                            </div>
-                            
-                            <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
-                                <h3 class="text-xl font-bold text-gray-800 mb-3">Multistakeholder Analysis</h3>
-                                <p class="text-gray-700 leading-relaxed">
-                                    Encourage critical analysis of ICANN policy issues from diverse stakeholder perspectives.
-                                </p>
-                            </div>
-                            
-                            <div class="bg-[#0352ae] p-6 rounded-lg shadow-md" data-aos="fade-up">
-                                <h3 class="text-xl font-bold text-white mb-3">Policy Engagement</h3>
-                                <p class="text-white leading-relaxed">
-                                    Empower participants to contribute meaningfully to current ICANN policy development processes.
-                                </p>
-                            </div>
-                        </div>
-
-                    <!-- About ICANN -->
-                    <div class="grid grid-cols-1 gap-8 mb-8">
-                        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
-                            <h3 class="text-2xl font-semibold mb-4">About ICANN</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                The <a href="https://www.icann.org/" target="_blank" class="text-blue-600 font-bold hover:underline">Internet Corporation for Assigned Names and Numbers</a> is a global multi-stakeholder group and nonprofit organization headquartered in the United States responsible for coordinating the maintenance and procedures of several databases related to the namespaces and numerical spaces of the Internet, ensuring the Internet's stable and secure operation. ICANN performs the actual technical maintenance work of the Central Internet Address pools and DNS root zone registries pursuant to the Internet Assigned Numbers Authority (IANA) function contract. Much of its work has concerned the Internet's global Domain Name System including policy development for internationalization of the DNS, introduction of new generic top-level domains (TLDs), and the operation of root name servers. The numbering facilities ICANN manages include the Internet Protocol address spaces for IPv4 and IPv6, and the assignment of address blocks to regional Internet registries. ICANN also maintains registries of Internet Protocol identifiers.
-                            </p>
-                            <p class="text-gray-700 leading-relaxed mt-4">
-                                ICANN's primary principles of operation have been described as helping preserve the operational stability of the Internet; promoting competition; achieving broad representation of the global Internet community; and developing policies appropriate to its mission through bottom-up, consensus-based processes.
-                            </p>
-                        </div>
-                    </div>
-                    <!--Multi Stakeholder Model-->
-                    <div class="grid grid-cols-1 gap-8 mb-8">
-                        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
-                            <h3 class="text-2xl font-semibold mb-4">The Multi-Stakeholder Model of Internet Governance</h3>
-                            <p class="text-gray-700 leading-relaxed">
-                                Internet governance refers to the rules, policies, standards and practices that coordinate and shape global cyberspace. The Internet is a vast network of independently-managed networks, woven together by globally standardized data communication protocols (primarily, Internet Protocol, TCP, UDP, DNS and BGP). The common adoption and use of these protocols unified the world of information and communications like never before. Millions of digital devices and massive amounts of data, software applications, and electronic services became compatible and interoperable. The Internet created a new environment, a complex and dynamic "cyberspace."
-                            </p>
-                            <p class="text-gray-700 leading-relaxed mt-4">
-                                While Internet connectivity generated innovative new services, capabilities and unprecedented forms of sharing and cooperation, it also created new forms of crime, abuse, surveillance and social conflict. Internet governance is the process whereby cyberspace participants resolve conflicts over these problems and develop a workable order.
-                            </p>
-                            <p class="text-gray-700 leading-relaxed mt-4">
-                                Internet governance is the development and application of shared principles, norms, rules, decision-making procedures and programs that shape the evolution and use of the Internet.
-                            </p>
-                        </div>
-                    </div>
-                    
-
-
-                    <!-- Workshop Format -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
-                            <h3 class="text-2xl font-semibold mb-4">Workshop Format</h3>
-                            <ul class="space-y-2 text-gray-700">
-                                <li><i class="fas fa-check-circle text-blue-600 mr-2"></i>ICANN Model Conference</li>
-                                <li><i class="fas fa-check-circle text-blue-600 mr-2"></i>Multi-stakeholder Role-Play</li>
-                                <li><i class="fas fa-check-circle text-blue-600 mr-2"></i>Roundtable Discussions</li>
-                                <li><i class="fas fa-check-circle text-blue-600 mr-2"></i>Guest Speakers</li>
-                                <li><i class="fas fa-check-circle text-blue-600 mr-2"></i>Interactive Modules</li>
+                            <ul class="list-disc pl-6 mt-4 space-y-2 text-gray-700">
+                                <li class="ml-4">The evolving landscape of Internet policy</li>
+                                <li class="ml-4">Critical issues in digital rights and cybersecurity</li>
+                                <li class="ml-4">Multi-stakeholder approach to Internet Governance</li>
+                                <li class="ml-4">Youth representation in policy and advocacy</li>
                             </ul>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-up">
-                            <h3 class="text-2xl font-semibold mb-4">Time Allocation</h3>
+                    </div>
+
+                    <!-- Objectives Section -->
+                    <h2 class="text-3xl md:text-4xl font-bold text-center my-12 mb-12" data-aos="fade-up" style="font-family: 'Space Grotesk', sans-serif;">OBJECTIVES</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                        <div class="card-modern bg-gradient-to-br from-blue-50 to-blue-100 border-l-4 border-l-blue-600" data-aos="fade-up">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-users-alt text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-blue-600 mb-3" style="font-family: 'Space Grotesk', sans-serif;">Enhanced Youth Representation</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Foster active involvement of youth in Internet governance policy discussions and ICANN remit areas.
+                            </p>
+                        </div>
+                        
+                        <div class="card-modern" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-balance-scale text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3" style="font-family: 'Space Grotesk', sans-serif;">Multistakeholder Analysis</h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                Encourage critical analysis of ICANN policy issues from diverse stakeholder perspectives.
+                            </p>
+                        </div>
+                        
+                        <div class="card-modern bg-gradient-to-br from-blue-600 to-blue-700 text-white" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon-box bg-blue-500 mb-4" style="background: rgba(255,255,255,0.2); color: white;">
+                                <i class="fas fa-gavel text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3" style="font-family: 'Space Grotesk', sans-serif;">Policy Engagement</h3>
+                            <p class="leading-relaxed">
+                                Empower participants to contribute meaningfully to current ICANN policy development processes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- About ICANN -->
+                    <div class="card-modern" data-aos="fade-up">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4" style="font-family: 'Space Grotesk', sans-serif;">About ICANN</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            The <a href="https://www.icann.org/" target="_blank" class="link-modern">Internet Corporation for Assigned Names and Numbers</a> is a global multi-stakeholder group and nonprofit organization headquartered in the United States responsible for coordinating the maintenance and procedures of several databases related to the namespaces and numerical spaces of the Internet, ensuring the Internet's stable and secure operation.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            ICANN's primary principles of operation have been described as helping preserve the operational stability of the Internet; promoting competition; achieving broad representation of the global Internet community; and developing policies appropriate to its mission through bottom-up, consensus-based processes.
+                        </p>
+                    </div>
+
+                    <!--Multi Stakeholder Model-->
+                    <div class="card-modern" data-aos="fade-up">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4" style="font-family: 'Space Grotesk', sans-serif;">The Multi-Stakeholder Model of Internet Governance</h3>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Internet governance refers to the rules, policies, standards and practices that coordinate and shape global cyberspace. The Internet is a vast network of independently-managed networks, woven together by globally standardized data communication protocols.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed">
+                            Internet governance is the development and application of shared principles, norms, rules, decision-making procedures and programs that shape the evolution and use of the Internet.
+                        </p>
+                    </div>
+
+                    <!-- Workshop Format -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                        <div class="card-modern" data-aos="fade-up">
+                            <h3 class="text-2xl font-bold mb-4" style="font-family: 'Space Grotesk', sans-serif;">Workshop Format</h3>
+                            <ul class="space-y-3 text-gray-700">
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i><span>ICANN Model Conference</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i><span>Multi-stakeholder Role-Play</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i><span>Roundtable Discussions</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i><span>Guest Speakers</span></li>
+                                <li class="flex items-start"><i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i><span>Interactive Modules</span></li>
+                            </ul>
+                        </div>
+                        <div class="card-modern" data-aos="fade-up" data-aos-delay="100">
+                            <h3 class="text-2xl font-bold mb-4" style="font-family: 'Space Grotesk', sans-serif;">Time Allocation</h3>
                             <p class="text-gray-700 leading-relaxed">
                                 The workshop runs for two full days, from 09:00 AM to 5:45 PM each day (8.45 Hours/Day). Sessions include stakeholder roundtable discussions, DNS and IDNs, simulation games, and collaborative decision-making exercises.
                             </p>
@@ -170,113 +174,116 @@
 
                 <!-- Key Features Cards -->
                 <div class="mb-12">
-                    <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">
-                        <i class="fas fa-key text-blue-600 mr-2"></i>Key Benefits
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8" data-aos="fade-up" style="font-family: 'Space Grotesk', sans-serif;">
+                        <i class="fas fa-sparkles text-blue-600 mr-3"></i>Key Benefits
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition" data-aos="fade-up">
-                            <div class="text-blue-600 text-3xl mb-4">
-                                <i class="fas fa-chalkboard-teacher"></i>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="card-modern interactive-element" data-aos="fade-up">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-chalkboard-user"></i>
                             </div>
-                            <h3 class="text-xl font-semibold mb-3">Expert Sessions</h3>
-                            <p>Interactive learning with industry experts and Internet governance leaders</p>
+                            <h3 class="text-xl font-bold mb-3 text-gray-800">Expert Sessions</h3>
+                            <p class="text-gray-700">Interactive learning with industry experts and Internet governance leaders</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="100">
-                            <div class="text-blue-600 text-3xl mb-4">
+                        <div class="card-modern interactive-element" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon-box mb-4">
                                 <i class="fas fa-users"></i>
                             </div>
-                            <h3 class="text-xl font-semibold mb-3">ICANN Model Conference</h3>
-                            <p>Participate in simulated policy development processes and multi-stakeholder discussions</p>
+                            <h3 class="text-xl font-bold mb-3 text-gray-800">ICANN Model Conference</h3>
+                            <p class="text-gray-700">Participate in simulated policy development processes and multi-stakeholder discussions</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="200">
-                            <div class="text-blue-600 text-3xl mb-4">
+                        <div class="card-modern interactive-element" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon-box mb-4">
                                 <i class="fas fa-certificate"></i>
                             </div>
-                            <h3 class="text-xl font-semibold mb-3">Certification</h3>
-                            <p>Receive recognition for completing the comprehensive Internet governance program</p>
+                            <h3 class="text-xl font-bold mb-3 text-gray-800">Certification</h3>
+                            <p class="text-gray-700">Receive recognition for completing the comprehensive Internet governance program</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Eligibility Criteria -->
-                <div class="mb-12 bg-white p-8 rounded-lg shadow-md" data-aos="fade-up">
-                    <h2 class="text-3xl font-bold mb-6">
-                        <i class="fas fa-clipboard-check text-blue-600 mr-2"></i>Eligibility Criteria
+                <div class="card-modern mb-12" data-aos="fade-up">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8" style="font-family: 'Space Grotesk', sans-serif;">
+                        <i class="fas fa-clipboard-check text-blue-600 mr-3"></i>Eligibility Criteria
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <h3 class="text-xl font-semibold mb-4">Requirements</h3>
+                            <h3 class="text-xl font-bold mb-4 text-gray-800">Requirements</h3>
                             <ul class="space-y-3">
                                 <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Age: 18-35 years</span>
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <span class="text-gray-700">Age: 18-35 years</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Must be an Indian Citizen</span>
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <span class="text-gray-700">Must be an Indian Citizen</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Available to travel to Delhi for the 2-day event</span>
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <span class="text-gray-700">Available to travel to Delhi for the 2-day event</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
-                                    <span>Commit to attend introductory sessions and complete mandatory preparatory courses (approx. 2-3 hours/week)</span>
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <span class="text-gray-700">Commit to attend introductory sessions and complete mandatory preparatory courses (approx. 2-3 hours/week)</span>
                                 </li>
                             </ul>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold mb-4">Preferred Background</h3>
+                            <h3 class="text-xl font-bold mb-4 text-gray-800">Preferred Background</h3>
                             <ul class="space-y-3">
                                 <li class="flex items-start">
-                                    <i class="fas fa-arrow-right text-blue-500 mt-1 mr-2"></i>
-                                    <span>Technology</span>
+                                    <i class="fas fa-arrow-right text-blue-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <span class="text-gray-700">Technology</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-arrow-right text-blue-500 mt-1 mr-2"></i>
-                                    <span>Law</span>
+                                    <i class="fas fa-arrow-right text-blue-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <span class="text-gray-700">Law</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-arrow-right text-blue-500 mt-1 mr-2"></i>
-                                    <span>Public Policy</span>
+                                    <i class="fas fa-arrow-right text-blue-500 mt-1 mr-3 flex-shrink-0"></i>
+                                    <span class="text-gray-700">Public Policy</span>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Add a new What to Expect section -->
+                <!-- What to Expect section -->
                 <div class="mb-12">
-                    <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">
-                        <i class="fas fa-star text-blue-600 mr-2"></i>What to Expect
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8" data-aos="fade-up" style="font-family: 'Space Grotesk', sans-serif;">
+                        <i class="fas fa-star text-blue-600 mr-3"></i>What to Expect
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="p-6 bg-white rounded-lg shadow-md" data-aos="fade-up">
-                            <h3 class="text-xl font-semibold mb-3">Expert Insights</h3>
-                            <p>Learn from leading professionals in Internet governance and policy-making.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="card-modern interactive-element" data-aos="fade-up">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Expert Insights</h3>
+                            <p class="text-gray-700">Learn from leading professionals in Internet governance and policy-making.</p>
                         </div>
-                        <div class="p-6 bg-white rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="100">
-                            <h3 class="text-xl font-semibold mb-3">Interactive Sessions</h3>
-                            <p>Engage in hands-on workshops and collaborative learning experiences.</p>
+                        <div class="card-modern interactive-element" data-aos="fade-up" data-aos-delay="100">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Interactive Sessions</h3>
+                            <p class="text-gray-700">Engage in hands-on workshops and collaborative learning experiences.</p>
                         </div>
-                        <div class="p-6 bg-white rounded-lg shadow-md" data-aos="fade-up" data-aos-delay="200">
-                            <h3 class="text-xl font-semibold mb-3">ICANN Model Conference</h3>
-                            <p>Experience policy-making through simulation of ICANN processes.</p>
+                        <div class="card-modern interactive-element" data-aos="fade-up" data-aos-delay="200">
+                            <div class="icon-box mb-4">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">ICANN Model Conference</h3>
+                            <p class="text-gray-700">Experience policy-making through simulation of ICANN processes.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-12" data-aos="fade-up">
-                    <a href="pages/coming_soon.html" 
-                       class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-center">
-                        View Program Schedule
+                <div class="flex flex-col sm:flex-row justify-center gap-6 mt-16 mb-8" data-aos="fade-up">
+                    <a href="pages/coming_soon.html" class="btn btn-primary">
+                        <i class="fas fa-calendar-alt"></i>View Program Schedule
                     </a>
-                    <!-- <a href="https://forms.gle/mpfHepMTEv1WxVQy6" 
-                       class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition text-center">
-                       Registeration Closed! Stay Tuned 
-
-                    </a> -->
                 </div>
             </div>
         </section>
@@ -284,11 +291,15 @@
        
     </main>
 
-    <div id="footer" class="relative z-10 bg-gray-50"></div> <!-- Added bg-gray-50 and z-10 -->
+    <div id="footer" class="relative z-10 bg-gray-50"></div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 600,
+            once: false,
+            offset: 100
+        });
         
         function throwConfetti() {
             confetti({

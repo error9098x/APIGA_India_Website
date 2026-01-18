@@ -1,4 +1,618 @@
-/* Main Stylesheet */ 
+/* APIGA India 2026 - Modern Design System Stylesheet */
+
+/* ============================================
+   1. ROOT VARIABLES - DESIGN SYSTEM
+   ============================================ */
+
+:root {
+  /* Colors - Primary Palette */
+  --color-primary-dark: #0352ae;
+  --color-primary: #2463EB;
+  --color-primary-light: #3eb6ff;
+  
+  /* Color Opacity Scale */
+  --color-primary-50: rgba(36, 99, 235, 0.05);
+  --color-primary-100: rgba(36, 99, 235, 0.1);
+  --color-primary-200: rgba(36, 99, 235, 0.2);
+  --color-primary-300: rgba(36, 99, 235, 0.3);
+
+  /* CONFIG: Hero Background Logo Opacity (0.0 to 1.0) 
+     Adjust this value to make the logo more or less visible */
+  --hero-logo-opacity: 0.55;
+  
+  /* Neutrals */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  
+  /* Spacing Scale (8px baseline) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  
+  /* Border Radius Scale */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+  
+  /* Shadow System - Modern Layered */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px rgba(36, 99, 235, 0.06);
+  --shadow-md: 0 4px 12px rgba(36, 99, 235, 0.08);
+  --shadow-lg: 0 8px 24px rgba(36, 99, 235, 0.12);
+  --shadow-xl: 0 12px 32px rgba(36, 99, 235, 0.15);
+  --shadow-2xl: 0 16px 48px rgba(36, 99, 235, 0.2);
+  
+  /* Transitions */
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
+  --timing-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --timing-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --timing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Typography */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+}
+
+/* ============================================
+   2. GLOBAL STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-gray-50);
+  color: var(--color-gray-800);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 5vw, 2.25rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); }
+
+p {
+  max-width: 70ch;
+  margin-bottom: 1.5em;
+}
+
+p + p {
+  margin-top: 1.5em;
+}
+
+/* ============================================
+   3. MODERN CARD COMPONENT
+   ============================================ */
+
+.card-modern {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-primary-100);
+  transition: all var(--duration-base) var(--timing-ease-out);
+}
+
+.card-modern:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary-200);
+}
+
+/* ============================================
+   4. BUTTON COMPONENTS - MODERN
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 32px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--timing-ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--duration-base);
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #1a4bc8 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(36, 99, 235, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(36, 99, 235, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(36, 99, 235, 0.2);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary-50);
+  border-color: var(--color-primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   5. NAVIGATION - GLASSMORPHISM
+   ============================================ */
+
+/* ============================================
+   RAYCAST HEADER - FLOATING BAR (UPDATED)
+   ============================================ */
+
+.raycast-header {
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Auto width based on content */
+  width: auto;
+  min-width: 320px;
+  max-width: 90vw;
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  padding: 0.5rem 1rem;
+  /* Cinematic Shadow */
+  box-shadow: 
+    0 20px 40px -10px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.raycast-header:hover {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Nav Items (Icons) */
+.nav-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  color: var(--color-gray-700);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  text-decoration: none;
+}
+
+.nav-item i {
+  font-size: 1.25rem;
+  transition: transform 0.2s;
+}
+
+.nav-item:hover {
+  background: white;
+  color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.nav-item:hover i {
+  transform: scale(1.1);
+}
+
+.nav-item.active {
+  background: white;
+  color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(36, 99, 235, 0.15);
+}
+
+/* Tooltip (Hover Text) */
+.nav-tooltip {
+  position: absolute;
+  top: 100%; /* Below the icon */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  margin-top: 12px;
+  background: rgba(15, 23, 42, 0.9); /* Dark background */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Small arrow for tooltip */
+.nav-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 8px;
+  height: 8px;
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.nav-item:hover .nav-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .raycast-header {
+    width: 90%;
+    top: 1rem;
+    padding: 0.5rem;
+    border-radius: 18px;
+  }
+  
+  .nav-item {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .nav-item i {
+    font-size: 1.1rem;
+  }
+  
+  /* Hide tooltips on touch devices */
+  .nav-tooltip {
+    display: none;
+  }
+}
+
+/* ============================================
+   6. FOOTER - MODERN STYLING
+   ============================================ */
+
+footer {
+  background: linear-gradient(180deg, var(--color-primary-50), var(--color-primary-100));
+  border-top: 1px solid var(--color-primary-100);
+  backdrop-filter: blur(8px);
+}
+
+footer h3 {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--space-4);
+}
+
+footer a {
+  color: var(--color-gray-700);
+  transition: color var(--duration-base);
+  text-decoration: none;
+  position: relative;
+}
+
+footer a:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   7. HERO SECTION - AWESOME AURORA
+   ============================================ */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  background: #0f172a; /* Deep blue/slate base */
+  isolation: isolate; /* Create stacking context */
+}
+
+/* Base Gradient Overlays */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(36, 99, 235, 0.4) 0%, rgba(36, 99, 235, 0) 70%);
+  filter: blur(80px);
+  animation: float-aurora-1 15s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(62, 182, 255, 0.3) 0%, rgba(62, 182, 255, 0) 70%);
+  filter: blur(80px);
+  animation: float-aurora-2 12s infinite alternate-reverse cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+/* Mesh Grid Overlay (Living Network) */
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* The Grid Pattern */
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  
+  /* The Magic Mask: 
+     1. Mouse Spotlight (var controlled) 
+     2. Base Visibility (always faint) 
+  */
+  mask-image: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    black 0%, 
+    rgba(0, 0, 0, 0.15) 50%, 
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  -webkit-mask-image: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    black 0%, 
+    rgba(0, 0, 0, 0.15) 50%, 
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  
+  z-index: 2;
+  pointer-events: none;
+  
+  /* The Breathing Animation */
+  animation: grid-breathe 8s ease-in-out infinite;
+  will-change: mask-image, opacity;
+}
+
+@keyframes grid-breathe {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes float-aurora-1 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(10%, 10%) rotate(5deg); }
+}
+
+@keyframes float-aurora-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-10%, -5%) scale(1.1); }
+}
+
+/* Awesome Title */
+.hero-title, .hero-title-awesome {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: transparent;
+  background: linear-gradient(135deg, #ffffff 0%, #dbeafe 40%, #93c5fd 60%, #ffffff 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: text-shine 6s linear infinite reverse;
+  filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
+}
+
+/* Hero Background Logo Control */
+.hero-bg-logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: var(--hero-logo-opacity);
+  mix-blend-mode: overlay;
+  z-index: 0;
+}
+
+@keyframes text-shine {
+  to { background-position: 200% center; }
+}
+
+/* ============================================
+   8. SECTION STYLING
+   ============================================ */
+
+section {
+  padding: clamp(2rem, 5vw, 4rem) var(--space-4);
+}
+
+.section-divider {
+  border-top: 1px solid var(--color-primary-100);
+  background: linear-gradient(to bottom, var(--color-primary-50) 0%, transparent 20%);
+  margin: 0;
+  padding-top: var(--space-12);
+}
+
+/* ============================================
+   9. MODERN TYPOGRAPHY - HERO TITLE
+   ============================================ */
+
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: white;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #fff 0%, #f0f4ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: subtle-float 3s ease-in-out infinite;
+}
+
+@keyframes subtle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* ============================================
+   10. LINK STYLING - MODERN
+   ============================================ */
+
+a.link-modern {
+  position: relative;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--duration-base);
+}
+
+a.link-modern::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-slow) var(--timing-bounce);
+}
+
+a.link-modern:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ============================================
+   11. ICON BOX COMPONENT
+   ============================================ */
+
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--color-primary-100), rgba(62, 182, 255, 0.05));
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-primary-200);
+  color: var(--color-primary);
+  font-size: 24px;
+  transition: all var(--duration-base) var(--timing-ease-out);
+}
+
+.icon-box:hover {
+  background: linear-gradient(135deg, var(--color-primary-200), rgba(62, 182, 255, 0.1));
+  border-color: var(--color-primary-300);
+  transform: scale(1.05);
+}
+
+/* ============================================
+   12. INTERACTIVE ELEMENTS
+   ============================================ */
+
+.interactive-element {
+  transition: transform var(--duration-base) var(--timing-bounce), 
+              box-shadow var(--duration-base) var(--timing-ease-out);
+}
+
+.interactive-element:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   13. SKELETON LOADING
+   ============================================ */
+
+@keyframes skeleton-loading {
+  0%, 100% { background-color: var(--color-primary-50); }
+  50% { background-color: var(--color-primary-100); }
+}
+
+.skeleton {
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--radius-md);
+}
 
 /* Existing styles */
 .carousel {
