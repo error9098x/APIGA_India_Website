@@ -51,6 +51,21 @@ document.addEventListener('DOMContentLoaded', function() {
                         newMobileMenu.classList.toggle('hidden');
                     });
                 }
+
+                // Initialize mobile dropdown toggles
+                const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+                mobileDropdowns.forEach(dropdown => {
+                    const trigger = dropdown.querySelector('.mobile-dropdown-trigger');
+                    const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                    
+                    if (trigger && menu) {
+                        trigger.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            dropdown.classList.toggle('active');
+                            menu.classList.toggle('hidden');
+                        });
+                    }
+                });
             });
     }
 

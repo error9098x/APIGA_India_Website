@@ -27,10 +27,20 @@
                 <i class="fas fa-handshake text-xl"></i>
                 <span class="nav-tooltip">Partners</span>
             </a>
-            <a href="/pages/apiga_oc.html" class="nav-item">
-                <i class="fas fa-user-graduate text-xl"></i>
-                <span class="nav-tooltip">Team</span>
-            </a>
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-item dropdown-trigger">
+                    <i class="fas fa-user-graduate text-xl"></i>
+                    <span class="nav-tooltip">Team</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="/pages/apiga_oc_2025.html" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> Team 2025
+                    </a>
+                    <a href="/pages/apiga_oc_2026.html" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> Team 2026
+                    </a>
+                </div>
+            </div>
         </div>
         
         <!-- Mobile: Simplified View (Home + Menu) -->
@@ -68,8 +78,20 @@
         <a href="/pages/coming_soon.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
             <i class="fas fa-handshake mr-2"></i> Supported By
         </a>
-        <a href="/pages/apiga_oc.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-user-graduate mr-2"></i> APIGA OC
+        <div class="mobile-dropdown">
+            <button class="mobile-dropdown-trigger block w-full text-left px-3 py-2 text-gray-700 hover:text-blue-600">
+                <i class="fas fa-user-graduate mr-2"></i> APIGA OC
+                <i class="fas fa-chevron-down ml-2 text-xs"></i>
+            </button>
+            <div class="mobile-dropdown-menu hidden pl-6">
+                <a href="/pages/apiga_oc_2025.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-users mr-2"></i> Team 2025
+                </a>
+                <a href="/pages/apiga_oc_2026.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-users mr-2"></i> Team 2026
+                </a>
+            </div>
+        </div>
         <a href="/pages/contact.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
             <i class="fas fa-envelope mr-2"></i> Contact
         </a>

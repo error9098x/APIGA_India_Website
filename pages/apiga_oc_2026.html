@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIGA India 2026 Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <style>
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .team-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .team-logo {
+            max-width: 220px;
+            margin-bottom: 20px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eaeaea;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .member-photo {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            border-radius: 50%;
+            margin: 20px auto;
+            object-position: center center;
+            border: 5px solid #eaeaea;
+        }
+        .team-member:hover .member-photo {
+            border-color: #0056b3;
+            transform: scale(1.10);
+        }
+        
+        .member-info {
+            padding: 20px 15px;
+            background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+        }
+        
+        .member-name {
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .member-role {
+            color: #0056b3;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .member-linkedin {
+            margin-top: 12px;
+        }
+        
+        .linkedin-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background-color: #0077b5;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .linkedin-btn:hover {
+            background-color: #005885;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+        }
+        
+        .linkedin-btn i {
+            font-size: 1rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Page transition effect */
+        body {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Include Header -->
+    <div id="header"></div>
+    
+    <!-- Main Content -->
+    <section class="pt-24 pb-16">
+        <div class="team-container">
+            <div class="team-header" data-aos="fade-up">
+                <img src="../images/apiga_logo.png" alt="APIGA Logo" class="team-logo mx-auto" >
+                <h1 class="text-4xl font-bold text-gray-800 mb-4" style="font-family: 'Space Grotesk', sans-serif;">Local APIGA India 2026 Team</h1>
+                <p class="text-gray-600">Meet the dedicated individuals working to make APIGA India 2026 a success</p>
+            </div>
+            
+            <div class="team-grid" data-aos="fade-up" data-aos-delay="100">
+                <!-- Barkha Manral -->
+                <div class="team-member">
+                    <img src="../images/team26/Barkha.jpg" alt="Barkha Manral" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Barkha Manral</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/barkha-manral/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Yash Agarwal -->
+                <div class="team-member">
+                    <img src="../images/team26/Yash.png" alt="Yash Agarwal" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Yash Agarwal</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/yashagarwalm/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sameer Gahlot -->
+                <div class="team-member">
+                    <img src="../images/team26/sameer.jpeg" alt="Sameer Gahlot" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Sameer Gahlot</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/sameergahlot/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ihita Gangavarapu -->
+                <div class="team-member">
+                    <img src="../images/team26/Ihita.jpeg" alt="Ihita Gangavarapu" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Ihita Gangavarapu</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/ihitagangavarapu/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Anika Vashisth -->
+                <div class="team-member">
+                    <img src="../images/team26/anika.png" alt="Anika Vashisth" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Anika Vashisth</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/anika-v-30b8869b/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ankita Rathi -->
+                <div class="team-member">
+                    <img src="../images/team26/Ankita.jpg" alt="Ankita Rathi" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Ankita Rathi</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/ankita-rathi/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kushagra Singh -->
+                <div class="team-member">
+                    <img src="../images/team26/kusharga.png" alt="Kushagra Singh" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Kushagra Singh</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/kushagrasinghh/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jigmet Dolker -->
+                <div class="team-member">
+                    <img src="../images/team26/Jigmet.jpeg" alt="Jigmet Dolker" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Jigmet Dolker</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/jigmet-dolker-0a3b03250/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aviral Kaintura -->
+                <div class="team-member">
+                    <img src="../images/team26/aviral.jpeg" alt="Aviral Kaintura" class="member-photo">
+                    <div class="member-info">
+                        <div class="member-name">Aviral Kaintura</div>
+                        <div class="member-role">Organizing Committee</div>
+                        <div class="member-linkedin">
+                            <a href="https://www.linkedin.com/in/codeavi/" target="_blank" rel="noopener noreferrer" class="linkedin-btn">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Include Footer -->
+    <div id="footer"></div>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="/js/main_component.js"></script>
+   
+    <script>
+        AOS.init();
+    </script>
+</body>
+</html>

@@ -319,6 +319,124 @@ p + p {
   transform: translateX(-50%) translateY(0);
 }
 
+/* ============================================
+   NAV DROPDOWN MENU
+   ============================================ */
+
+.nav-item-dropdown {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-item-dropdown .dropdown-trigger {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  margin-top: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  padding: 8px;
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15),
+              0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+  z-index: 1001;
+}
+
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.nav-item-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.nav-item-dropdown:hover .nav-tooltip {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  color: var(--color-gray-700);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background: var(--color-primary-100);
+  color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+.dropdown-item i {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Mobile Dropdown Styles */
+.mobile-dropdown {
+  position: relative;
+}
+
+.mobile-dropdown-trigger {
+  background: none;
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-dropdown-trigger .fa-chevron-down {
+  transition: transform 0.2s ease;
+}
+
+.mobile-dropdown.active .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.mobile-dropdown-menu {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.mobile-dropdown-menu a {
+  font-size: 0.95rem;
+}
+
 /* Mobile Adjustments */
 @media (max-width: 768px) {
   .raycast-header {
