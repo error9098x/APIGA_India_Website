@@ -369,14 +369,14 @@ p + p {
   border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.nav-item-dropdown:hover .dropdown-menu {
+.nav-item-dropdown.active .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
 
-.nav-item-dropdown:hover .nav-tooltip {
+.nav-item-dropdown.active .nav-tooltip {
   opacity: 0;
   visibility: hidden;
 }
