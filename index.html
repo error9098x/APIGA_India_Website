@@ -31,7 +31,11 @@
     <div class="application-banner" id="app-banner">
         <div class="banner-content">
             <span class="banner-badge">🎉 NOW OPEN</span>
-            <span class="banner-text">Applications for APIGA India 2026 are now open!</span>
+            <span class="banner-text">Applications for APIGA India 2026 are now open. Deadline: Feb 8, 2026, 11:59 PM IST.</span>
+            <div class="banner-timer" aria-live="polite">
+                <span class="timer-label">Closes in</span>
+                <span id="deadline-countdown" class="timer-value">Loading...</span>
+            </div>
             <a href="https://docs.google.com/forms/d/1fDE5P-Q5QQeMFlSf-x1u3ugEhkTsNF93CzpjCNfRihY/viewform" target="_blank" class="banner-cta" onclick="throwConfetti()">Apply Now →</a>
             <button class="banner-close" onclick="document.getElementById('app-banner').style.display='none'" aria-label="Close banner">×</button>
         </div>
