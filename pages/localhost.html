@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supporting Organization - APIGA India 2025</title>
+    <title>Local Host - APIGA India 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .host-image {
             max-width: 100%;
@@ -28,12 +28,11 @@
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Include Header -->
-    <div id="header-placeholder"></div>
+<body class="bg-gray-50 flex flex-col min-h-screen">
+    <div id="header"></div>
 
     <!-- Main Content -->
-    <main class="pt-16">
+    <main class="flex-grow pt-16">
         <!-- Hero Section with Image -->
         <div class="container mx-auto px-4 py-8">
             <div class="text-center">
@@ -41,6 +40,19 @@
                      alt="Local Host Logos" 
                      class="host-image"
                      data-aos="fade-up">
+            </div>
+        </div>
+
+        <!-- Local Co-Host -->
+        <div class="container mx-auto px-4 py-4">
+            <div class="content-section text-center" data-aos="fade-up">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Local Co-Host</h2>
+                <img
+                    src="/images/partners/iiro.png"
+                    alt="IIRO Logo"
+                    class="host-image"
+                    style="max-width: 360px;"
+                >
             </div>
         </div>
 
@@ -132,36 +144,14 @@
     </main>
 
     <!-- Include Footer -->
-    <div id="footer-placeholder"></div>
+    <div id="footer"></div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main_component.js"></script>
     <script>
-        // Load header and footer
-        fetch('../components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-                // Initialize mobile menu after header is loaded
-                const mobileMenuButton = document.getElementById('mobile-menu-button');
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenuButton && mobileMenu) {
-                    mobileMenuButton.addEventListener('click', () => {
-                        mobileMenu.classList.toggle('hidden');
-                    });
-                }
-            });
-
-        fetch('../components/footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            });
-
-        // Initialize AOS
-        document.addEventListener('DOMContentLoaded', function() {
-            AOS.init({
-                duration: 1000,
-                once: true
-            });
+        AOS.init({
+            duration: 1000,
+            once: true
         });
     </script>
 </body>
