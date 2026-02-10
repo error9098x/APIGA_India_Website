@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const deadlineCountdown = document.getElementById('deadline-countdown');
     const appBanner = document.getElementById('app-banner');
 
     const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -112,46 +111,5 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 
-    if (deadlineCountdown && appBanner) {
-        const deadlineUtc = Date.UTC(2026, 1, 8, 18, 29, 59);
-        const urgentThresholdMs = 72 * 60 * 60 * 1000;
-
-        const formatCountdown = (milliseconds) => {
-            const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
-            const days = Math.floor(totalSeconds / 86400);
-            const hours = Math.floor((totalSeconds % 86400) / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-
-            return `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
-        };
-
-        const updateCountdown = () => {
-            const nowUtc = Date.now();
-            const remaining = deadlineUtc - nowUtc;
-
-            if (remaining <= 0) {
-                deadlineCountdown.textContent = 'Closed';
-                appBanner.classList.remove('is-urgent');
-                appBanner.classList.add('is-closed');
-                return false;
-            }
-
-            deadlineCountdown.textContent = formatCountdown(remaining);
-            if (remaining <= urgentThresholdMs) {
-                appBanner.classList.add('is-urgent');
-            } else {
-                appBanner.classList.remove('is-urgent');
-            }
-
-            return true;
-        };
-
-        updateCountdown();
-        const countdownInterval = setInterval(() => {
-            if (!updateCountdown()) {
-                clearInterval(countdownInterval);
-            }
-        }, 1000);
-    }
+    // Banner close button (no countdown needed - participants announced)
 });

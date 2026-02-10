@@ -869,11 +869,11 @@ a.link-modern:hover::after {
     top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #6d28d9 100%);
     color: white;
     padding: 12px 20px;
     z-index: 1100;
-    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
 }
 
 .banner-content {
@@ -907,7 +907,7 @@ a.link-modern:hover::after {
 
 .banner-cta {
     background: white;
-    color: #059669;
+    color: #2563eb;
     padding: 6px 20px;
     border-radius: 20px;
     font-weight: 700;
@@ -917,7 +917,7 @@ a.link-modern:hover::after {
 }
 
 .banner-cta:hover {
-    background: #f0fdf4;
+    background: #ede9fe;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
