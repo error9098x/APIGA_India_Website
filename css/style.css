@@ -1228,8 +1228,44 @@ body:has(.application-banner) .raycast-header {
     50% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.5), 0 0 25px rgba(16, 185, 129, 0.2); }
 }
 
-@media (max-width: 768px) {
-    .nav-apply-btn {
-        display: none;
-    }
+/* ============================================
+   14. ACCESSIBILITY - REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .hero-bg-grid {
+    animation: none;
+  }
+  
+  .hero-title, .hero-title-awesome {
+    animation: none;
+  }
+  
+  .india-flag-svg text {
+    animation: none;
+  }
+  
+  .apply-badge,
+  .pulse-glow,
+  .pulse-badge {
+    animation: none;
+  }
+  
+  .floating-icons i {
+    animation: none;
+  }
+  
+  .professional-title,
+  .animate-title {
+    animation: none;
+  }
 }

@@ -7,251 +7,466 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
     <style>
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 2px;
-            background-color: #3b82f6;
+        :root {
+            --c-break:      #6b7280;
+            --c-ceremony:   #d97706;
+            --c-network:    #059669;
+            --c-talk:       #2463eb;
+            --c-panel:      #7c3aed;
+            --c-session:    #0891b2;
+            --c-workshop:   #4f46e5;
+            --c-conference: #ea580c;
+            --c-review:     #475569;
         }
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: -4px;
-            top: 24px;
-            height: 10px;
-            width: 10px;
-            border-radius: 50%;
-            background-color: #3b82f6;
+        .day-tabs { display:flex; gap:8px; border-bottom:2px solid #e5e7eb; margin-bottom:2rem; }
+        .day-tab {
+            display:flex; flex-direction:column; align-items:center;
+            padding:12px 28px; border-radius:12px 12px 0 0;
+            font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;
+            color:#6b7280; cursor:pointer; border:2px solid transparent; border-bottom:none;
+            background:#f9fafb; transition:all 0.2s ease;
         }
-        .tab-active {
-            background-color: #3b82f6;
-            color: white;
+        .day-tab:hover { background:#eff6ff; color:#2463eb; }
+        .day-tab.active { background:#fff; color:#2463eb; border-color:#e5e7eb; border-bottom-color:#fff; margin-bottom:-2px; }
+        .day-tab .date-label { font-size:0.7rem; font-weight:500; color:#9ca3af; margin-top:2px; letter-spacing:0.05em; }
+        .day-tab.active .date-label { color:#93c5fd; }
+
+        .timeline { position:relative; padding-left:0; }
+        .timeline::before { content:''; position:absolute; left:28px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom,#dbeafe,#e5e7eb); }
+
+        .session-card { display:flex; gap:0; margin-bottom:12px; position:relative; }
+        .session-icon-col { width:56px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; padding-top:18px; }
+        .session-dot { width:16px; height:16px; border-radius:50%; border:3px solid white; flex-shrink:0; box-shadow:0 0 0 2px currentColor; z-index:1; }
+        .session-body { flex:1; background:#fff; border-radius:14px; padding:16px 20px; box-shadow:0 2px 8px rgba(0,0,0,0.06); border-left:4px solid currentColor; transition:box-shadow 0.2s ease,transform 0.2s ease; }
+        .session-body:hover { box-shadow:0 6px 20px rgba(0,0,0,0.1); transform:translateX(3px); }
+
+        .t-break      { color:var(--c-break); }
+        .t-ceremony   { color:var(--c-ceremony); }
+        .t-network    { color:var(--c-network); }
+        .t-talk       { color:var(--c-talk); }
+        .t-panel      { color:var(--c-panel); }
+        .t-session    { color:var(--c-session); }
+        .t-workshop   { color:var(--c-workshop); }
+        .t-conference { color:var(--c-conference); }
+        .t-review     { color:var(--c-review); }
+
+        .bg-break      { background:#f3f4f6; }
+        .bg-ceremony   { background:#fffbeb; }
+        .bg-network    { background:#ecfdf5; }
+        .bg-talk       { background:#eff6ff; }
+        .bg-panel      { background:#f5f3ff; }
+        .bg-session    { background:#ecfeff; }
+        .bg-workshop   { background:#eef2ff; }
+        .bg-conference { background:#fff7ed; }
+        .bg-review     { background:#f8fafc; }
+
+        .type-pill { display:inline-flex; align-items:center; gap:4px; font-size:0.68rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:2px 8px; border-radius:999px; background:currentColor; }
+        .type-pill span { color:white; }
+
+        .mode-badge { display:inline-flex; align-items:center; gap:4px; font-size:0.72rem; font-weight:600; padding:2px 10px; border-radius:999px; }
+        .mode-inperson { background:#dcfce7; color:#16a34a; }
+        .mode-online   { background:#dbeafe; color:#1d4ed8; }
+
+        .speaker-tag { display:inline-flex; align-items:center; gap:5px; background:#f1f5f9; color:#374151; font-size:0.8rem; font-weight:500; padding:3px 10px; border-radius:8px; margin:2px; }
+        .speaker-tag i { font-size:0.65rem; color:#94a3b8; }
+
+        .session-card.is-transition .session-body { background:#f9fafb; border-left-color:#d1d5db; box-shadow:none; padding:8px 20px; }
+        .session-card.is-transition .session-body:hover { transform:none; box-shadow:none; }
+
+        .stats-bar { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:1rem; background:white; border-radius:16px; padding:1.5rem 2rem; box-shadow:0 4px 12px rgba(36,99,235,0.08); margin-bottom:2rem; }
+        .stat-item { text-align:center; }
+        .stat-value { font-family:'Space Grotesk',sans-serif; font-size:1.8rem; font-weight:700; color:#2463eb; line-height:1; }
+        .stat-label { font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.07em; color:#94a3b8; margin-top:4px; }
+
+        .legend { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:1.5rem; }
+        .legend-item { display:flex; align-items:center; gap:5px; font-size:0.75rem; font-weight:600; color:#374151; }
+        .legend-dot { width:10px; height:10px; border-radius:50%; }
+
+        @media(max-width:640px){
+            .day-tab{padding:10px 16px;font-size:0.85rem;}
+            .session-body{padding:14px 16px;}
+            .timeline::before{left:22px;}
+            .session-icon-col{width:44px;}
+            .stats-bar{padding:1rem;}
+            .stat-value{font-size:1.4rem;}
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Include Header -->
-    <div id="header"></div>
+<body class="bg-gray-50" style="font-family:'Inter',sans-serif;">
 
-    <!-- Header -->
-    <section class="pt-24 pb-12 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h1 class="text-4xl font-bold mb-4" data-aos="fade-up">Program Schedule</h1>
-            <p class="text-xl" data-aos="fade-up" data-aos-delay="100">Three days of intensive learning and networking</p>
-            <p class="text-lg mt-4" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-calendar-check mr-2"></i> Explore our detailed program below
-            </p>
+<div id="header"></div>
+
+<!-- Hero -->
+<section class="pt-28 pb-12 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 20% 50%,white 1px,transparent 1px),radial-gradient(circle at 80% 20%,white 1px,transparent 1px);background-size:40px 40px;"></div>
+    <div class="max-w-5xl mx-auto px-4 relative">
+        <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm" data-aos="fade-up">
+            <i class="fas fa-calendar-check text-yellow-300"></i>
+            26 &ndash; 27 February 2026 &nbsp;&middot;&nbsp; JGU International Academy, Taj Mahal Hotel, New Delhi
         </div>
-    </section>
+        <h1 class="text-4xl md:text-5xl font-bold mb-3" data-aos="fade-up" data-aos-delay="100" style="font-family:'Space Grotesk',sans-serif;">Program Schedule</h1>
+        <p class="text-blue-100 text-lg max-w-2xl" data-aos="fade-up" data-aos-delay="200">Two intensive days of sessions, panels, power talks, and the ICANN Model Conference.</p>
+    </div>
+</section>
 
-    <!-- Program Schedule -->
-    <section class="py-16">
-        <div class="max-w-6xl mx-auto px-4">
-            <!-- Day Tabs -->
-            <div class="flex flex-wrap mb-8 border-b border-gray-200" data-aos="fade-up">
-                <button class="tab-btn tab-active px-6 py-3 font-medium text-lg rounded-t-lg mr-2 transition duration-200" onclick="showDay('day0')">Day 0</button>
-                <button class="tab-btn px-6 py-3 font-medium text-lg rounded-t-lg mr-2 transition duration-200" onclick="showDay('day1')">Day 1</button>
-                <button class="tab-btn px-6 py-3 font-medium text-lg rounded-t-lg mr-2 transition duration-200" onclick="showDay('day2')">Day 2</button>
-            </div>
+<section class="py-12">
+    <div class="max-w-5xl mx-auto px-4">
 
-            <!-- Day 0 Schedule -->
-            <div id="day0" class="day-content">
-                <div class="bg-white rounded-xl shadow-lg p-8 mb-8" data-aos="fade-up">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                        <i class="fas fa-plane-arrival text-blue-600 mr-3"></i>Day 0: Arrival & Welcome
-                    </h2>
-                    
-                    <div class="space-y-8 pl-6">
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">4:00 PM</h3>
-                            <p class="text-gray-700 mt-1">Arrival at JGU International Academy, Taj Mahal Hotel</p>
+        <!-- Stats bar -->
+        <div class="stats-bar" data-aos="fade-up">
+            <div class="stat-item"><div class="stat-value">2</div><div class="stat-label">Days</div></div>
+            <div class="stat-item"><div class="stat-value">17</div><div class="stat-label">Sessions</div></div>
+            <div class="stat-item"><div class="stat-value">9</div><div class="stat-label">Speakers</div></div>
+            <div class="stat-item"><div class="stat-value">2</div><div class="stat-label">Power Talks</div></div>
+            <div class="stat-item"><div class="stat-value">3.5h</div><div class="stat-label">Model ICANN</div></div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend" data-aos="fade-up">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--c-ceremony)"></div>Ceremony</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--c-talk)"></div>Power Talk</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--c-panel)"></div>Panel</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--c-session)"></div>Session</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--c-network)"></div>Networking</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--c-workshop)"></div>Workshop</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--c-conference)"></div>Model ICANN</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--c-break)"></div>Break</div>
+        </div>
+
+        <!-- Day tabs -->
+        <div class="day-tabs" data-aos="fade-up">
+            <button class="day-tab active" onclick="showDay('day1',this)">Day 1<span class="date-label">26 Feb 2026</span></button>
+            <button class="day-tab" onclick="showDay('day2',this)">Day 2<span class="date-label">27 Feb 2026</span></button>
+        </div>
+
+        <!-- ===================== DAY 1 ===================== -->
+        <div id="day1" class="day-content">
+            <div class="timeline">
+
+                <!-- Registration -->
+                <div class="session-card t-break">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-break)"></div></div>
+                    <div class="session-body bg-break t-break">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-sm text-gray-500">8:30 &ndash; 9:15 AM</span>
+                            <span class="type-pill t-break"><span><i class="fas fa-mug-hot mr-1"></i>Registration</span></span>
                         </div>
-                       
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">5:00 PM</h3>
-                            <p class="text-gray-700 mt-1">Visit to the Constitution Museum</p>
+                        <p class="text-gray-700 font-medium">Registration / Tea &amp; Coffee</p>
+                    </div>
+                </div>
+
+                <!-- Opening Ceremony -->
+                <div class="session-card t-ceremony">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-ceremony)"></div></div>
+                    <div class="session-body bg-ceremony t-ceremony">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#92400e">9:15 &ndash; 10:00 AM</span>
+                            <span class="type-pill t-ceremony"><span><i class="fas fa-star mr-1"></i>Opening Ceremony</span></span>
                         </div>
-                        
-                        <div class="timeline-item relative pl-8">
-                            <h3 class="text-xl font-semibold text-gray-800">6:00 - 7:00 PM</h3>
-                            <p class="text-gray-700 mt-1">Ice-breaking session followed by High Tea</p>
+                        <p class="text-gray-800 font-semibold mb-2">Opening Ceremony &amp; Keynote Speech</p>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Samiran Gupta</span>
+                            <span class="speaker-tag"><i class="fas fa-university"></i>JGU Representative</span>
+                            <span class="speaker-tag"><i class="fas fa-landmark"></i>Meity / Ministry</span>
+                            <span class="speaker-tag"><i class="fas fa-network-wired"></i>NIXI Representative</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Day 1 Schedule -->
-            <div id="day1" class="day-content hidden">
-                <div class="bg-white rounded-xl shadow-lg p-8 mb-8" data-aos="fade-up">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                        <i class="fas fa-chalkboard-teacher text-blue-600 mr-3"></i>Day 1: Learning & Engagement
-                    </h2>
-                    
-                    <div class="space-y-8 pl-6">
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">08:00 - 09:00 AM</h3>
-                            <p class="text-gray-700 mt-1">Registration and Networking</p>
+                <!-- Group Photo -->
+                <div class="session-card t-network">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-network)"></div></div>
+                    <div class="session-body bg-network t-network">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-sm" style="color:#065f46">10:00 &ndash; 10:30 AM</span>
+                            <span class="type-pill t-network"><span><i class="fas fa-camera mr-1"></i>Networking</span></span>
                         </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">09:00 - 10:00 AM</h3>
-                            <p class="text-gray-700 mt-1">Opening Ceremony</p>
+                        <p class="text-gray-800 font-medium">Group Photo + Networking</p>
+                    </div>
+                </div>
+
+                <!-- DNS & ICANN -->
+                <div class="session-card t-session">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-session)"></div></div>
+                    <div class="session-body bg-session t-session">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#164e63">10:30 &ndash; 11:15 AM</span>
+                            <span class="type-pill t-session"><span><i class="fas fa-globe mr-1"></i>Session</span></span>
+                            <span class="mode-badge mode-inperson"><i class="fas fa-user-check"></i>In-person</span>
                         </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">10:00 - 10:30 AM</h3>
-                            <p class="text-gray-700 mt-1">Tea Break</p>
+                        <p class="text-gray-800 font-semibold mb-2">Names and Numbers in the Internet <span class="text-sm font-normal text-gray-500">(DNS and ICANN)</span></p>
+                        <div class="flex flex-wrap gap-1"><span class="speaker-tag"><i class="fas fa-user"></i>Samiran Gupta</span></div>
+                    </div>
+                </div>
+
+                <!-- Changeover -->
+                <div class="session-card is-transition t-break">
+                    <div class="session-icon-col" style="padding-top:10px"><div class="session-dot" style="background:#d1d5db;width:10px;height:10px"></div></div>
+                    <div class="session-body"><span class="text-xs text-gray-400 font-medium"><i class="fas fa-arrows-rotate mr-1"></i>11:15 &ndash; 11:20 AM &nbsp;&middot;&nbsp; Changeover</span></div>
+                </div>
+
+                <!-- Power Talk 1 -->
+                <div class="session-card t-talk">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-talk)"></div></div>
+                    <div class="session-body bg-talk t-talk">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#1e3a8a">11:20 &ndash; 11:40 AM</span>
+                            <span class="type-pill t-talk"><span><i class="fas fa-bolt mr-1"></i>Power Talk 1</span></span>
+                            <span class="mode-badge mode-online"><i class="fas fa-video"></i>Online</span>
                         </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">10:30 - 11:30 AM</h3>
-                            <p class="text-gray-700 mt-1">Internet Governance 101</p>
+                        <div class="flex flex-wrap gap-1"><span class="speaker-tag"><i class="fas fa-user"></i>Venkateshwar Vekatesh</span></div>
+                    </div>
+                </div>
+
+                <!-- Changeover -->
+                <div class="session-card is-transition t-break">
+                    <div class="session-icon-col" style="padding-top:10px"><div class="session-dot" style="background:#d1d5db;width:10px;height:10px"></div></div>
+                    <div class="session-body"><span class="text-xs text-gray-400 font-medium"><i class="fas fa-arrows-rotate mr-1"></i>11:40 &ndash; 11:45 AM &nbsp;&middot;&nbsp; Changeover</span></div>
+                </div>
+
+                <!-- Panel: DNS Abuse -->
+                <div class="session-card t-panel">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-panel)"></div></div>
+                    <div class="session-body bg-panel t-panel">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#4c1d95">11:45 AM &ndash; 12:15 PM</span>
+                            <span class="type-pill t-panel"><span><i class="fas fa-comments mr-1"></i>Panel Discussion</span></span>
                         </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">11:30 - 12:45 PM</h3>
-                            <p class="text-gray-700 mt-1">Decoding the Internet</p>
+                        <p class="text-gray-800 font-semibold mb-2">DNS Abuse, Emerging Technologies + New gTLD</p>
+                        <div class="flex flex-wrap gap-1"><span class="speaker-tag"><i class="fas fa-microphone"></i>Moderator: Sameer Gahlot</span></div>
+                    </div>
+                </div>
+
+                <!-- Changeover -->
+                <div class="session-card is-transition t-break">
+                    <div class="session-icon-col" style="padding-top:10px"><div class="session-dot" style="background:#d1d5db;width:10px;height:10px"></div></div>
+                    <div class="session-body"><span class="text-xs text-gray-400 font-medium"><i class="fas fa-arrows-rotate mr-1"></i>12:15 &ndash; 12:20 PM &nbsp;&middot;&nbsp; Changeover</span></div>
+                </div>
+
+                <!-- Power Talk 2: AI Governance -->
+                <div class="session-card t-talk">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-talk)"></div></div>
+                    <div class="session-body bg-talk t-talk">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#1e3a8a">12:20 &ndash; 1:00 PM</span>
+                            <span class="type-pill t-talk"><span><i class="fas fa-bolt mr-1"></i>Power Talk 2</span></span>
+                            <span class="mode-badge mode-inperson"><i class="fas fa-user-check"></i>In-person</span>
                         </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">12:45 - 1:45 PM</h3>
-                            <p class="text-gray-700 mt-1">Lunch Break</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">1:45 - 2:45 PM</h3>
-                            <p class="text-gray-700 mt-1">APNIC and PDP</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">2:45 - 3:45 PM</h3>
-                            <p class="text-gray-700 mt-1">ICANN Composition</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">3:45 - 4:45 PM</h3>
-                            <p class="text-gray-700 mt-1">ICANN's PDP</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">4:45 - 5:00 PM</h3>
-                            <p class="text-gray-700 mt-1">Tea Break</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">5:00 - 5:45 PM</h3>
-                            <p class="text-gray-700 mt-1">Model ICANN Format</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8">
-                            <h3 class="text-xl font-semibold text-gray-800">5:45 - 6:00 PM</h3>
-                            <p class="text-gray-700 mt-1">Photo Session</p>
+                        <p class="text-gray-800 font-semibold mb-2">Governance of AI</p>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Pranjal Srivastava</span>
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Shefali Mehra</span>
+                            <span class="speaker-tag"><i class="fas fa-microphone"></i>Moderator: Barkha Manral</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Day 2 Schedule -->
-            <div id="day2" class="day-content hidden">
-                <div class="bg-white rounded-xl shadow-lg p-8 mb-8" data-aos="fade-up">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                        <i class="fas fa-users text-blue-600 mr-3"></i>Day 2: Collaboration & Conclusion
-                    </h2>
-                    
-                    <div class="space-y-8 pl-6">
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">09:00 - 09:30 AM</h3>
-                            <p class="text-gray-700 mt-1">IDNs and UASG</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">09:30 - 10:00 AM</h3>
-                            <p class="text-gray-700 mt-1">Industry Expert Talk</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">10:00 - 10:15 AM</h3>
-                            <p class="text-gray-700 mt-1">Tea Break</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">10:15 - 10:45 AM</h3>
-                            <p class="text-gray-700 mt-1">ICANN Model Conference Prep</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">10:45 - 12:00 Noon</h3>
-                            <p class="text-gray-700 mt-1">Model ICANN Conference: Part 1</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">12:00 - 12:30 PM</h3>
-                            <p class="text-gray-700 mt-1">Photo Session</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">12:30 - 01:30 PM</h3>
-                            <p class="text-gray-700 mt-1">Lunch Break</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">01:30 - 03:30 PM</h3>
-                            <p class="text-gray-700 mt-1">Model ICANN Conference: Part 2</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">03:30 - 03:45 PM</h3>
-                            <p class="text-gray-700 mt-1">Tea Break</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8 pb-6">
-                            <h3 class="text-xl font-semibold text-gray-800">03:45 - 04:15 PM</h3>
-                            <p class="text-gray-700 mt-1">Way Forward: How to get involved and contribute to Internet Governance and QnA</p>
-                        </div>
-                        
-                        <div class="timeline-item relative pl-8">
-                            <h3 class="text-xl font-semibold text-gray-800">04:15 - 05:15 PM</h3>
-                            <p class="text-gray-700 mt-1">Closing Ceremony</p>
+                <!-- Lunch -->
+                <div class="session-card t-break">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-break)"></div></div>
+                    <div class="session-body bg-break t-break">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-sm text-gray-500">1:00 &ndash; 2:00 PM</span>
+                            <span class="type-pill t-break"><span><i class="fas fa-utensils mr-1"></i>Lunch Break</span></span>
                         </div>
                     </div>
                 </div>
+
+                <!-- APNIC PDP -->
+                <div class="session-card t-session">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-session)"></div></div>
+                    <div class="session-body bg-session t-session">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#164e63">2:00 &ndash; 2:45 PM</span>
+                            <span class="type-pill t-session"><span><i class="fas fa-globe mr-1"></i>Session</span></span>
+                            <span class="mode-badge mode-online"><i class="fas fa-video"></i>Online</span>
+                        </div>
+                        <p class="text-gray-800 font-semibold mb-2">APNIC and Policy Development Process at APNIC</p>
+                        <div class="flex flex-wrap gap-1"><span class="speaker-tag"><i class="fas fa-user"></i>Srinivas Chendi</span></div>
+                    </div>
+                </div>
+
+                <!-- IG Indian Landscape -->
+                <div class="session-card t-session">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-session)"></div></div>
+                    <div class="session-body bg-session t-session">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#164e63">2:45 &ndash; 3:15 PM</span>
+                            <span class="type-pill t-session"><span><i class="fas fa-globe mr-1"></i>Session</span></span>
+                            <span class="mode-badge mode-inperson"><i class="fas fa-user-check"></i>In-person</span>
+                        </div>
+                        <p class="text-gray-800 font-semibold mb-2">IG OF/VS on the Internet: Indian Landscape Perspective</p>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Barkha Manral</span>
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Sameer Gahlot</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ICANN SOs & ACs -->
+                <div class="session-card t-session">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-session)"></div></div>
+                    <div class="session-body bg-session t-session">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#164e63">3:15 &ndash; 3:45 PM</span>
+                            <span class="type-pill t-session"><span><i class="fas fa-sitemap mr-1"></i>Session</span></span>
+                            <span class="mode-badge mode-inperson"><i class="fas fa-user-check"></i>In-person</span>
+                        </div>
+                        <p class="text-gray-800 font-semibold mb-2">ICANN Supporting Organizations &amp; Advisory Committees</p>
+                        <p class="text-gray-500 text-sm mb-2">Overview of SOs and ACs and Policy Development Process at ICANN</p>
+                        <div class="flex flex-wrap gap-1"><span class="speaker-tag"><i class="fas fa-user"></i>Yash Agarwal</span></div>
+                    </div>
+                </div>
+
+                <!-- Tea Break -->
+                <div class="session-card t-break">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-break)"></div></div>
+                    <div class="session-body bg-break t-break">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-sm text-gray-500">3:45 &ndash; 4:00 PM</span>
+                            <span class="type-pill t-break"><span><i class="fas fa-mug-hot mr-1"></i>Tea Break</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IGF & Multistakeholder -->
+                <div class="session-card t-session">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-session)"></div></div>
+                    <div class="session-body bg-session t-session">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#164e63">4:00 &ndash; 4:45 PM</span>
+                            <span class="type-pill t-session"><span><i class="fas fa-globe mr-1"></i>Session</span></span>
+                            <span class="mode-badge mode-online"><i class="fas fa-video"></i>Online</span>
+                        </div>
+                        <p class="text-gray-800 font-semibold mb-2">Overview of IGF &amp; The Global Multistakeholder Model</p>
+                        <p class="text-gray-500 text-sm mb-2">GDC, Net Mundial &amp; Ongoing Multilateral Processes</p>
+                        <div class="flex flex-wrap gap-1"><span class="speaker-tag"><i class="fas fa-user"></i>Amrita Choudhury</span></div>
+                    </div>
+                </div>
+
+                <!-- Digital Divide -->
+                <div class="session-card t-session">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-session)"></div></div>
+                    <div class="session-body bg-session t-session">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#164e63">4:45 &ndash; 5:15 PM</span>
+                            <span class="type-pill t-session"><span><i class="fas fa-wifi mr-1"></i>Session</span></span>
+                            <span class="mode-badge mode-online"><i class="fas fa-video"></i>Online</span>
+                        </div>
+                        <p class="text-gray-800 font-semibold mb-2">Bridging the Digital Divide</p>
+                        <div class="flex flex-wrap gap-1"><span class="speaker-tag"><i class="fas fa-user"></i>Syed Kazi</span></div>
+                    </div>
+                </div>
+
+                <!-- Day 1 Review -->
+                <div class="session-card t-review">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-review)"></div></div>
+                    <div class="session-body bg-review t-review">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm text-slate-500">5:15 &ndash; 6:00 PM</span>
+                            <span class="type-pill t-review"><span><i class="fas fa-clipboard-list mr-1"></i>Review</span></span>
+                        </div>
+                        <p class="text-gray-800 font-semibold mb-1">Day 1 Review &amp; Experience Sharing</p>
+                        <p class="text-gray-500 text-sm">Model ICANN Briefing + Group Formation</p>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </section>
-     <!-- Include Footer -->
-     <div id="footer"></div>
 
-    <!-- AOS Script -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="/js/main_component.js"></script>
-    <script>
-        AOS.init();
-        
-        function showDay(dayId) {
-            // Hide all day contents
-            document.querySelectorAll('.day-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab-btn').forEach(tab => {
-                tab.classList.remove('tab-active');
-            });
-            
-            // Show selected day content
-            document.getElementById(dayId).classList.remove('hidden');
-            
-            // Add active class to clicked tab
-            event.currentTarget.classList.add('tab-active');
-        }
-    </script>
+        <!-- ===================== DAY 2 ===================== -->
+        <div id="day2" class="day-content hidden">
+            <div class="timeline">
+
+                <!-- ICANN Prep -->
+                <div class="session-card t-workshop">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-workshop)"></div></div>
+                    <div class="session-body bg-workshop t-workshop">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#312e81">9:00 &ndash; 11:00 AM</span>
+                            <span class="type-pill t-workshop"><span><i class="fas fa-chalkboard mr-1"></i>Workshop</span></span>
+                        </div>
+                        <p class="text-gray-800 font-semibold mb-2">Preparation for the ICANN Model Conference</p>
+                        <div class="flex flex-wrap gap-1">
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Ankita</span>
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Sameer</span>
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Ihita</span>
+                            <span class="speaker-tag"><i class="fas fa-user"></i>Aviral</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model ICANN Part 1 -->
+                <div class="session-card t-conference">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-conference)"></div></div>
+                    <div class="session-body bg-conference t-conference">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#7c2d12">11:00 AM &ndash; 12:30 PM</span>
+                            <span class="type-pill t-conference"><span><i class="fas fa-landmark mr-1"></i>Model ICANN</span></span>
+                        </div>
+                        <p class="text-gray-800 font-semibold">Model ICANN Conference &ndash; Part 1</p>
+                    </div>
+                </div>
+
+                <!-- Lunch -->
+                <div class="session-card t-break">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-break)"></div></div>
+                    <div class="session-body bg-break t-break">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-sm text-gray-500">12:30 &ndash; 1:30 PM</span>
+                            <span class="type-pill t-break"><span><i class="fas fa-utensils mr-1"></i>Lunch Break</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model ICANN Part 2 -->
+                <div class="session-card t-conference">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-conference)"></div></div>
+                    <div class="session-body bg-conference t-conference">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#7c2d12">1:30 &ndash; 4:00 PM</span>
+                            <span class="type-pill t-conference"><span><i class="fas fa-landmark mr-1"></i>Model ICANN</span></span>
+                        </div>
+                        <p class="text-gray-800 font-semibold">Model ICANN Conference &ndash; Part 2</p>
+                    </div>
+                </div>
+
+                <!-- Closing Ceremony -->
+                <div class="session-card t-ceremony">
+                    <div class="session-icon-col"><div class="session-dot" style="background:var(--c-ceremony)"></div></div>
+                    <div class="session-body bg-ceremony t-ceremony">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="font-bold text-sm" style="color:#92400e">4:00 &ndash; 4:30 PM</span>
+                            <span class="type-pill t-ceremony"><span><i class="fas fa-award mr-1"></i>Closing Ceremony</span></span>
+                        </div>
+                        <p class="text-gray-800 font-semibold">Closing Ceremony &amp; Certificate Distribution</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div id="footer"></div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="../js/main_component.js"></script>
+<script>
+    AOS.init({ duration: 600, once: true });
+    function showDay(dayId, btn) {
+        document.querySelectorAll('.day-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.day-tab').forEach(el => el.classList.remove('active'));
+        document.getElementById(dayId).classList.remove('hidden');
+        btn.classList.add('active');
+    }
+</script>
 </body>
 </html>
-   

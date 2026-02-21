@@ -3,7 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APIGA Photo Gallery</title>
+    <title>APIGA Photo Gallery - APIGA India 2025</title>
+    <meta name="description" content="Browse photos from APIGA India 2025 - capturing moments from our Internet governance workshop and community events.">
+    <meta name="keywords" content="APIGA, ICANN, Internet Governance, India, photos, gallery, 2025, images">
+    <meta property="og:title" content="APIGA Photo Gallery - APIGA India 2025">
+    <meta property="og:description" content="Browse photos from APIGA India 2025 events and workshops.">
+    <meta property="og:image" content="https://apigaindia.in/images/home_page_logo.png">
+    <meta property="og:url" content="https://apigaindia.in/pages/photos.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://apigaindia.in/pages/photos.html">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -485,7 +494,7 @@
 </head>
 
 <body>
-    <div id="header"></div>
+    <div id="header-container"></div>
     <div class="gallery-container">
         <h1>APIGA Photo Gallery</h1>
         
@@ -804,20 +813,6 @@
             nextButton.disabled = currentImageIndex === currentImages.length - 1;
         }
         // Close modal
-        function closeModal() {
-            modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = 'none';
-                // Re-enable body scroll
-                document.body.style.overflow = '';
-                // Reset zoom
-                isZoomed = false;
-                modalImage.style.transform = '';
-            }, 300);
-        }
-
-
-                        // Close modal
         function closeModal() {
             modal.classList.remove('show');
             setTimeout(() => {

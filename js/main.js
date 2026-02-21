@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const appBanner = document.getElementById('app-banner');
-
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
 
@@ -10,11 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Load header and footer
-    const headerContainer = document.getElementById('header');
+    const headerContainer = document.getElementById('header-container');
     const footerContainer = document.getElementById('footer');
 
-    // Hero Section Interactive Grid Logic
     const heroSection = document.querySelector('.hero-section');
     const heroGrid = document.querySelector('.hero-bg-grid');
     
@@ -24,14 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             
-            // Efficiently update CSS variables
             requestAnimationFrame(() => {
                 heroGrid.style.setProperty('--mouse-x', `${x}px`);
                 heroGrid.style.setProperty('--mouse-y', `${y}px`);
             });
         });
         
-        // Handle mouse leaving the section (reset center)
         heroSection.addEventListener('mouseleave', () => {
             heroGrid.style.setProperty('--mouse-x', '50%');
             heroGrid.style.setProperty('--mouse-y', '50%');
@@ -40,11 +34,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (headerContainer) {
         fetch('components/header.html')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to load header');
+                return response.text();
+            })
             .then(html => {
                 headerContainer.innerHTML = html;
 
-                // Reinitialize mobile menu button after loading header
                 const newMobileMenuButton = document.getElementById('mobile-menu-button');
                 const newMobileMenu = document.getElementById('mobile-menu');
 
@@ -54,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
 
-                // Initialize mobile dropdown toggles
                 const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
                 mobileDropdowns.forEach(dropdown => {
                     const trigger = dropdown.querySelector('.mobile-dropdown-trigger');
@@ -69,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
 
-                // Initialize desktop click-based dropdown
                 const navDropdowns = document.querySelectorAll('.nav-item-dropdown');
                 navDropdowns.forEach(dropdown => {
                     const trigger = dropdown.querySelector('.dropdown-trigger');
@@ -79,20 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
                             e.preventDefault();
                             e.stopPropagation();
                             
-                            // Close other dropdowns
                             navDropdowns.forEach(other => {
                                 if (other !== dropdown) {
                                     other.classList.remove('active');
                                 }
                             });
                             
-                            // Toggle current dropdown
                             dropdown.classList.toggle('active');
                         });
                     }
                 });
 
-                // Close dropdown when clicking outside
                 document.addEventListener('click', (e) => {
                     if (!e.target.closest('.nav-item-dropdown')) {
                         navDropdowns.forEach(dropdown => {
@@ -100,16 +91,25 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     }
                 });
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                headerContainer.innerHTML = '<nav class="bg-blue-600 p-4 text-white text-center">Navigation unavailable</nav>';
             });
     }
 
     if (footerContainer) {
         fetch('components/footer.html')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to load footer');
+                return response.text();
+            })
             .then(html => {
                 footerContainer.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error loading footer:', error);
+                footerContainer.innerHTML = '<footer class="bg-gray-800 p-4 text-white text-center">Footer unavailable</footer>';
             });
     }
-
-    // Banner close button (no countdown needed - participants announced)
 });
