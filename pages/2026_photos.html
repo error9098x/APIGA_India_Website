@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIGA Photo Gallery - APIGA India 2026</title>
+    <meta name="description" content="Browse photos from APIGA India 2026 - capturing moments from our Internet governance workshop and community events.">
+    <meta name="keywords" content="APIGA, ICANN, Internet Governance, India, photos, gallery, 2026, images">
+    <meta property="og:title" content="APIGA Photo Gallery - APIGA India 2026">
+    <meta property="og:description" content="Browse photos from APIGA India 2026 events and workshops.">
+    <meta property="og:image" content="https://apigaindia.in/images/home_page_logo.png">
+    <meta property="og:url" content="https://apigaindia.in/pages/2026_photos.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://apigaindia.in/pages/2026_photos.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 2rem 3rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            padding: 0.75rem 1.125rem;
+            border-radius: 16px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 360px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.625rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            color: #1e293b;
+            background: rgba(255,255,255,0.8);
+            transition: all 0.2s ease;
+        }
+
+        .search-container input:focus {
+            border-color: #2463EB;
+            box-shadow: 0 0 0 3px rgba(36, 99, 235, 0.12);
+            background: white;
+            outline: none;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 0.875rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        .sort-container select {
+            padding: 0.6rem 2.125rem 0.6rem 0.875rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-family: inherit;
+            color: #1e293b;
+            background-color: rgba(255,255,255,0.8);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .sort-container select:focus {
+            border-color: #2463EB;
+            box-shadow: 0 0 0 3px rgba(36, 99, 235, 0.12);
+            background-color: white;
+            outline: none;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 0.875rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 28px -4px rgba(36, 99, 235, 0.18);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.25) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            transform: scale(0.96);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Blur-up: both images stack; thumb is blurred behind, hires fades in on top */
+        .modal-image-thumb {
+            position: absolute;
+            max-width: 92vw;
+            max-height: 88vh;
+            object-fit: contain;
+            border-radius: 4px;
+            filter: blur(22px);
+            transform: scale(1.05);
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-image {
+            position: relative;
+            max-width: 92vw;
+            max-height: 88vh;
+            object-fit: contain;
+            border-radius: 4px;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.4s ease-out, transform 0.3s ease;
+        }
+
+        .modal-controls {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.375rem;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.5rem;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 3;
+        }
+
+        .modal-controls button {
+            background: transparent;
+            color: rgba(255,255,255,0.8);
+            border: none;
+            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .modal-controls button:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .modal-nav button {
+            pointer-events: auto;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: rgba(255,255,255,0.9);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.1rem;
+        }
+
+        .modal-nav button:hover:not(:disabled) {
+            background: rgba(36, 99, 235, 0.7);
+            border-color: rgba(36, 99, 235, 0.5);
+        }
+
+        .modal-nav button:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
+
+        .close {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.25rem;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.25rem;
+            cursor: pointer;
+            z-index: 2010;
+            transition: all 0.2s ease;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .close:hover {
+            background: rgba(239, 68, 68, 0.7);
+            color: white;
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            flex-direction: column;
+            grid-column: 1/-1;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #2463EB;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1.5rem;
+        }
+
+        .loading-text {
+            color: #64748b;
+            font-weight: 500;
+            font-family: inherit;
+        }
+
+        /* Scroll sentinel + end message */
+        #scroll-sentinel {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #end-message {
+            display: none;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            padding: 2rem 0 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container { padding: 80px 1rem 2rem; }
+            .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
+            .gallery-item { border-radius: 8px; }
+            .modal-nav button { width: 40px; height: 40px; border-radius: 10px; }
+            .modal-controls { bottom: 1rem; padding: 0.375rem; border-radius: 12px; }
+            .modal-controls button { width: 38px; height: 38px; }
+            .controls { flex-direction: column; padding: 0.75rem; border-radius: 12px; }
+            .search-container { max-width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .gallery { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+            .gallery-item { border-radius: 6px; }
+        }
+
+        button:focus-visible, input:focus-visible, select:focus-visible {
+            outline: 2px solid #2463EB;
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute; width: 1px; height: 1px; padding: 0;
+            margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+            white-space: nowrap; border-width: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header-container"></div>
+    <div class="gallery-container">
+        <h1><i class="fas fa-images" style="color: #2463EB; margin-right: 0.5rem;"></i>APIGA Photo Gallery</h1>
+        <p class="gallery-subtitle">Capturing moments from APIGA India 2026</p>
+
+        <div class="controls">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search by filename..." aria-label="Search images by filename">
+            </div>
+            <div class="sort-container">
+                <select id="sort-select" aria-label="Sort images">
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="image-count" style="text-align: right; margin-bottom: 0.75rem; color: #94a3b8; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em;"></div>
+
+        <div class="gallery" id="gallery">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p class="loading-text">Loading gallery...</p>
+            </div>
+        </div>
+
+        <div id="scroll-sentinel"></div>
+        <div id="end-message"><i class="fas fa-check-circle" style="color: #2463EB; margin-right: 0.4rem;"></i>All photos loaded</div>
+    </div>
+
+    <!-- Modal / Lightbox -->
+    <div id="modal" class="modal" role="dialog" aria-modal="true">
+        <span class="close" aria-label="Close modal">&times;</span>
+        <div id="modal-counter" style="position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.7); font-size: 0.8rem; font-weight: 500; z-index: 2010; background: rgba(15,23,42,0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0.375rem 1rem; border-radius: 10px; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.1); font-family: 'Inter', sans-serif;"></div>
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <!-- Blur-up: thumb shown first (blurred), hires fades in on top -->
+                <img id="modal-image-thumb" class="modal-image-thumb" src="" alt="">
+                <img id="modal-image" class="modal-image" src="" alt="">
+                <div class="modal-nav">
+                    <button id="prev-button" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+                    <button id="next-button" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="modal-controls">
+                    <button id="download-button" aria-label="Download image"><i class="fas fa-download"></i></button>
+                    <button id="share-button" aria-label="Share image"><i class="fas fa-share-alt"></i></button>
+                    <button id="zoom-button" aria-label="Toggle zoom"><i class="fas fa-search-plus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main_component.js"></script>
+    <script>
+        // ── Hugging Face URLs ─────────────────────────────────────────────────
+        const HF_API   = 'https://huggingface.co/api/datasets/procodec/APIGA_2026/tree/main/web_optimized';
+        const HF_BASE  = 'https://huggingface.co/datasets/procodec/APIGA_2026/resolve/main/';
+
+        function getThumbUrl(filename) {
+            // WebP thumbnail — identical name but .webp extension, inside thumbs/
+            return HF_BASE + 'thumbs/' + filename.replace(/\.(jpe?g|png)$/i, '.webp');
+        }
+        function getHiresUrl(filename) {
+            return HF_BASE + 'web_optimized/' + filename;
+        }
+
+        // ── State ─────────────────────────────────────────────────────────────
+        let allImages     = [];   // full list from API
+        let currentImages = [];   // filtered/sorted list
+        let loadedCount   = 0;    // how many are rendered so far
+        let isLoading     = false;
+        let currentImageIndex = 0;
+        let isZoomed      = false;
+        const CHUNK = 30;         // images per scroll-load
+
+        // ── DOM ───────────────────────────────────────────────────────────────
+        const gallery        = document.getElementById('gallery');
+        const modal          = document.getElementById('modal');
+        const modalThumb     = document.getElementById('modal-image-thumb');
+        const modalImage     = document.getElementById('modal-image');
+        const closeBtn       = document.querySelector('.close');
+        const prevButton     = document.getElementById('prev-button');
+        const nextButton     = document.getElementById('next-button');
+        const downloadButton = document.getElementById('download-button');
+        const shareButton    = document.getElementById('share-button');
+        const zoomButton     = document.getElementById('zoom-button');
+        const searchInput    = document.getElementById('search-input');
+        const sortSelect     = document.getElementById('sort-select');
+        const imageCountEl   = document.getElementById('image-count');
+        const sentinel       = document.getElementById('scroll-sentinel');
+        const endMessage     = document.getElementById('end-message');
+
+        // ── Fetch file list from HF API ───────────────────────────────────────
+        async function fetchImageFiles() {
+            try {
+                const res = await fetch(HF_API);
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                allImages = data
+                    .filter(item => item.type === 'file' && /\.(jpe?g|png)$/i.test(item.path))
+                    .map(item => item.path.split('/').pop())
+                    .sort();
+                applyFilterAndSort();
+            } catch (err) {
+                console.error('Could not fetch from Hugging Face API:', err);
+                gallery.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:2rem;color:#64748b;">Failed to load photos. Please refresh and try again.</p>';
+            }
+        }
+
+        // ── Filter + sort, then reset grid ───────────────────────────────────
+        function applyFilterAndSort() {
+            const term = searchInput.value.toLowerCase();
+            currentImages = allImages.filter(f => f.toLowerCase().includes(term));
+            if (sortSelect.value === 'name-desc') currentImages.reverse();
+
+            // Reset
+            loadedCount = 0;
+            gallery.innerHTML = '';
+            endMessage.style.display = 'none';
+
+            if (currentImages.length === 0) {
+                gallery.innerHTML = '<p style="text-align:center;grid-column:1/-1;padding:2rem;color:#64748b;">No photos match your search.</p>';
+                imageCountEl.textContent = '0 photos found';
+                return;
+            }
+
+            observer.disconnect();
+            loadChunk();
+            observer.observe(sentinel);
+        }
+
+        // ── Render next chunk ─────────────────────────────────────────────────
+        function loadChunk() {
+            if (isLoading) return;
+            const end = Math.min(loadedCount + CHUNK, currentImages.length);
+            if (loadedCount >= currentImages.length) return;
+
+            isLoading = true;
+
+            for (let i = loadedCount; i < end; i++) {
+                gallery.appendChild(createCard(i));
+            }
+
+            loadedCount = end;
+            imageCountEl.textContent = `Showing ${loadedCount} of ${currentImages.length} photos`;
+
+            if (loadedCount >= currentImages.length) {
+                observer.disconnect();
+                endMessage.style.display = 'block';
+            }
+
+            isLoading = false;
+        }
+
+        // ── Build a single gallery card ───────────────────────────────────────
+        function createCard(index) {
+            const filename = currentImages[index];
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.setAttribute('role', 'button');
+            item.setAttribute('tabindex', '0');
+            item.setAttribute('aria-label', 'Open photo ' + (index + 1));
+
+            const img = document.createElement('img');
+            img.src = getThumbUrl(filename);
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            img.alt = 'APIGA India 2026 — photo ' + (index + 1);
+            // Fallback: if webp thumb fails, load the hires jpg instead
+            img.onerror = () => { img.src = getHiresUrl(filename); img.onerror = null; };
+
+            item.addEventListener('click', () => openModal(index));
+            item.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(index); }
+            });
+
+            item.appendChild(img);
+            return item;
+        }
+
+        // ── IntersectionObserver for infinite scroll ──────────────────────────
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) loadChunk();
+        }, { rootMargin: '300px' });
+
+        // ── Modal: open ───────────────────────────────────────────────────────
+        function openModal(index) {
+            currentImageIndex = index;
+            updateModalImage();
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+            document.body.style.overflow = 'hidden';
+            trapFocus(modal);
+        }
+
+        // ── Modal: blur-up progressive load ──────────────────────────────────
+        function updateModalImage() {
+            const filename = currentImages[currentImageIndex];
+
+            // 1. Show blurred thumbnail instantly (likely already cached from grid)
+            modalThumb.src = getThumbUrl(filename);
+            modalThumb.style.opacity = '1';
+            modalImage.style.opacity = '0';
+            modalImage.src = '';
+
+            // 2. Load full-res silently behind the blur
+            const hires = new Image();
+            hires.onload = () => {
+                modalImage.src = hires.src;
+                modalImage.style.opacity = '1';   // crossfade over blurred thumb
+            };
+            hires.onerror = () => {
+                // Fallback: just show thumb clearly
+                modalThumb.style.filter = 'none';
+                modalThumb.style.transform = 'none';
+            };
+            hires.src = getHiresUrl(filename);
+
+            prevButton.disabled = currentImageIndex === 0;
+            nextButton.disabled = currentImageIndex === currentImages.length - 1;
+
+            const counter = document.getElementById('modal-counter');
+            if (counter) counter.textContent = (currentImageIndex + 1) + ' / ' + currentImages.length;
+        }
+
+        // ── Modal: close ──────────────────────────────────────────────────────
+        function closeModal() {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+                isZoomed = false;
+                modalImage.style.transform = '';
+                modalThumb.style.filter = 'blur(22px)';
+                modalThumb.style.transform = 'scale(1.05)';
+            }, 300);
+        }
+
+        // ── Accessibility: trap focus inside modal ────────────────────────────
+        let _trapHandler = null;
+        function trapFocus(el) {
+            const focusable = el.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+            if (!focusable.length) return;
+            const first = focusable[0], last = focusable[focusable.length - 1];
+            if (_trapHandler) el.removeEventListener('keydown', _trapHandler);
+            _trapHandler = e => {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+                    else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+                }
+                if (e.key === 'Escape') closeModal();
+            };
+            el.addEventListener('keydown', _trapHandler);
+            first.focus();
+        }
+
+        // ── Zoom ──────────────────────────────────────────────────────────────
+        function toggleZoom() {
+            isZoomed = !isZoomed;
+            const scale = isZoomed ? 'scale(1.6)' : '';
+            modalImage.style.transform = scale;
+            modalThumb.style.transform = isZoomed ? 'scale(1.6)' : 'scale(1.05)';
+            modalImage.style.cursor = isZoomed ? 'grab' : '';
+            zoomButton.innerHTML = isZoomed
+                ? '<i class="fas fa-search-minus"></i>'
+                : '<i class="fas fa-search-plus"></i>';
+        }
+
+        // ── Download (fetch+blob for cross-origin) ────────────────────────────
+        function downloadImage() {
+            const url = getHiresUrl(currentImages[currentImageIndex]);
+            fetch(url)
+                .then(r => r.blob())
+                .then(blob => {
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = currentImages[currentImageIndex];
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(a.href);
+                })
+                .catch(() => window.open(url, '_blank'));
+        }
+
+        // ── Share ─────────────────────────────────────────────────────────────
+        function shareImage() {
+            const url = getHiresUrl(currentImages[currentImageIndex]);
+            if (navigator.share) {
+                navigator.share({ title: 'APIGA India 2026 Photo', url }).catch(console.error);
+            } else {
+                navigator.clipboard.writeText(url).then(() => alert('Image URL copied!')).catch(console.error);
+            }
+        }
+
+        function prevImage() { if (currentImageIndex > 0) openModal(currentImageIndex - 1); }
+        function nextImage() { if (currentImageIndex < currentImages.length - 1) openModal(currentImageIndex + 1); }
+
+        // ── Event listeners ───────────────────────────────────────────────────
+        closeBtn.addEventListener('click', closeModal);
+        prevButton.addEventListener('click', prevImage);
+        nextButton.addEventListener('click', nextImage);
+        downloadButton.addEventListener('click', downloadImage);
+        shareButton.addEventListener('click', shareImage);
+        zoomButton.addEventListener('click', toggleZoom);
+        searchInput.addEventListener('input', applyFilterAndSort);
+        sortSelect.addEventListener('change', applyFilterAndSort);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+        document.addEventListener('keydown', e => {
+            if (modal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') prevImage();
+                else if (e.key === 'ArrowRight') nextImage();
+                else if (e.key === 'Escape') closeModal();
+            }
+        });
+
+        // Swipe support
+        let touchStartX = 0;
+        modalImage.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        modalImage.addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].screenX - touchStartX;
+            if (dx < -50) nextImage();
+            if (dx > 50) prevImage();
+        });
+
+        // ── Boot ──────────────────────────────────────────────────────────────
+        window.addEventListener('load', fetchImageFiles);
+    </script>
+    <div id="footer"></div>
+</body>
+</html>
