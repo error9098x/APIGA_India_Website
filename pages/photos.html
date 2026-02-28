@@ -13,7 +13,6 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://apigaindia.in/pages/photos.html">
-    <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -33,20 +32,10 @@
           
         }
         
-        /* Add styles for the fixed header */
-        #header {
-            position: relative;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: #fff;
-        }
-        
         .gallery-container {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1.5rem;
+            margin: 0 auto;
+            padding: 80px 1.5rem 2rem;
         }
         
         h1 {
@@ -148,7 +137,9 @@
             transition: transform 0.4s ease, box-shadow 0.4s ease;
             aspect-ratio: 4/3;
             cursor: pointer;
-            background-color: #f0f0f0;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
         }
         
         .gallery-item:hover {
@@ -399,6 +390,11 @@
             100% { transform: rotate(360deg); }
         }
         
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
         .pagination {
             display: flex;
             justify-content: center;
@@ -501,7 +497,7 @@
         <div class="controls">
             <div class="search-container">
                 <i class="fas fa-search"></i>
-                <input type="text" id="search-input" placeholder="Search images..." aria-label="Search images">
+                <input type="text" id="search-input" placeholder="Search by filename..." aria-label="Search images by filename">
             </div>
             <div class="sort-container">
                 <select id="sort-select" aria-label="Sort images">
@@ -512,6 +508,8 @@
                 </select>
             </div>
         </div>
+        
+        <div id="image-count" style="text-align: center; margin-bottom: 1rem; color: #666; font-size: 0.95rem; font-weight: 500;"></div>
         
         <div class="gallery" id="gallery">
             <div class="loading">
@@ -527,6 +525,7 @@
     
     <div id="modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
         <span class="close" aria-label="Close modal">&times;</span>
+        <div id="modal-counter" style="position: absolute; top: 30px; left: 50%; transform: translateX(-50%); color: white; font-size: 0.95rem; font-weight: 500; z-index: 1010; background: rgba(0,0,0,0.5); padding: 4px 16px; border-radius: 20px; letter-spacing: 1px;"></div>
         <div class="modal-content">
             <div class="modal-image-container">
                 <img id="modal-image" class="modal-image" src="" alt="">
@@ -540,18 +539,9 @@
                     <button id="zoom-button" aria-label="Toggle zoom"><i class="fas fa-search-plus"></i></button>
                 </div>
             </div>
-            <div class="modal-info" id="modal-info">
-                <h3 id="modal-title">Image Title</h3>
-                <!-- Image info will be loaded here -->
-            </div>
         </div>
     </div>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/main_component.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
     <script>
         // Base URL for Hugging Face dataset images
         const BASE_URL = 'https://huggingface.co/datasets/procodec/APIGA_2025/resolve/main/';
@@ -560,10 +550,6 @@
         const imageFiles = [
             '3M3A5162.JPG', '3M3A5163.JPG', '3M3A5164.JPG', '3M3A5165.JPG', '3M3A5166.JPG', '3M3A5167.JPG', '3M3A5168.JPG', '3M3A5169.JPG', '3M3A5170.JPG', '3M3A5171.JPG', '3M3A5172.JPG', '3M3A5173.JPG', '3M3A5174.JPG', '3M3A5175.JPG', '3M3A5176.JPG', '3M3A5177.JPG', '3M3A5178.JPG', '3M3A5179.JPG', '3M3A5180.JPG', '3M3A5181.JPG', '3M3A5182.JPG', '3M3A5183.JPG', '3M3A5184.JPG', '3M3A5185.JPG', '3M3A5186.JPG', '3M3A5188.JPG', '3M3A5189.JPG', '3M3A5190.JPG', '3M3A5191.JPG', '3M3A5193.JPG', '3M3A5194.JPG', '3M3A5195.JPG', '3M3A5196.JPG', '3M3A5198.JPG', '3M3A5199.JPG', '3M3A5201.JPG', '3M3A5202.JPG', '3M3A5203.JPG', '3M3A5204.JPG', '3M3A5205.JPG', '3M3A5206.JPG', '3M3A5207.JPG', '3M3A5208.JPG', '3M3A5209.JPG', '3M3A5210.JPG', '3M3A5211.JPG', '3M3A5212.JPG', '3M3A5213.JPG', '3M3A5214.JPG', '3M3A5215.JPG', '3M3A5216.JPG', '3M3A5217.JPG', '3M3A5218.JPG', '3M3A5219.JPG', '3M3A5220.JPG', '3M3A5221.JPG', '3M3A5222.JPG', '3M3A5223.JPG', '3M3A5224.JPG', '3M3A5225.JPG', '3M3A5226.JPG', '3M3A5227.JPG', '3M3A5228.JPG', '3M3A5229.JPG', '3M3A5230.JPG', '3M3A5231.JPG', '3M3A5232.JPG', '3M3A5233.JPG', '3M3A5234.JPG', '3M3A5235.JPG', '3M3A5236.JPG', '3M3A5237.JPG', '3M3A5238.JPG', '3M3A5239.JPG', '3M3A5240.JPG', '3M3A5241.JPG', '3M3A5242.JPG', '3M3A5243.JPG', '3M3A5244.JPG', '3M3A5245.JPG', '3M3A5246.JPG', '3M3A5247.JPG', '3M3A5249.JPG', '3M3A5250.JPG', '3M3A5251.JPG', '3M3A5252.JPG', '3M3A5253.JPG', '3M3A5254.JPG', '3M3A5255.JPG', '3M3A5256.JPG', '3M3A5259.JPG', '3M3A5260.JPG', '3M3A5261.JPG', '3M3A5262.JPG', '3M3A5263.JPG', '3M3A5264.JPG', '3M3A5265.JPG', '3M3A5266.JPG', '3M3A5267.JPG', '3M3A5268.JPG', '3M3A5270.JPG', '3M3A5271.JPG', '3M3A5272.JPG', '3M3A5273.JPG', '3M3A5274.JPG', '3M3A5275.JPG', '3M3A5277.JPG', '3M3A5278.JPG', '3M3A5279.JPG', '3M3A5280.JPG', '3M3A5281.JPG', '3M3A5282.JPG', '3M3A5283.JPG', '3M3A5284.JPG', '3M3A5285.JPG', '3M3A5286.JPG', '3M3A5287.JPG', '3M3A5289.JPG', '3M3A5290.JPG', '3M3A5291.JPG', '3M3A5292.JPG', '3M3A5293.JPG', '3M3A5294.JPG', '3M3A5295.JPG', '3M3A5296.JPG', '3M3A5297.JPG', '3M3A5298.JPG', '3M3A5299.JPG', '3M3A5301.JPG', '3M3A5302.JPG', '3M3A5303.JPG', '3M3A5304.JPG', '3M3A5305.JPG', '3M3A5306.JPG', '3M3A5307.JPG', '3M3A5310.JPG', '3M3A5311.JPG', '3M3A5312.JPG', '3M3A5314.JPG', '3M3A5316.JPG', '3M3A5317.JPG', '3M3A5318.JPG', '3M3A5320.JPG', '3M3A5321.JPG', '3M3A5322.JPG', '3M3A5323.JPG', '3M3A5324.JPG', '3M3A5326.JPG', '3M3A5327.JPG', '3M3A5330.JPG', '3M3A5331.JPG', '3M3A5333.JPG', '3M3A5334.JPG', '3M3A5335.JPG', '3M3A5336.JPG', '3M3A5337.JPG', '3M3A5338.JPG', '3M3A5339.JPG', '3M3A5340.JPG', '3M3A5341.JPG', '3M3A5342.JPG', '3M3A5343.JPG', '3M3A5344.JPG', '3M3A5349.JPG', '3M3A5350.JPG', '3M3A5351.JPG', '3M3A5352.JPG', '3M3A5353.JPG', '3M3A5355.JPG', '3M3A5356.JPG', '3M3A5357.JPG', '3M3A5358.JPG', '3M3A5359.JPG', '3M3A5360.JPG', '3M3A5361.JPG', '3M3A5362.JPG', '3M3A5363.JPG', '3M3A5364.JPG', '3M3A5365.JPG', '3M3A5366.JPG', '3M3A5367.JPG', '3M3A5368.JPG', '3M3A5369.JPG', '3M3A5370.JPG', '3M3A5371.JPG', '3M3A5373.JPG', '3M3A5374.JPG', '3M3A5375.JPG', '3M3A5376.JPG', '3M3A5377.JPG', '3M3A5378.JPG', 'IMG-20250323-WA0020.jpg', 'IMG-20250323-WA0028.jpg', 'IMG-20250323-WA0029.jpg', 'IMG-20250323-WA0030.jpg', 'IMG-20250323-WA0032.jpg', 'IMG-20250323-WA0035.jpg', 'IMG-20250323-WA0037.jpg', 'IMG-20250323-WA0038.jpg', 'IMG-20250323-WA0039.jpg', 'IMG-20250323-WA0040.jpg', 'IMG-20250323-WA0041.jpg', 'IMG-20250323-WA0042.jpg', 'LM1A9234.JPG', 'LM1A9236.JPG', 'LM1A9237.JPG', 'LM1A9238.JPG', 'LM1A9241.JPG', 'LM1A9242.JPG', 'LM1A9244.JPG', 'LM1A9245.JPG', 'LM1A9246.JPG', 'LM1A9247.JPG', 'LM1A9248.JPG', 'LM1A9249.JPG', 'LM1A9250.JPG', 'LM1A9251.JPG', 'LM1A9252.JPG', 'LM1A9254.JPG', 'LM1A9255.JPG', 'LM1A9256.JPG', 'LM1A9257.JPG', 'LM1A9258.JPG', 'LM1A9259.JPG', 'LM1A9260.JPG', 'LM1A9261.JPG', 'LM1A9262.JPG', 'LM1A9263.JPG', 'LM1A9264.JPG', 'LM1A9265.JPG', 'LM1A9266.JPG', 'LM1A9267.JPG', 'LM1A9268.JPG', 'LM1A9269.JPG', 'LM1A9270.JPG', 'LM1A9271.JPG', 'LM1A9275.JPG', 'LM1A9278.JPG', 'LM1A9280.JPG', 'LM1A9281.JPG', 'LM1A9282.JPG', 'LM1A9285.JPG', 'LM1A9286.JPG', 'LM1A9287.JPG', 'LM1A9288.JPG', 'LM1A9289.JPG', 'LM1A9290.JPG', 'PXL_20250321_035642477.jpg', 'PXL_20250321_050602853.jpg', 'PXL_20250321_050611857.jpg', 'PXL_20250321_050626712.jpg', 'PXL_20250321_050635981.jpg', 'PXL_20250321_050643541.jpg', 'PXL_20250321_050746044.jpg', 'PXL_20250321_050754163.jpg', 'PXL_20250321_050757456.jpg', 'PXL_20250321_050940170.jpg', 'PXL_20250321_050947245.jpg', 'PXL_20250321_050956854.jpg', 'PXL_20250321_051504318.jpg', 'PXL_20250321_051522446.jpg', 'PXL_20250321_051532260.jpg', 'PXL_20250321_051550449.jpg', 'PXL_20250321_051553871.jpg', 'PXL_20250321_051607648.jpg', 'PXL_20250321_051621010.jpg', 'PXL_20250321_051710747.jpg', 'PXL_20250321_051720940.jpg', 'PXL_20250321_051725811.jpg', 'PXL_20250321_051731284.jpg', 'PXL_20250321_051741235.jpg', 'PXL_20250321_051742546.jpg', 'PXL_20250321_052119748.jpg', 'PXL_20250321_052126081.jpg', 'PXL_20250321_052142611.jpg', 'PXL_20250321_052146060.jpg', 'PXL_20250321_052242469.jpg', 'PXL_20250321_052256551.jpg', 'PXL_20250321_052303149.jpg', 'PXL_20250321_052304179.jpg', 'PXL_20250321_060345660.jpg', 'PXL_20250321_060948427.jpg', 'PXL_20250321_060951781.jpg', 'PXL_20250321_060952503.jpg', 'PXL_20250321_060955307.jpg', 'PXL_20250321_060956038.jpg', 'PXL_20250321_060956667.jpg', 'PXL_20250321_061033975.jpg', 'PXL_20250321_061035123.jpg', 'PXL_20250321_061037228.jpg', 'PXL_20250321_061045453.jpg', 'PXL_20250321_061053532.jpg', 'PXL_20250321_061056498.jpg', 'PXL_20250321_061057745.jpg', 'PXL_20250321_061058970.jpg', 'PXL_20250321_061059658.jpg', 'PXL_20250321_061517382.jpg', 'PXL_20250321_061518985.jpg', 'PXL_20250321_061521786.jpg', 'PXL_20250321_061948370.jpg', 'PXL_20250321_071617323.jpg', 'PXL_20250321_072220156.jpg', 'PXL_20250321_083909635.jpg', 'PXL_20250321_084005011.jpg', 'PXL_20250321_091825788.jpg', 'PXL_20250321_091827986.jpg', 'PXL_20250321_091833033.jpg', 'PXL_20250321_091842061.jpg', 'PXL_20250321_091844104.jpg', 'PXL_20250321_091853048.jpg', 'PXL_20250321_091906732.jpg', 'PXL_20250321_091907950.jpg', 'PXL_20250321_091957604.jpg', 'PXL_20250321_092832362.jpg', 'PXL_20250321_092833489.jpg', 'PXL_20250321_092838944.jpg', 'PXL_20250321_092840339.jpg', 'PXL_20250321_092843338.jpg', 'PXL_20250321_092845086.jpg', 'PXL_20250321_093156601.jpg', 'PXL_20250321_093208851.jpg', 'PXL_20250321_093411380.jpg', 'PXL_20250321_093416440.jpg', 'PXL_20250321_093424268.jpg', 'PXL_20250321_093454720.jpg', 'PXL_20250321_094944212.jpg', 'PXL_20250321_102544158.jpg', 'PXL_20250321_102552153.jpg', 'PXL_20250321_102553333.jpg', 'PXL_20250321_114427218.jpg', 'PXL_20250321_114428419.jpg', 'PXL_20250321_114430774.jpg', 'PXL_20250321_114844303.jpg', 'PXL_20250321_124413015.jpg', 'PXL_20250321_124415244.jpg', 'PXL_20250321_124415697.jpg', 'PXL_20250321_131349888.jpg', 'PXL_20250321_133002446.jpg'];
     
-        // Add simulated metadata for each image (in a real app, you'd extract this from EXIF)
-        const imageMetadata = {};
-      
-        
         // Gallery state
         let currentImages = [...imageFiles];
         let currentPage = 1;
@@ -575,7 +561,6 @@
         const gallery = document.getElementById('gallery');
         const modal = document.getElementById('modal');
         const modalImage = document.getElementById('modal-image');
-        const modalInfo = document.getElementById('modal-info');
         const closeBtn = document.querySelector('.close');
         const prevButton = document.getElementById('prev-button');
         const nextButton = document.getElementById('next-button');
@@ -587,7 +572,6 @@
         const pagination = document.getElementById('pagination');
         
         // Filter and sort images
-               // Filter and sort images
         function filterAndSortImages() {
             const searchTerm = searchInput.value.toLowerCase();
             const sortOption = sortSelect.value;
@@ -625,6 +609,8 @@
             
             if (currentImages.length === 0) {
                 gallery.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 2rem;">No images found matching your search.</p>';
+                const countEl = document.getElementById('image-count');
+                if (countEl) countEl.textContent = '0 photos found';
                 return;
             }
             
@@ -643,6 +629,7 @@
                 // Create thumbnail URL (in a real app, you'd have actual thumbnails)
                 img.src = `${BASE_URL}${filename}`;
                 img.loading = 'lazy';
+                img.decoding = 'async';
                 img.alt = filename;
                 
                 // Handle image loading errors
@@ -665,10 +652,6 @@
                     });
                 };
                 
-                // Preload high-res image
-                const preloadImage = new Image();
-                preloadImage.src = `${BASE_URL}${filename}`;
-                
                 // Open modal when clicking on image
                 item.addEventListener('click', () => openModal(i - startIndex, startIndex));
                 
@@ -682,6 +665,14 @@
                 
                 item.appendChild(img);
                 gallery.appendChild(item);
+            }
+            
+            // Update image count indicator
+            const countEl = document.getElementById('image-count');
+            if (countEl) {
+                const start = (currentPage - 1) * imagesPerPage + 1;
+                const end = Math.min(currentPage * imagesPerPage, currentImages.length);
+                countEl.textContent = `Showing ${start}\u2013${end} of ${currentImages.length} photos`;
             }
         }
         
@@ -770,7 +761,6 @@
         }
         
         // Update modal image and info
-                // Update modal image and info
          function updateModalImage() {
             const filename = currentImages[currentImageIndex];
             modalImage.src = '';
@@ -784,26 +774,11 @@
             img.onload = () => {
                 modalImage.src = img.src;
                 modalImage.style.opacity = '1';
-                
-                // Remove all metadata display
-                modalInfo.innerHTML = `
-                    <h3 id="modal-title">${filename}</h3>
-                `;
             };
             
             img.onerror = () => {
                 modalImage.style.opacity = '1';
                 modalImage.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22600%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15e8b8346ac%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15e8b8346ac%22%3E%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.9296875%22%20y%3D%22317.7%22%3EImage%20Not%20Available%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E';
-                
-                modalInfo.innerHTML = `
-                    <h3 id="modal-title">${filename}</h3>
-                    <p>Failed to load image</p>
-                    <button id="retry-modal-image" style="padding: 0.5rem 1rem; background-color: #3498db; border: none; border-radius: 4px; color: white; margin-top: 0.5rem; cursor: pointer;">Retry</button>
-                `;
-                
-                document.getElementById('retry-modal-image').addEventListener('click', () => {
-                    updateModalImage();
-                });
             };
             
             img.src = `${BASE_URL}${filename}`;
@@ -811,6 +786,12 @@
             // Update navigation buttons state
             prevButton.disabled = currentImageIndex === 0;
             nextButton.disabled = currentImageIndex === currentImages.length - 1;
+            
+            // Update modal counter
+            const counterEl = document.getElementById('modal-counter');
+            if (counterEl) {
+                counterEl.textContent = `${currentImageIndex + 1} / ${currentImages.length}`;
+            }
         }
         // Close modal
         function closeModal() {
@@ -826,12 +807,18 @@
         }
         
         // Trap focus in modal for accessibility
+        let _trapFocusHandler = null;
         function trapFocus(element) {
             const focusableElements = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
             const firstFocusableElement = focusableElements[0];
             const lastFocusableElement = focusableElements[focusableElements.length - 1];
             
-            element.addEventListener('keydown', function(e) {
+            // Remove previous handler to prevent listener leak
+            if (_trapFocusHandler) {
+                element.removeEventListener('keydown', _trapFocusHandler);
+            }
+            
+            _trapFocusHandler = function(e) {
                 if (e.key === 'Tab') {
                     if (e.shiftKey) {
                         if (document.activeElement === firstFocusableElement) {
@@ -849,7 +836,8 @@
                 if (e.key === 'Escape') {
                     closeModal();
                 }
-            });
+            };
+            element.addEventListener('keydown', _trapFocusHandler);
             
             firstFocusableElement.focus();
         }
@@ -868,15 +856,27 @@
             }
         }
         
-        // Download current image
+        // Download current image (fetch + blob for cross-origin support)
         function downloadImage() {
             const filename = currentImages[currentImageIndex];
-            const link = document.createElement('a');
-            link.href = `${BASE_URL}${filename}`;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const url = `${BASE_URL}${filename}`;
+            
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const blobUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(blobUrl);
+                })
+                .catch(() => {
+                    // Fallback: open in new tab
+                    window.open(url, '_blank');
+                });
         }
         
         // Share current image
@@ -926,6 +926,13 @@
         searchInput.addEventListener('input', filterAndSortImages);
         sortSelect.addEventListener('change', filterAndSortImages);
         
+        // Close modal when clicking on background overlay
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (modal.style.display === 'flex') {
@@ -964,92 +971,6 @@
         
         // Initialize gallery
         window.addEventListener('load', () => {
-            // Populate the complete image list
-            // In a real app, you might fetch this from an API
-        
-
-            const completeImageList = [
-            "3M3A5162.JPG", "3M3A5163.JPG", "3M3A5164.JPG", "3M3A5165.JPG", "3M3A5166.JPG",
-            "3M3A5167.JPG", "3M3A5168.JPG", "3M3A5169.JPG", "3M3A5170.JPG", "3M3A5171.JPG",
-            "3M3A5172.JPG", "3M3A5173.JPG", "3M3A5174.JPG", "3M3A5175.JPG", "3M3A5176.JPG",
-            "3M3A5177.JPG", "3M3A5178.JPG", "3M3A5179.JPG", "3M3A5180.JPG", "3M3A5181.JPG",
-            "3M3A5182.JPG", "3M3A5183.JPG", "3M3A5184.JPG", "3M3A5185.JPG", "3M3A5186.JPG",
-            "3M3A5188.JPG", "3M3A5189.JPG", "3M3A5190.JPG", "3M3A5191.JPG", "3M3A5193.JPG",
-            "3M3A5194.JPG", "3M3A5195.JPG", "3M3A5196.JPG", "3M3A5198.JPG", "3M3A5199.JPG",
-            "3M3A5201.JPG", "3M3A5202.JPG", "3M3A5203.JPG", "3M3A5204.JPG", "3M3A5205.JPG",
-            "3M3A5206.JPG", "3M3A5207.JPG", "3M3A5208.JPG", "3M3A5209.JPG", "3M3A5210.JPG",
-            "3M3A5211.JPG", "3M3A5212.JPG", "3M3A5213.JPG", "3M3A5214.JPG", "3M3A5215.JPG",
-            "3M3A5216.JPG", "3M3A5217.JPG", "3M3A5218.JPG", "3M3A5219.JPG", "3M3A5220.JPG",
-            "3M3A5221.JPG", "3M3A5222.JPG", "3M3A5223.JPG", "3M3A5224.JPG", "3M3A5225.JPG",
-            "3M3A5226.JPG", "3M3A5227.JPG", "3M3A5228.JPG", "3M3A5229.JPG", "3M3A5230.JPG",
-            "3M3A5231.JPG", "3M3A5232.JPG", "3M3A5233.JPG", "3M3A5234.JPG", "3M3A5235.JPG",
-            "3M3A5236.JPG", "3M3A5237.JPG", "3M3A5238.JPG", "3M3A5239.JPG", "3M3A5240.JPG",
-            "3M3A5241.JPG", "3M3A5242.JPG", "3M3A5243.JPG", "3M3A5244.JPG", "3M3A5245.JPG",
-            "3M3A5246.JPG", "3M3A5247.JPG", "3M3A5249.JPG", "3M3A5250.JPG", "3M3A5251.JPG",
-            "3M3A5252.JPG", "3M3A5253.JPG", "3M3A5254.JPG", "3M3A5255.JPG", "3M3A5256.JPG",
-            "3M3A5259.JPG", "3M3A5260.JPG", "3M3A5261.JPG", "3M3A5262.JPG", "3M3A5263.JPG",
-            "3M3A5264.JPG", "3M3A5265.JPG", "3M3A5266.JPG", "3M3A5267.JPG", "3M3A5268.JPG",
-            "3M3A5270.JPG", "3M3A5271.JPG", "3M3A5272.JPG", "3M3A5273.JPG", "3M3A5274.JPG",
-            "3M3A5275.JPG", "3M3A5277.JPG", "3M3A5278.JPG", "3M3A5279.JPG", "3M3A5280.JPG",
-            "3M3A5281.JPG", "3M3A5282.JPG", "3M3A5283.JPG", "3M3A5284.JPG", "3M3A5285.JPG",
-            "3M3A5286.JPG", "3M3A5287.JPG", "3M3A5289.JPG", "3M3A5290.JPG", "3M3A5291.JPG",
-            "3M3A5292.JPG", "3M3A5293.JPG", "3M3A5294.JPG", "3M3A5295.JPG", "3M3A5296.JPG",
-            "3M3A5297.JPG", "3M3A5298.JPG", "3M3A5299.JPG", "3M3A5301.JPG", "3M3A5302.JPG",
-            "3M3A5303.JPG", "3M3A5304.JPG", "3M3A5305.JPG", "3M3A5306.JPG", "3M3A5307.JPG",
-            "3M3A5310.JPG", "3M3A5311.JPG", "3M3A5312.JPG", "3M3A5314.JPG", "3M3A5316.JPG",
-            "3M3A5317.JPG", "3M3A5318.JPG", "3M3A5320.JPG", "3M3A5321.JPG", "3M3A5322.JPG",
-            "3M3A5323.JPG", "3M3A5324.JPG", "3M3A5326.JPG", "3M3A5327.JPG", "3M3A5330.JPG",
-            "3M3A5331.JPG", "3M3A5333.JPG", "3M3A5334.JPG", "3M3A5335.JPG", "3M3A5336.JPG",
-            "3M3A5337.JPG", "3M3A5338.JPG", "3M3A5339.JPG", "3M3A5340.JPG", "3M3A5341.JPG",
-            "3M3A5342.JPG", "3M3A5343.JPG", "3M3A5344.JPG", "3M3A5349.JPG", "3M3A5350.JPG",
-            "3M3A5351.JPG", "3M3A5352.JPG", "3M3A5353.JPG", "3M3A5355.JPG", "3M3A5356.JPG",
-            "3M3A5357.JPG", "3M3A5358.JPG", "3M3A5359.JPG", "3M3A5360.JPG", "3M3A5361.JPG",
-            "3M3A5362.JPG", "3M3A5363.JPG", "3M3A5364.JPG", "3M3A5365.JPG", "3M3A5366.JPG",
-            "3M3A5367.JPG", "3M3A5368.JPG", "3M3A5369.JPG", "3M3A5370.JPG", "3M3A5371.JPG",
-            "3M3A5373.JPG", "3M3A5374.JPG", "3M3A5375.JPG", "3M3A5376.JPG", "3M3A5377.JPG",
-            "3M3A5378.JPG", "IMG-20250323-WA0020.jpg", "IMG-20250323-WA0028.jpg",
-            "IMG-20250323-WA0029.jpg", "IMG-20250323-WA0030.jpg", "IMG-20250323-WA0032.jpg",
-            "IMG-20250323-WA0035.jpg", "IMG-20250323-WA0037.jpg", "IMG-20250323-WA0038.jpg",
-            "IMG-20250323-WA0039.jpg", "IMG-20250323-WA0040.jpg", "IMG-20250323-WA0041.jpg",
-            "IMG-20250323-WA0042.jpg", "LM1A9234.JPG", "LM1A9236.JPG", "LM1A9237.JPG",
-            "LM1A9238.JPG", "LM1A9241.JPG", "LM1A9242.JPG", "LM1A9244.JPG", "LM1A9245.JPG",
-            "LM1A9246.JPG", "LM1A9247.JPG", "LM1A9248.JPG", "LM1A9249.JPG", "LM1A9250.JPG",
-            "LM1A9251.JPG", "LM1A9252.JPG", "LM1A9254.JPG", "LM1A9255.JPG", "LM1A9256.JPG",
-            "LM1A9257.JPG", "LM1A9258.JPG", "LM1A9259.JPG", "LM1A9260.JPG", "LM1A9261.JPG",
-            "LM1A9262.JPG", "LM1A9263.JPG", "LM1A9264.JPG", "LM1A9265.JPG", "LM1A9266.JPG",
-            "LM1A9267.JPG", "LM1A9268.JPG", "LM1A9269.JPG", "LM1A9270.JPG", "LM1A9271.JPG",
-            "LM1A9275.JPG", "LM1A9278.JPG", "LM1A9280.JPG", "LM1A9281.JPG", "LM1A9282.JPG",
-            "LM1A9285.JPG", "LM1A9286.JPG", "LM1A9287.JPG", "LM1A9288.JPG", "LM1A9289.JPG",
-            "LM1A9290.JPG", "PXL_20250321_035642477.jpg", "PXL_20250321_050602853.jpg",
-            "PXL_20250321_050611857.jpg", "PXL_20250321_050626712.jpg", "PXL_20250321_050635981.jpg",
-            "PXL_20250321_050643541.jpg", "PXL_20250321_050746044.jpg", "PXL_20250321_050754163.jpg",
-            "PXL_20250321_050757456.jpg", "PXL_20250321_050940170.jpg", "PXL_20250321_050947245.jpg",
-            "PXL_20250321_050956854.jpg", "PXL_20250321_051504318.jpg", "PXL_20250321_051522446.jpg",
-            "PXL_20250321_051532260.jpg", "PXL_20250321_051550449.jpg", "PXL_20250321_051553871.jpg",
-            "PXL_20250321_051607648.jpg", "PXL_20250321_051621010.jpg", "PXL_20250321_051710747.jpg",
-            "PXL_20250321_051720940.jpg", "PXL_20250321_051725811.jpg", "PXL_20250321_051731284.jpg",
-            "PXL_20250321_051741235.jpg", "PXL_20250321_051742546.jpg", "PXL_20250321_052119748.jpg",
-            "PXL_20250321_052126081.jpg", "PXL_20250321_052142611.jpg", "PXL_20250321_052146060.jpg",
-            "PXL_20250321_052242469.jpg", "PXL_20250321_052256551.jpg", "PXL_20250321_052303149.jpg",
-            "PXL_20250321_052304179.jpg", "PXL_20250321_060345660.jpg", "PXL_20250321_060948427.jpg",
-            "PXL_20250321_060951781.jpg", "PXL_20250321_060952503.jpg", "PXL_20250321_060955307.jpg",
-            "PXL_20250321_060956038.jpg", "PXL_20250321_060956667.jpg", "PXL_20250321_061033975.jpg",
-            "PXL_20250321_061035123.jpg", "PXL_20250321_061037228.jpg", "PXL_20250321_061045453.jpg",
-            "PXL_20250321_061053532.jpg", "PXL_20250321_061056498.jpg", "PXL_20250321_061057745.jpg",
-            "PXL_20250321_061058970.jpg", "PXL_20250321_061059658.jpg", "PXL_20250321_061517382.jpg",
-            "PXL_20250321_061518985.jpg", "PXL_20250321_061521786.jpg", "PXL_20250321_061948370.jpg",
-            "PXL_20250321_071617323.jpg", "PXL_20250321_072220156.jpg", "PXL_20250321_083909635.jpg",
-            "PXL_20250321_084005011.jpg", "PXL_20250321_091825788.jpg", "PXL_20250321_091827986.jpg",
-            "PXL_20250321_091833033.jpg", "PXL_20250321_091842061.jpg", "PXL_20250321_091844104.jpg",
-            "PXL_20250321_091853048.jpg", "PXL_20250321_091906732.jpg", "PXL_20250321_091907950.jpg",
-            "PXL_20250321_091957604.jpg", "PXL_20250321_092832362.jpg", "PXL_20250321_092833489.jpg",
-            "PXL_20250321_092838944.jpg", "PXL_20250321_092840339.jpg"];
-            
-            // Replace the placeholder list with the complete list
-            imageFiles.length = 0;
-            imageFiles.push(...completeImageList);
-            
-            // Initialize the gallery
             filterAndSortImages();
             
             // Remove initial loading spinner
