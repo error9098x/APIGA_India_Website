@@ -1267,6 +1267,33 @@ body:has(.application-banner) .raycast-header {
   white-space: nowrap;
 }
 
+.sid-home-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.sid-home-text {
+  min-width: 0;
+}
+
+.sid-home-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.sid-home-mascot {
+  width: 132px;
+  height: auto;
+  display: block;
+}
+
+.sid-home-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
 @media (max-width: 768px) {
   .sid-cta-group {
     flex-direction: column;
@@ -1275,6 +1302,23 @@ body:has(.application-banner) .raycast-header {
 
   .sid-cta-group .btn {
     width: 100%;
+  }
+
+  .sid-home-layout {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .sid-home-visual {
+    justify-content: flex-start;
+  }
+
+  .sid-home-mascot {
+    width: 112px;
+  }
+
+  .sid-home-action {
+    justify-content: flex-start;
   }
 }
 
