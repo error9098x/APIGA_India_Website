@@ -1229,7 +1229,57 @@ body:has(.application-banner) .raycast-header {
 }
 
 /* ============================================
-   14. ACCESSIBILITY - REDUCED MOTION
+   14. SID INDIA PAGE + ANNOUNCEMENT UTILITIES
+   ============================================ */
+
+.sid-hero {
+  background: linear-gradient(180deg, rgba(219, 234, 254, 0.65) 0%, rgba(249, 250, 251, 0) 100%);
+}
+
+.sid-poster-card {
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.sid-poster-card:hover {
+  transform: translateY(-2px);
+}
+
+.sid-poster-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  display: block;
+}
+
+.sid-cta-card {
+  text-align: center;
+}
+
+.sid-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.sid-home-announcement .btn {
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .sid-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sid-cta-group .btn {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   15. ACCESSIBILITY - REDUCED MOTION
    ============================================ */
 
 @media (prefers-reduced-motion: reduce) {
