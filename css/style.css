@@ -704,6 +704,113 @@ a.link-modern:hover::after {
 }
 
 /* ============================================
+   10b. TESTIMONIALS
+   ============================================ */
+
+.testimonial-avatar {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+  border: 5px solid var(--color-gray-200);
+  margin: 0 auto var(--space-4);
+  display: block;
+  transition: border-color var(--duration-base) var(--timing-ease-out);
+}
+
+.card-modern:hover .testimonial-avatar {
+  border-color: var(--color-primary);
+}
+
+.testimonial-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-12);
+  align-items: start;
+  margin-bottom: var(--space-20);
+  /* Clears the fixed floating header when linked to by anchor. */
+  scroll-margin-top: 130px;
+}
+
+/* Trailing space so the final row can still reach its scroll-margin when deep-linked. */
+.testimonial-row:last-of-type {
+  margin-bottom: calc(var(--space-20) + 160px);
+}
+
+/* Reversed rows place the portrait on the right on wide screens only. */
+.testimonial-row.is-reversed {
+  grid-template-columns: 1fr 280px;
+}
+
+.testimonial-row.is-reversed .testimonial-portrait {
+  order: 2;
+}
+
+.testimonial-portrait {
+  position: sticky;
+  top: 120px;
+}
+
+.testimonial-portrait img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-primary-100);
+}
+
+.testimonial-name {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-1);
+}
+
+.testimonial-meta {
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: var(--space-6);
+}
+
+.testimonial-body p {
+  color: var(--color-gray-700);
+  margin-bottom: var(--space-4);
+  max-width: 68ch;
+}
+
+.testimonial-pullquote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  line-height: 1.4;
+  color: var(--color-primary-dark);
+  border-left: 4px solid var(--color-primary);
+  padding: var(--space-4) 0 var(--space-4) var(--space-6);
+  margin: var(--space-8) 0;
+  max-width: 60ch;
+}
+
+@media (max-width: 900px) {
+  .testimonial-row,
+  .testimonial-row.is-reversed {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    margin-bottom: var(--space-16);
+  }
+
+  .testimonial-row.is-reversed .testimonial-portrait {
+    order: 0;
+  }
+
+  .testimonial-portrait {
+    position: static;
+    max-width: 240px;
+  }
+}
+
+/* ============================================
    11. ICON BOX COMPONENT
    ============================================ */
 
