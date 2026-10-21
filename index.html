@@ -39,13 +39,16 @@
             
             <div class="relative z-10 max-w-7xl mx-auto px-4 w-full flex flex-col justify-start md:justify-center h-full pt-32 md:pt-20">
                 <div class="max-w-6xl">
-                    <div class="hero-edition-pill" data-aos="fade-down">
+                    <div class="hero-edition-pill">
                         <span class="pill-tag">Coming Soon</span>
                         The 2027 edition is being planned
                     </div>
-                    <h1 class="hero-title hero-morph mb-6 md:mb-8 text-4xl sm:text-5xl md:text-7xl leading-tight" data-aos="fade-down" data-aos-duration="1000" aria-label="APIGA India 2027">
-                        <!-- APIGA expands to its full form and contracts back (CSS: .acronym) -->
-                        <span class="acronym" aria-hidden="true"><span class="ac-word"><span class="ac-initial">A</span><span class="ac-rest"><span>sia&nbsp;</span></span></span><wbr><span class="ac-word"><span class="ac-initial">P</span><span class="ac-rest"><span>acific&nbsp;</span></span></span><wbr><span class="ac-word"><span class="ac-initial">I</span><span class="ac-rest"><span>nternet&nbsp;</span></span></span><wbr><span class="ac-word"><span class="ac-initial">G</span><span class="ac-rest"><span>overnance&nbsp;</span></span></span><wbr><span class="ac-word"><span class="ac-initial">A</span><span class="ac-rest"><span>cademy</span></span></span></span><span class="title-tail tail-india" aria-hidden="true"><span class="tail-inner"><svg class="india-flag-svg" viewBox="0 0 280 100" preserveAspectRatio="xMidYMid meet" focusable="false">
+                    <h1 class="hero-title hero-morph mb-6 md:mb-8" aria-label="APIGA India 2027">
+                        <!-- Two fixed layers stacked in a fixed-height box; js/hero-morph.js FLIP-animates
+                             the capitals between them using transform/opacity only, so nothing reflows. -->
+                        <span class="morph" aria-hidden="true">
+                            <span class="morph-layer morph-short">
+                                <span class="morph-line"><span class="cap" data-cap="0">A</span><span class="cap" data-cap="1">P</span><span class="cap" data-cap="2">I</span><span class="cap" data-cap="3">G</span><span class="cap" data-cap="4">A</span><span class="fade-word fade-india"><svg class="india-flag-svg" viewBox="0 0 280 100" preserveAspectRatio="xMidYMid meet" focusable="false">
                             <defs>
                                 <clipPath id="indiaTextClip">
                                     <text x="140" y="100" text-anchor="middle" font-size="95" font-weight="800" font-family="'Space Grotesk', sans-serif">INDIA</text>
@@ -68,21 +71,27 @@
                                     <rect x="0" y="0" width="600" height="130" fill="url(#clothShade)"/>
                                 </g>
                             </g>
-                        </svg></span></span><span class="title-tail tail-year" aria-hidden="true"><span class="tail-inner">2027</span></span>
+                        </svg></span></span>
+                                <span class="morph-line morph-line-2"><span class="fade-word fade-year">2027</span></span>
+                            </span>
+                            <span class="morph-layer morph-long">
+                                <span class="morph-line"><span class="cap" data-cap="0">A</span><span class="lc" data-word="0">sia </span><span class="cap" data-cap="1">P</span><span class="lc" data-word="1">acific </span><span class="cap" data-cap="2">I</span><span class="lc" data-word="2">nternet </span></span>
+                                <span class="morph-line morph-line-2"><span class="cap" data-cap="3">G</span><span class="lc" data-word="3">overnance </span><span class="cap" data-cap="4">A</span><span class="lc" data-word="4">cademy</span></span>
+                            </span>
+                        </span>
                     </h1>
                     <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-6 text-blue-100 font-light max-w-2xl" 
-                       data-aos="fade-up" data-aos-delay="200" 
                        style="text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
                         Empowering Future Internet Leaders
                     </p>
-                    <div class="hero-meta" data-aos="fade-up" data-aos-delay="300">
+                    <div class="hero-meta">
                         <span><i class="fas fa-calendar-alt"></i> Dates to be announced</span>
                         <span><i class="fas fa-map-marker-alt"></i> Venue to be announced</span>
                         <span><i class="fas fa-file-signature"></i> Applications opening soon</span>
                     </div>
                     
                     <!-- Call to Action Buttons -->
-                    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 w-full sm:w-auto" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 w-full sm:w-auto">
                         <a href="#apiga-2027" class="btn btn-apply pulse-glow w-full sm:w-auto justify-center">
                             <i class="fas fa-bell mr-2"></i> Get 2027 Updates
                         </a>
@@ -488,6 +497,7 @@
     <div id="footer" class="relative z-10 bg-gray-50"></div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main_component.js"></script>
+    <script src="js/hero-morph.js" defer></script>
     <script>
         AOS.init({
             duration: 600,

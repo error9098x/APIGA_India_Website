@@ -795,141 +795,133 @@ p + p {
 /* ============================================
    HERO TITLE MORPH: APIGA <-> FULL FORM
    ============================================
-   Plays once per page load (10s), then rests on "APIGA INDIA 2027":
-   hold briefly -> each word unfolds from its initial into "Asia Pacific
-   Internet Governance Academy" while the tail folds away -> hold ~5.5s so
-   it can be read -> letters blur and slide back into the initials, which
-   flash as they snap shut.
-   Widths animate via grid-template-columns 0fr <-> 1fr so no measurement
-   is needed. */
+   Both states are rendered as separate layers stacked inside a fixed-height
+   box, each with explicit, non-wrapping lines:
+     short: "APIGA INDIA" / "2027"
+     long:  "Asia Pacific Internet" / "Governance Academy"
+   (on wide screens each state is a single line).
+   js/hero-morph.js FLIP-animates the long layer's capitals onto the short
+   layer's capital positions and fades whole words, using only transform and
+   opacity. Nothing here changes size during the animation, so the page never
+   reflows. Without JS the short layer is shown as-is. */
 
-/* Each part paints its own colour. Clipping the parent's gradient to text
-   mis-renders animated children in Chrome (ghost copies), so turn it off. */
 .hero-title.hero-morph {
+  /* Each part paints its own colour (clipping a gradient through animated
+     children ghosts in Chrome), and the title does not float. */
   background: none;
   color: #ffffff;
   -webkit-text-fill-color: #ffffff;
+  animation: none;
+  --morph-lh: 1.15;
+  --morph-lines: 2;
+  font-size: 2.6rem;
+  line-height: var(--morph-lh);
 }
 
-.acronym {
-  display: inline;
+@media (min-width: 640px) {
+  .hero-title.hero-morph { font-size: 3.4rem; }
 }
 
-.ac-word {
-  display: inline-flex;
-  align-items: baseline;
+@media (min-width: 1024px) {
+  .hero-title.hero-morph {
+    font-size: 4.25rem;
+    --morph-lines: 1;
+  }
 }
 
-.ac-initial {
+/* Fixed height = the taller state at this breakpoint (both have the same
+   number of lines), so the tagline and buttons below can never move. */
+.morph {
+  position: relative;
+  display: block;
+  height: calc(var(--morph-lines) * var(--morph-lh) * 1em);
+}
+
+.morph-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.morph-line {
+  display: block;
+  height: calc(var(--morph-lh) * 1em);
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .morph-layer {
+    flex-direction: row;
+  }
+
+  /* One line per state: the second "line" continues after a word gap */
+  .morph-short .morph-line-2 {
+    margin-left: 0.28em;
+  }
+}
+
+.cap {
   display: inline-block;
   color: #ffffff;
   -webkit-text-fill-color: #ffffff;
-  animation: ac-initial-flash 10s ease-in-out 1 both;
 }
 
-.ac-rest {
-  display: inline-grid;
-  grid-template-columns: 0fr;
-  animation: ac-unfold 10s cubic-bezier(0.65, 0, 0.35, 1) 1 both;
-}
-
-.ac-rest > span {
-  min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  /* Lowercase letters sit smaller, lighter and cooler than the white initials */
-  font-size: 0.42em;
+/* Lowercase tails: smaller, cooler and lighter than the white capitals */
+.lc {
+  display: inline-block;
+  font-size: 0.5em;
   font-weight: 600;
-  /* Room for descenders (the "y" in Academy) inside the overflow clip */
-  padding-bottom: 0.25em;
-  margin-bottom: -0.25em;
   letter-spacing: -0.01em;
+  white-space: pre;
   background: linear-gradient(90deg, #93c5fd 0%, #67e8f9 50%, #a5b4fc 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Staggered left-to-right so the words open like a ripple */
-.ac-word:nth-child(2) .ac-rest, .ac-word:nth-child(2) .ac-initial { animation-delay: 0.08s; }
-.ac-word:nth-child(3) .ac-rest, .ac-word:nth-child(3) .ac-initial { animation-delay: 0.16s; }
-.ac-word:nth-child(4) .ac-rest, .ac-word:nth-child(4) .ac-initial { animation-delay: 0.24s; }
-.ac-word:nth-child(5) .ac-rest, .ac-word:nth-child(5) .ac-initial { animation-delay: 0.32s; }
-
-.title-tail {
-  display: inline-grid;
-  grid-template-columns: 1fr;
-  animation: tail-fold 10s cubic-bezier(0.65, 0, 0.35, 1) 1 both;
+@media (min-width: 1024px) {
+  .lc { font-size: 0.42em; }
 }
 
-.title-tail > .tail-inner {
-  min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  padding-left: 0.28em;
+.fade-word {
+  display: inline-block;
 }
 
-.tail-year .tail-inner {
+.fade-india {
+  margin-left: 0.28em;
+}
+
+.fade-year {
   background: linear-gradient(135deg, #ffffff 0%, #dbeafe 50%, #ffffff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-@keyframes ac-unfold {
-  0%, 12%   { grid-template-columns: 0fr; opacity: 0; filter: blur(6px); transform: translateX(-0.15em); }
-  24%, 80%  { grid-template-columns: 1fr; opacity: 1; filter: blur(0);   transform: translateX(0); }
-  92%, 100% { grid-template-columns: 0fr; opacity: 0; filter: blur(6px); transform: translateX(-0.15em); }
+/* Static (no-JS) state: short layer only */
+.morph-long {
+  opacity: 0;
 }
 
-@keyframes tail-fold {
-  0%, 12%   { grid-template-columns: 1fr; opacity: 1; }
-  21%, 83%  { grid-template-columns: 0fr; opacity: 0; }
-  94%, 100% { grid-template-columns: 1fr; opacity: 1; }
+/* Once the script has measured and placed the long layer's capitals on top of
+   the short layer's, the short capitals hand over to them. */
+.morph.is-ready .morph-long {
+  opacity: 1;
 }
 
-/* Initials glow cyan while expanded, then flash white as the word snaps shut */
-@keyframes ac-initial-flash {
-  0%, 12%  { text-shadow: none; transform: scale(1); }
-  24%, 80% { text-shadow: 0 0 18px rgba(103, 232, 249, 0.45); transform: scale(1); }
-  92%      { text-shadow: 0 0 28px rgba(255, 255, 255, 0.95), 0 0 48px rgba(103, 232, 249, 0.7); transform: scale(1.08); }
-  100%     { text-shadow: none; transform: scale(1); }
+.morph.is-ready .morph-short .cap {
+  visibility: hidden;
 }
 
-/* Phones and tablets: the full form breaks over two balanced lines
-   ("Asia Pacific Internet" / "Governance Academy") at a readable size.
-   Two lines of height are reserved up front and the title sits on the
-   bottom line, so nothing below it jumps when it expands. */
-@media (max-width: 1023px) {
-  .hero-title.hero-morph {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    align-content: flex-end;
-    min-height: 2.5em;
-  }
-
-  .acronym {
-    display: block;
-    max-width: 7.6em;
-  }
-
-  .hero-edition-pill {
-    margin-bottom: 0.5rem;
-  }
+/* Reduced motion: the two layers simply crossfade (driven by the script) */
+.morph.is-crossfade .morph-short .cap {
+  visibility: visible;
 }
 
-@media (max-width: 639px) {
-  .ac-rest > span {
-    font-size: 0.5em;
-  }
-}
-
-/* Wide screens have room for the full form beside the flag, so keep INDIA visible */
-@media (min-width: 1200px) {
-  .tail-india {
-    animation: none;
-  }
+.morph.is-crossfade .morph-long {
+  opacity: 0;
 }
 
 /* ============================================
@@ -2002,10 +1994,7 @@ a.link-modern:hover::after {
     animation: none;
   }
   
-  .india-flag-svg .flag-cloth,
-  .ac-initial,
-  .ac-rest,
-  .title-tail {
+  .india-flag-svg .flag-cloth {
     animation: none !important;
   }
   
