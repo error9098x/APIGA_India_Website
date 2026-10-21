@@ -896,9 +896,32 @@ p + p {
   100%     { text-shadow: none; transform: scale(1); }
 }
 
+/* Phones and tablets: the full form breaks over two balanced lines
+   ("Asia Pacific Internet" / "Governance Academy") at a readable size.
+   Two lines of height are reserved up front and the title sits on the
+   bottom line, so nothing below it jumps when it expands. */
+@media (max-width: 1023px) {
+  .hero-title.hero-morph {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    align-content: flex-end;
+    min-height: 2.5em;
+  }
+
+  .acronym {
+    display: block;
+    max-width: 7.6em;
+  }
+
+  .hero-edition-pill {
+    margin-bottom: 0.5rem;
+  }
+}
+
 @media (max-width: 639px) {
   .ac-rest > span {
-    font-size: 0.31em;
+    font-size: 0.5em;
   }
 }
 
