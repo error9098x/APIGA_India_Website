@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About APIGA India - Information</title>
-        <meta name="description" content="Learn about APIGA India 2026 - a capacity development workshop on Internet governance, ICANN policies, and the multistakeholder model.">
+        <meta name="description" content="Learn about APIGA India 2027 - a capacity development workshop on Internet governance, ICANN policies, and the multistakeholder model.">
         <meta name="keywords" content="APIGA, ICANN, Internet Governance, India, DNS, domain, tech, workshop, capacity building">
         <meta property="og:title" content="About APIGA India - Information">
-        <meta property="og:description" content="Learn about APIGA India 2026 - a capacity development workshop on Internet governance.">
+        <meta property="og:description" content="Learn about APIGA India 2027 - a capacity development workshop on Internet governance.">
         <meta property="og:image" content="https://apigaindia.in/images/home_page_logo.png">
         <meta property="og:url" content="https://apigaindia.in/pages/information.html">
         <meta property="og:type" content="website">
@@ -15,6 +15,7 @@
         <link rel="canonical" href="https://apigaindia.in/pages/information.html">
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
@@ -24,43 +25,55 @@
     <div id="header-container"></div>
 
     <!-- Main Content -->
-    <section class="pt-24 pb-12">
-        <div class="max-w-7xl mx-auto px-4">
+    <section class="pt-28 pb-16">
+        <div class="max-w-5xl mx-auto px-4">
             <!-- Page Title -->
-            <h1 class="text-4xl font-bold text-center mb-12" data-aos="fade-up">About APIGA India</h1>
-            <div class="card-modern mb-12" data-aos="fade-up" data-aos-delay="80">
-                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                    <p class="text-gray-700 mb-0">
-                        Official update: APIGA India is serving as coordinator for Safer Internet Day India 2026.
-                    </p>
-                    <a href="/pages/safer_internet_day_india.html" class="btn btn-primary">
-                        <i class="fas fa-shield-halved mr-2"></i> View SID India 2026
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-12" data-aos="fade-up">About APIGA India</h1>
+            <div class="soon-card mb-12" data-aos="fade-up" data-aos-delay="80">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div>
+                        <div class="soon-badge !mb-3"><span class="dot"></span> APIGA India 2027</div>
+                        <p class="text-lg mb-0">The next edition is being planned. Dates, venue and theme will be announced soon.</p>
+                    </div>
+                    <a href="/pages/registration.html" class="btn btn-light whitespace-nowrap">
+                        <i class="fas fa-bell"></i> Application updates
                     </a>
                 </div>
             </div>
 
             <!-- What Awaits You -->
             <section class="mb-12">
-                <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">
-                    <i class="fas fa-lightbulb text-blue-600 mr-2"></i>What Awaits You
+                <h2 class="section-title mb-6" data-aos="fade-up">
+                    <i class="fas fa-lightbulb"></i>What Awaits You
                 </h2>
-                <p class="text-gray-700 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-                    Prepare to embark on a journey of learning and networking at APIGA India 2026. This event promises to be a transformative experience, offering insights into Internet governance and the multistakeholder model.
+                <p class="text-gray-700 leading-relaxed text-lg" data-aos="fade-up" data-aos-delay="100">
+                    Prepare to embark on a journey of learning and networking at APIGA India 2027. This event promises to be a transformative experience, offering insights into Internet governance and the multistakeholder model.
                 </p>
             </section>
 
             <!-- Model ICANN Experience -->
             <section class="mb-12">
-                <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">
-                    <i class="fas fa-globe text-blue-600 mr-2"></i>ICANN Model Conference
+                <h2 class="section-title mb-6" data-aos="fade-up">
+                    <i class="fas fa-globe"></i>ICANN Model Conference
                 </h2>
-                <p class="text-gray-700 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                <p class="text-gray-700 leading-relaxed text-lg" data-aos="fade-up" data-aos-delay="100">
                     Engage in a hands-on simulation of ICANN processes, where you will learn about policy development and decision-making in the realm of Internet governance. This interactive session is designed to provide a deep understanding of the complexities involved in managing the global Internet.
                 </p>
             </section>
 
-            <!-- Additional Sections -->
-            <!-- Add more sections as needed based on the content provided -->
+            <!-- Safer Internet Day India -->
+            <section class="mb-4">
+                <div class="card-modern" data-aos="fade-up">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <p class="text-gray-700 mb-0">
+                            APIGA India also serves as the coordinator for Safer Internet Day India.
+                        </p>
+                        <a href="/pages/safer_internet_day_india.html" class="btn btn-primary whitespace-nowrap">
+                            <i class="fas fa-shield-halved mr-2"></i> Safer Internet Day India
+                        </a>
+                    </div>
+                </div>
+            </section>
         </div>
     </section>
 
@@ -71,7 +84,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/main_component.js"></script>
     <script>
-        AOS.init();
+        AOS.init({ duration: 600, once: true });
     </script>
 </body>
 </html>

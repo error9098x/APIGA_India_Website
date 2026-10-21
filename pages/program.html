@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program Schedule - APIGA India 2026</title>
+    <title>Program - APIGA India 2027 (Coming Soon)</title>
+    <meta name="description" content="The APIGA India 2027 programme will be announced soon. Explore the 2026 schedule to see what the two-day workshop looks like.">
+    <meta property="og:title" content="Program - APIGA India 2027">
+    <meta property="og:description" content="The APIGA India 2027 programme will be announced soon.">
+    <meta property="og:image" content="https://apigaindia.in/images/home_page_logo.png">
+    <meta property="og:url" content="https://apigaindia.in/pages/program.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://apigaindia.in/pages/program.html">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -107,26 +115,29 @@
     <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 20% 50%,white 1px,transparent 1px),radial-gradient(circle at 80% 20%,white 1px,transparent 1px);background-size:40px 40px;"></div>
     <div class="max-w-5xl mx-auto px-4 relative">
         <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm" data-aos="fade-up">
-            <i class="fas fa-calendar-check text-yellow-300"></i>
-            26 &ndash; 27 February 2026 &nbsp;&middot;&nbsp; JGU International Academy, Taj Mahal Hotel, New Delhi
+            <i class="fas fa-hourglass-half text-yellow-300"></i>
+            APIGA India 2027 &nbsp;&middot;&nbsp; Dates &amp; venue to be announced
         </div>
         <h1 class="text-4xl md:text-5xl font-bold mb-3" data-aos="fade-up" data-aos-delay="100" style="font-family:'Space Grotesk',sans-serif;">Program Schedule</h1>
-        <p class="text-blue-100 text-lg max-w-2xl" data-aos="fade-up" data-aos-delay="200">Two intensive days of sessions, panels, power talks, and the ICANN Model Conference.</p>
+        <p class="text-blue-100 text-lg max-w-2xl" data-aos="fade-up" data-aos-delay="200">The 2027 programme is being put together. Below is the 2026 schedule, which gives a good picture of the two intensive days of sessions, panels, power talks and the ICANN Model Conference.</p>
     </div>
 </section>
 
 <section class="py-12">
     <div class="max-w-5xl mx-auto px-4">
-        <div class="card-modern mb-8" data-aos="fade-up">
+        <div class="card-modern mb-8 border-l-4 !border-l-blue-600" data-aos="fade-up">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <p class="text-gray-700 mb-0">
-                    See APIGA India's official Safer Internet Day India 2026 coordination announcement.
-                </p>
-                <a href="/pages/safer_internet_day_india.html" class="btn btn-primary">
-                    <i class="fas fa-shield-halved mr-2"></i> SID India 2026
+                <div>
+                    <p class="font-semibold text-gray-900 mb-1"><i class="fas fa-bell text-blue-600 mr-2"></i>APIGA India 2027 programme: coming soon</p>
+                    <p class="text-gray-600 mb-0">Sessions and speakers for 2027 will be published here once confirmed.</p>
+                </div>
+                <a href="https://www.linkedin.com/company/apiga-india/" target="_blank" rel="noopener noreferrer" class="btn btn-primary whitespace-nowrap">
+                    <i class="fab fa-linkedin mr-2"></i> Follow for updates
                 </a>
             </div>
         </div>
+
+        <div class="archive-divider !mt-10" data-aos="fade-up">Previous edition &middot; 2026 schedule</div>
 
         <!-- Stats bar -->
         <div class="stats-bar" data-aos="fade-up">
@@ -150,9 +161,9 @@
         </div>
 
         <!-- Day tabs -->
-        <div class="day-tabs" data-aos="fade-up">
-            <button class="day-tab active" onclick="showDay('day1',this)">Day 1<span class="date-label">26 Feb 2026</span></button>
-            <button class="day-tab" onclick="showDay('day2',this)">Day 2<span class="date-label">27 Feb 2026</span></button>
+        <div class="day-tabs" data-aos="fade-up" role="tablist">
+            <button type="button" role="tab" aria-selected="true" class="day-tab active" onclick="showDay('day1',this)">Day 1<span class="date-label">26 Feb 2026</span></button>
+            <button type="button" role="tab" aria-selected="false" class="day-tab" onclick="showDay('day2',this)">Day 2<span class="date-label">27 Feb 2026</span></button>
         </div>
 
         <!-- ===================== DAY 1 ===================== -->
@@ -437,9 +448,13 @@
     AOS.init({ duration: 600, once: true });
     function showDay(dayId, btn) {
         document.querySelectorAll('.day-content').forEach(el => el.classList.add('hidden'));
-        document.querySelectorAll('.day-tab').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.day-tab').forEach(el => {
+            el.classList.remove('active');
+            el.setAttribute('aria-selected', 'false');
+        });
         document.getElementById(dayId).classList.remove('hidden');
         btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
     }
 </script>
 </body>

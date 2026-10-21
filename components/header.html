@@ -1,135 +1,165 @@
 
-<nav id="header" class="raycast-header">
+<nav id="header" class="raycast-header" aria-label="Main navigation">
     <div class="header-container flex justify-center items-center h-full">
         <!-- Desktop: Centered Navigation Items -->
-        <div class="hidden md:flex items-center space-x-4">
-            <a href="/" class="nav-item">
+        <div class="hidden md:flex items-center space-x-3">
+            <a href="/" class="nav-item" aria-label="Home">
                 <i class="fas fa-home text-xl"></i>
                 <span class="nav-tooltip">Home</span>
             </a>
-            <a href="/pages/information.html" class="nav-item">
+            <a href="/pages/information.html" class="nav-item" aria-label="About">
                 <i class="fas fa-info-circle text-xl"></i>
                 <span class="nav-tooltip">About</span>
             </a>
-            <a href="/pages/program.html" class="nav-item">
+            <a href="/pages/program.html" class="nav-item" aria-label="Program">
                 <i class="fas fa-calendar-alt text-xl"></i>
                 <span class="nav-tooltip">Program</span>
             </a>
-            <a href="/pages/participants.html" class="nav-item">
-                <i class="fas fa-users text-xl"></i>
-                <span class="nav-tooltip">Participants</span>
-            </a>
-            <a href="/pages/localhost.html" class="nav-item">
+            <div class="nav-item-dropdown">
+                <a href="#" class="nav-item dropdown-trigger" aria-label="Participants" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-users text-xl"></i>
+                    <span class="nav-tooltip">Participants</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="/pages/participants.html" class="dropdown-item">
+                        <i class="fas fa-hourglass-half mr-2"></i> 2027 <span class="dropdown-pill">Soon</span>
+                    </a>
+                    <a href="/pages/participants_2026.html" class="dropdown-item">
+                        <i class="fas fa-user-group mr-2"></i> 2026 Participants
+                    </a>
+                    <a href="/pages/participants_2025.html" class="dropdown-item">
+                        <i class="fas fa-user-group mr-2"></i> 2025 Participants
+                    </a>
+                </div>
+            </div>
+            <a href="/pages/localhost.html" class="nav-item" aria-label="Host">
                 <i class="fas fa-handshake-angle text-xl"></i>
                 <span class="nav-tooltip">Host</span>
             </a>
-            <a href="/pages/sponsors.html" class="nav-item">
+            <a href="/pages/sponsors.html" class="nav-item" aria-label="Partners">
                 <i class="fas fa-handshake text-xl"></i>
                 <span class="nav-tooltip">Partners</span>
             </a>
-            <a href="/pages/testimonials.html" class="nav-item">
+            <a href="/pages/testimonials.html" class="nav-item" aria-label="Testimonials">
                 <i class="fas fa-quote-left text-xl"></i>
                 <span class="nav-tooltip">Testimonials</span>
             </a>
             <div class="nav-item-dropdown">
-                <a href="#" class="nav-item dropdown-trigger" onclick="event.preventDefault()">
+                <a href="#" class="nav-item dropdown-trigger" aria-label="Gallery" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-images text-xl"></i>
                     <span class="nav-tooltip">Gallery</span>
                 </a>
                 <div class="dropdown-menu">
-                    <a href="/pages/photos.html" class="dropdown-item">
-                        <i class="fas fa-camera mr-2"></i> 2025 Photos
-                    </a>
                     <a href="/pages/2026_photos.html" class="dropdown-item">
                         <i class="fas fa-image mr-2"></i> 2026 Photos
+                    </a>
+                    <a href="/pages/photos.html" class="dropdown-item">
+                        <i class="fas fa-camera mr-2"></i> 2025 Photos
                     </a>
                 </div>
             </div>
             <div class="nav-item-dropdown">
-                <a href="#" class="nav-item dropdown-trigger" onclick="event.preventDefault()">
+                <a href="#" class="nav-item dropdown-trigger" aria-label="Organizing Committee" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-graduate text-xl"></i>
                     <span class="nav-tooltip">Organizing Committee</span>
                 </a>
                 <div class="dropdown-menu">
-                    <a href="/pages/apiga_oc_2025.html" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> Team 2025
-                    </a>
                     <a href="/pages/apiga_oc_2026.html" class="dropdown-item">
                         <i class="fas fa-users mr-2"></i> Team 2026
                     </a>
+                    <a href="/pages/apiga_oc_2025.html" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> Team 2025
+                    </a>
                 </div>
             </div>
+            <a href="/pages/contact.html" class="nav-item" aria-label="Contact">
+                <i class="fas fa-envelope text-xl"></i>
+                <span class="nav-tooltip">Contact</span>
+            </a>
         </div>
-        
+
         <!-- Mobile: Simplified View (Home + Menu) -->
         <div class="md:hidden flex items-center justify-between w-full px-2">
             <a href="/" class="text-gray-800 font-bold text-lg flex items-center gap-2">
                 <i class="fas fa-home text-blue-600"></i>
-                <span>APIGA India</span>
+                <span>APIGA India <span class="text-blue-600">2027</span></span>
             </a>
-            
-            <button id="mobile-menu-button" type="button" class="text-gray-700 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition">
+
+            <button id="mobile-menu-button" type="button" class="text-gray-700 focus:outline-none p-2 rounded-lg hover:bg-gray-100 transition" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
                 <i class="fas fa-bars text-xl"></i>
             </button>
         </div>
     </div>
 
     <!-- Mobile menu (Dropdown below the floating bar) -->
-   <div id="mobile-menu" class="md:hidden hidden mt-2 bg-white/95 rounded-xl border border-gray-100 shadow-xl backdrop-blur-md">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-        <a href="/" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-home mr-2"></i> Home
-        </a>
-        <a href="/pages/information.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-info-circle mr-2"></i> About
-        </a>
-        <a href="/pages/program.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-calendar-alt mr-2"></i> Program Schedule
-        </a>
-        <a href="/pages/participants.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-users mr-2"></i> Selected Participants
-        </a>
-        <!-- Add the missing Localhost link -->
-        <a href="/pages/localhost.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-handshake-angle mr-2"></i> Local Host
-        </a>
-        <a href="/pages/sponsors.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-handshake mr-2"></i> Partners
-        </a>
-        <a href="/pages/testimonials.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-quote-left mr-2"></i> Testimonials
-        </a>
-        <div class="mobile-dropdown">
-            <button class="mobile-dropdown-trigger block w-full text-left px-3 py-2 text-gray-700 hover:text-blue-600" type="button">
-                <i class="fas fa-images mr-2"></i> Photo Gallery
-                <i class="fas fa-chevron-down ml-2 text-xs"></i>
-            </button>
-            <div class="mobile-dropdown-menu hidden pl-6">
-                <a href="/pages/photos.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
-                    <i class="fas fa-camera mr-2"></i> 2025 Photos
-                </a>
-                <a href="/pages/2026_photos.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
-                    <i class="fas fa-image mr-2"></i> 2026 Photos
-                </a>
+    <div id="mobile-menu" class="md:hidden hidden mt-2 bg-white/95 rounded-xl border border-gray-100 shadow-xl backdrop-blur-md">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="/" class="mobile-link">
+                <i class="fas fa-home mr-2"></i> Home
+            </a>
+            <a href="/pages/information.html" class="mobile-link">
+                <i class="fas fa-info-circle mr-2"></i> About
+            </a>
+            <a href="/pages/program.html" class="mobile-link">
+                <i class="fas fa-calendar-alt mr-2"></i> Program Schedule
+            </a>
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-trigger mobile-link w-full text-left" type="button" aria-expanded="false">
+                    <i class="fas fa-users mr-2"></i> Participants
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </button>
+                <div class="mobile-dropdown-menu hidden pl-6">
+                    <a href="/pages/participants.html" class="mobile-link mobile-sublink">
+                        <i class="fas fa-hourglass-half mr-2"></i> 2027 <span class="dropdown-pill">Soon</span>
+                    </a>
+                    <a href="/pages/participants_2026.html" class="mobile-link mobile-sublink">
+                        <i class="fas fa-user-group mr-2"></i> 2026 Participants
+                    </a>
+                    <a href="/pages/participants_2025.html" class="mobile-link mobile-sublink">
+                        <i class="fas fa-user-group mr-2"></i> 2025 Participants
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="mobile-dropdown">
-            <button class="mobile-dropdown-trigger block w-full text-left px-3 py-2 text-gray-700 hover:text-blue-600" type="button">
-                <i class="fas fa-user-graduate mr-2"></i> APIGA OC
-                <i class="fas fa-chevron-down ml-2 text-xs"></i>
-            </button>
-            <div class="mobile-dropdown-menu hidden pl-6">
-                <a href="/pages/apiga_oc_2025.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
-                    <i class="fas fa-users mr-2"></i> Team 2025
-                </a>
-                <a href="/pages/apiga_oc_2026.html" class="block px-3 py-2 text-gray-600 hover:text-blue-600">
-                    <i class="fas fa-users mr-2"></i> Team 2026
-                </a>
+            <a href="/pages/localhost.html" class="mobile-link">
+                <i class="fas fa-handshake-angle mr-2"></i> Local Host
+            </a>
+            <a href="/pages/sponsors.html" class="mobile-link">
+                <i class="fas fa-handshake mr-2"></i> Partners
+            </a>
+            <a href="/pages/testimonials.html" class="mobile-link">
+                <i class="fas fa-quote-left mr-2"></i> Testimonials
+            </a>
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-trigger mobile-link w-full text-left" type="button" aria-expanded="false">
+                    <i class="fas fa-images mr-2"></i> Photo Gallery
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </button>
+                <div class="mobile-dropdown-menu hidden pl-6">
+                    <a href="/pages/2026_photos.html" class="mobile-link mobile-sublink">
+                        <i class="fas fa-image mr-2"></i> 2026 Photos
+                    </a>
+                    <a href="/pages/photos.html" class="mobile-link mobile-sublink">
+                        <i class="fas fa-camera mr-2"></i> 2025 Photos
+                    </a>
+                </div>
             </div>
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-trigger mobile-link w-full text-left" type="button" aria-expanded="false">
+                    <i class="fas fa-user-graduate mr-2"></i> APIGA OC
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </button>
+                <div class="mobile-dropdown-menu hidden pl-6">
+                    <a href="/pages/apiga_oc_2026.html" class="mobile-link mobile-sublink">
+                        <i class="fas fa-users mr-2"></i> Team 2026
+                    </a>
+                    <a href="/pages/apiga_oc_2025.html" class="mobile-link mobile-sublink">
+                        <i class="fas fa-users mr-2"></i> Team 2025
+                    </a>
+                </div>
+            </div>
+            <a href="/pages/contact.html" class="mobile-link">
+                <i class="fas fa-envelope mr-2"></i> Contact
+            </a>
         </div>
-        <a href="/pages/contact.html" class="block px-3 py-2 text-gray-700 hover:text-blue-600">
-            <i class="fas fa-envelope mr-2"></i> Contact
-        </a>
     </div>
-</div>
 </nav>
