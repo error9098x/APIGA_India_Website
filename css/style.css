@@ -854,6 +854,9 @@ p + p {
 @media (min-width: 1024px) {
   .morph-layer {
     flex-direction: row;
+    /* "APIGA INDIA" holds the inline flag SVG and "2027" is plain text, so
+       their natural baselines differ; align the two lines on one baseline. */
+    align-items: baseline;
   }
 
   /* One line per state: the second "line" continues after a word gap */
