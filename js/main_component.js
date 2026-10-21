@@ -32,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 footerContainer.innerHTML = html;
                 const year = footerContainer.querySelector('[data-current-year]');
                 if (year) year.textContent = new Date().getFullYear();
+                lazyLoadFooterGlobe(footerContainer);
             })
             .catch(error => {
                 console.error('Error loading footer:', error);
@@ -97,6 +98,21 @@ function initHeader() {
     });
 
     markActiveNav();
+}
+
+// Fetches the dotted-globe script only when the footer is about to scroll into view.
+function lazyLoadFooterGlobe(footer) {
+    if (!footer.querySelector('canvas[data-dotted-globe]') || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+        const script = document.createElement('script');
+        script.src = '/js/footer-globe.js';
+        script.defer = true;
+        document.body.appendChild(script);
+    }, { rootMargin: '400px' });
+    observer.observe(footer);
 }
 
 // Highlights the nav entry (or the dropdown that contains it) for the current page.

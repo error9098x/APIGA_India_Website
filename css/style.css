@@ -511,6 +511,7 @@ p + p {
 
 .site-footer {
   position: relative;
+  overflow: hidden;
   background: linear-gradient(180deg, #eef4ff 0%, #e2ecff 100%);
   border-top: 1px solid var(--color-primary-100);
 }
@@ -525,6 +526,30 @@ p + p {
   height: 3px;
   background: linear-gradient(90deg, var(--color-saffron) 0 33%, #ffffff 33% 66%, var(--color-india-green) 66% 100%);
   opacity: 0.85;
+}
+
+/* Peeks in from the bottom-right corner, behind the footer content */
+.footer-globe {
+  position: absolute;
+  right: -150px;
+  bottom: -170px;
+  width: 520px;
+  height: 520px;
+  pointer-events: none;
+  opacity: 0.8;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 55%, transparent 72%);
+  mask-image: radial-gradient(circle at 50% 50%, black 55%, transparent 72%);
+}
+
+@media (max-width: 768px) {
+  .footer-globe {
+    right: -120px;
+    bottom: -120px;
+    width: 340px;
+    height: 340px;
+    opacity: 0.4;
+  }
 }
 
 .site-footer h3 {
@@ -770,10 +795,11 @@ p + p {
 /* ============================================
    HERO TITLE MORPH: APIGA <-> FULL FORM
    ============================================
-   Loop (11s): hold "APIGA INDIA 2027" -> each word unfolds from its
-   initial into "Asia Pacific Internet Governance Academy" while the tail
-   folds away -> hold -> letters blur and slide back into the initials,
-   which flash as they snap shut.
+   Plays once per page load (10s), then rests on "APIGA INDIA 2027":
+   hold briefly -> each word unfolds from its initial into "Asia Pacific
+   Internet Governance Academy" while the tail folds away -> hold ~5.5s so
+   it can be read -> letters blur and slide back into the initials, which
+   flash as they snap shut.
    Widths animate via grid-template-columns 0fr <-> 1fr so no measurement
    is needed. */
 
@@ -798,13 +824,13 @@ p + p {
   display: inline-block;
   color: #ffffff;
   -webkit-text-fill-color: #ffffff;
-  animation: ac-initial-flash 11s ease-in-out infinite;
+  animation: ac-initial-flash 10s ease-in-out 1 both;
 }
 
 .ac-rest {
   display: inline-grid;
   grid-template-columns: 0fr;
-  animation: ac-unfold 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  animation: ac-unfold 10s cubic-bezier(0.65, 0, 0.35, 1) 1 both;
 }
 
 .ac-rest > span {
@@ -833,7 +859,7 @@ p + p {
 .title-tail {
   display: inline-grid;
   grid-template-columns: 1fr;
-  animation: tail-fold 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  animation: tail-fold 10s cubic-bezier(0.65, 0, 0.35, 1) 1 both;
 }
 
 .title-tail > .tail-inner {
@@ -851,23 +877,23 @@ p + p {
 }
 
 @keyframes ac-unfold {
-  0%, 14%   { grid-template-columns: 0fr; opacity: 0; filter: blur(6px); transform: translateX(-0.15em); }
-  28%, 62%  { grid-template-columns: 1fr; opacity: 1; filter: blur(0);   transform: translateX(0); }
-  74%, 100% { grid-template-columns: 0fr; opacity: 0; filter: blur(6px); transform: translateX(-0.15em); }
+  0%, 12%   { grid-template-columns: 0fr; opacity: 0; filter: blur(6px); transform: translateX(-0.15em); }
+  24%, 80%  { grid-template-columns: 1fr; opacity: 1; filter: blur(0);   transform: translateX(0); }
+  92%, 100% { grid-template-columns: 0fr; opacity: 0; filter: blur(6px); transform: translateX(-0.15em); }
 }
 
 @keyframes tail-fold {
-  0%, 14%   { grid-template-columns: 1fr; opacity: 1; }
-  24%, 66%  { grid-template-columns: 0fr; opacity: 0; }
-  78%, 100% { grid-template-columns: 1fr; opacity: 1; }
+  0%, 12%   { grid-template-columns: 1fr; opacity: 1; }
+  21%, 83%  { grid-template-columns: 0fr; opacity: 0; }
+  94%, 100% { grid-template-columns: 1fr; opacity: 1; }
 }
 
 /* Initials glow cyan while expanded, then flash white as the word snaps shut */
 @keyframes ac-initial-flash {
-  0%, 14%  { text-shadow: none; transform: scale(1); }
-  28%, 62% { text-shadow: 0 0 18px rgba(103, 232, 249, 0.45); transform: scale(1); }
-  74%      { text-shadow: 0 0 28px rgba(255, 255, 255, 0.95), 0 0 48px rgba(103, 232, 249, 0.7); transform: scale(1.08); }
-  84%, 100% { text-shadow: none; transform: scale(1); }
+  0%, 12%  { text-shadow: none; transform: scale(1); }
+  24%, 80% { text-shadow: 0 0 18px rgba(103, 232, 249, 0.45); transform: scale(1); }
+  92%      { text-shadow: 0 0 28px rgba(255, 255, 255, 0.95), 0 0 48px rgba(103, 232, 249, 0.7); transform: scale(1.08); }
+  100%     { text-shadow: none; transform: scale(1); }
 }
 
 @media (max-width: 639px) {
@@ -1146,6 +1172,223 @@ a.link-modern:hover::after {
     background: rgba(255, 255, 255, 0.25);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-2px);
+}
+
+/* ============================================
+   12b. SPLIT CARDS, TOPIC TILES, LOGO PANEL
+   ============================================ */
+
+/* Text on the left, visual on the right; stacks on small screens. Fixes the
+   empty right half that wide cards had with the 70ch paragraph cap. */
+.split-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+.split-media {
+  min-width: 0;
+}
+
+@media (max-width: 860px) {
+  .split-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+}
+
+.topic-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, #f5f8ff, #ffffff);
+  border: 1px solid var(--color-primary-100);
+  color: var(--color-gray-800);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.topic-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--color-primary-100);
+  color: var(--color-primary);
+}
+
+@media (max-width: 420px) {
+  .topic-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.logo-panel {
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 4vw, 40px);
+  border-radius: var(--radius-xl);
+  background: radial-gradient(circle at 50% 40%, #f3f7ff 0%, #ffffff 70%);
+  border: 1px solid var(--color-primary-100);
+  transition: border-color var(--duration-base), box-shadow var(--duration-base);
+}
+
+.logo-panel:hover {
+  border-color: var(--color-primary-200);
+  box-shadow: var(--shadow-md);
+}
+
+.logo-panel img {
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+}
+
+/* ============================================
+   12c. MULTISTAKEHOLDER DIAGRAM (ANIMATED)
+   ============================================ */
+
+.ms-diagram {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+}
+
+.ms-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.ms-ring {
+  fill: rgba(36, 99, 235, 0.03);
+  stroke: rgba(36, 99, 235, 0.22);
+  stroke-width: 0.35;
+  stroke-dasharray: 1.2 1.6;
+  animation: ms-ring-flow 30s linear infinite;
+}
+
+/* Dashes travel along each spoke towards the centre, like data flowing in */
+.ms-spoke {
+  stroke: var(--color-primary);
+  stroke-opacity: 0.45;
+  stroke-width: 0.5;
+  stroke-linecap: round;
+  stroke-dasharray: 0.6 2.4;
+  animation: ms-spoke-flow 1.6s linear infinite;
+}
+
+@keyframes ms-spoke-flow {
+  to { stroke-dashoffset: -3; }
+}
+
+@keyframes ms-ring-flow {
+  to { stroke-dashoffset: -28; }
+}
+
+.ms-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 2px;
+  color: white;
+  background: linear-gradient(135deg, #2463eb, #1d4ed8 60%, #0ea5e9);
+  box-shadow: 0 10px 30px rgba(36, 99, 235, 0.35);
+}
+
+.ms-hub i {
+  font-size: clamp(1.2rem, 3vw, 1.75rem);
+  animation: ms-spin 18s linear infinite;
+}
+
+.ms-hub-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ms-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(36, 99, 235, 0.45);
+  animation: ms-pulse 3s ease-out infinite;
+}
+
+.ms-pulse-2 {
+  animation-delay: 1.5s;
+}
+
+@keyframes ms-pulse {
+  from { transform: scale(1); opacity: 0.9; }
+  to   { transform: scale(1.9); opacity: 0; }
+}
+
+@keyframes ms-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ms-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 30%;
+  text-align: center;
+  animation: ms-bob 4s ease-in-out infinite;
+}
+
+.ms-node-icon {
+  width: clamp(38px, 11vw, 48px);
+  height: clamp(38px, 11vw, 48px);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: white;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary-200);
+  box-shadow: var(--shadow-md);
+  font-size: clamp(0.9rem, 2.4vw, 1.1rem);
+}
+
+.ms-node-label {
+  font-size: clamp(0.62rem, 1.8vw, 0.75rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-gray-700);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 1px 6px;
+  border-radius: 6px;
+}
+
+@keyframes ms-bob {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50%      { transform: translate(-50%, calc(-50% - 4px)); }
 }
 
 /* ============================================
