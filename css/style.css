@@ -748,11 +748,138 @@ p + p {
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
+/* The cloth is three periodic bands (period 200 user units). Scrolling it by
+   exactly one period loops seamlessly; a CSS transform is cheaper than SMIL. */
+.india-flag-svg .flag-cloth {
+  animation: flag-wave 2.8s linear infinite;
+  will-change: transform;
+}
+
+@keyframes flag-wave {
+  to { transform: translateX(-200px); }
+}
+
 /* Responsive sizing */
 @media (max-width: 768px) {
   .india-flag-svg {
     height: 1em;
     margin: 0 0.02em;
+  }
+}
+
+/* ============================================
+   HERO TITLE MORPH: APIGA <-> FULL FORM
+   ============================================
+   Loop (11s): hold "APIGA INDIA 2027" -> each word unfolds from its
+   initial into "Asia Pacific Internet Governance Academy" while the tail
+   folds away -> hold -> letters blur and slide back into the initials,
+   which flash as they snap shut.
+   Widths animate via grid-template-columns 0fr <-> 1fr so no measurement
+   is needed. */
+
+/* Each part paints its own colour. Clipping the parent's gradient to text
+   mis-renders animated children in Chrome (ghost copies), so turn it off. */
+.hero-title.hero-morph {
+  background: none;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+
+.acronym {
+  display: inline;
+}
+
+.ac-word {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.ac-initial {
+  display: inline-block;
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  animation: ac-initial-flash 11s ease-in-out infinite;
+}
+
+.ac-rest {
+  display: inline-grid;
+  grid-template-columns: 0fr;
+  animation: ac-unfold 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.ac-rest > span {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Lowercase letters sit smaller, lighter and cooler than the white initials */
+  font-size: 0.42em;
+  font-weight: 600;
+  /* Room for descenders (the "y" in Academy) inside the overflow clip */
+  padding-bottom: 0.25em;
+  margin-bottom: -0.25em;
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #93c5fd 0%, #67e8f9 50%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Staggered left-to-right so the words open like a ripple */
+.ac-word:nth-child(2) .ac-rest, .ac-word:nth-child(2) .ac-initial { animation-delay: 0.08s; }
+.ac-word:nth-child(3) .ac-rest, .ac-word:nth-child(3) .ac-initial { animation-delay: 0.16s; }
+.ac-word:nth-child(4) .ac-rest, .ac-word:nth-child(4) .ac-initial { animation-delay: 0.24s; }
+.ac-word:nth-child(5) .ac-rest, .ac-word:nth-child(5) .ac-initial { animation-delay: 0.32s; }
+
+.title-tail {
+  display: inline-grid;
+  grid-template-columns: 1fr;
+  animation: tail-fold 11s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.title-tail > .tail-inner {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 0.28em;
+}
+
+.tail-year .tail-inner {
+  background: linear-gradient(135deg, #ffffff 0%, #dbeafe 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes ac-unfold {
+  0%, 14%   { grid-template-columns: 0fr; opacity: 0; filter: blur(6px); transform: translateX(-0.15em); }
+  28%, 62%  { grid-template-columns: 1fr; opacity: 1; filter: blur(0);   transform: translateX(0); }
+  74%, 100% { grid-template-columns: 0fr; opacity: 0; filter: blur(6px); transform: translateX(-0.15em); }
+}
+
+@keyframes tail-fold {
+  0%, 14%   { grid-template-columns: 1fr; opacity: 1; }
+  24%, 66%  { grid-template-columns: 0fr; opacity: 0; }
+  78%, 100% { grid-template-columns: 1fr; opacity: 1; }
+}
+
+/* Initials glow cyan while expanded, then flash white as the word snaps shut */
+@keyframes ac-initial-flash {
+  0%, 14%  { text-shadow: none; transform: scale(1); }
+  28%, 62% { text-shadow: 0 0 18px rgba(103, 232, 249, 0.45); transform: scale(1); }
+  74%      { text-shadow: 0 0 28px rgba(255, 255, 255, 0.95), 0 0 48px rgba(103, 232, 249, 0.7); transform: scale(1.08); }
+  84%, 100% { text-shadow: none; transform: scale(1); }
+}
+
+@media (max-width: 639px) {
+  .ac-rest > span {
+    font-size: 0.31em;
+  }
+}
+
+/* Wide screens have room for the full form beside the flag, so keep INDIA visible */
+@media (min-width: 1200px) {
+  .tail-india {
+    animation: none;
   }
 }
 
@@ -1609,8 +1736,11 @@ a.link-modern:hover::after {
     animation: none;
   }
   
-  .india-flag-svg text {
-    animation: none;
+  .india-flag-svg .flag-cloth,
+  .ac-initial,
+  .ac-rest,
+  .title-tail {
+    animation: none !important;
   }
   
   .pulse-glow,
