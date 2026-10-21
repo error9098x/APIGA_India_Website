@@ -114,30 +114,50 @@
 <section class="pt-28 pb-12 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-800 text-white relative overflow-hidden">
     <div class="absolute inset-0 opacity-10" style="background-image:radial-gradient(circle at 20% 50%,white 1px,transparent 1px),radial-gradient(circle at 80% 20%,white 1px,transparent 1px);background-size:40px 40px;"></div>
     <div class="max-w-5xl mx-auto px-4 relative">
-        <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-sm font-semibold mb-4 backdrop-blur-sm" data-aos="fade-up">
-            <i class="fas fa-hourglass-half text-yellow-300"></i>
-            APIGA India 2027 &nbsp;&middot;&nbsp; Dates &amp; venue to be announced
-        </div>
-        <h1 class="text-4xl md:text-5xl font-bold mb-3" data-aos="fade-up" data-aos-delay="100" style="font-family:'Space Grotesk',sans-serif;">Program Schedule</h1>
-        <p class="text-blue-100 text-lg max-w-2xl" data-aos="fade-up" data-aos-delay="200">The 2027 programme is being put together. Below is the 2026 schedule, which gives a good picture of the two intensive days of sessions, panels, power talks and the ICANN Model Conference.</p>
+        <h1 class="text-4xl md:text-5xl font-bold mb-3" data-aos="fade-up" style="font-family:'Space Grotesk',sans-serif;">Program Schedule</h1>
+        <p class="text-blue-100 text-lg max-w-2xl" data-aos="fade-up" data-aos-delay="100">Two intensive days of sessions, panels, power talks and the ICANN Model Conference.</p>
     </div>
 </section>
 
 <section class="py-12">
     <div class="max-w-5xl mx-auto px-4">
-        <div class="card-modern mb-8 border-l-4 !border-l-blue-600" data-aos="fade-up">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                    <p class="font-semibold text-gray-900 mb-1"><i class="fas fa-bell text-blue-600 mr-2"></i>APIGA India 2027 programme: coming soon</p>
-                    <p class="text-gray-600 mb-0">Sessions and speakers for 2027 will be published here once confirmed.</p>
-                </div>
-                <a href="https://www.linkedin.com/company/apiga-india/" target="_blank" rel="noopener noreferrer" class="btn btn-primary whitespace-nowrap">
-                    <i class="fab fa-linkedin mr-2"></i> Follow for updates
-                </a>
+        <!-- Edition switch -->
+        <div class="mb-8 flex justify-center">
+            <div class="year-switch" role="tablist" aria-label="Program by year">
+                <a href="#2027" role="tab" data-year="2027" class="is-current" aria-selected="true">2027</a>
+                <a href="#2026" role="tab" data-year="2026" aria-selected="false">2026</a>
             </div>
         </div>
 
-        <div class="archive-divider !mt-10" data-aos="fade-up">Previous edition &middot; 2026 schedule</div>
+        <!-- ===================== 2027 ===================== -->
+        <div id="program-2027" class="program-year">
+            <div class="soon-card text-center">
+                <div class="soon-badge"><span class="dot"></span> APIGA India 2027</div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Program Coming Soon</h2>
+                <p class="text-lg max-w-2xl mx-auto mb-0">Sessions, speakers and timings for APIGA India 2027 will be published here once confirmed.</p>
+                <div class="tba-grid max-w-3xl mx-auto text-left">
+                    <div class="tba-tile">
+                        <div class="tba-label"><i class="fas fa-calendar-alt"></i> Dates</div>
+                        <div class="tba-value">To be announced</div>
+                    </div>
+                    <div class="tba-tile">
+                        <div class="tba-label"><i class="fas fa-map-marker-alt"></i> Venue</div>
+                        <div class="tba-value">To be announced</div>
+                    </div>
+                    <div class="tba-tile">
+                        <div class="tba-label"><i class="fas fa-microphone"></i> Speakers</div>
+                        <div class="tba-value">Coming soon</div>
+                    </div>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center gap-3">
+                    <a href="https://www.linkedin.com/company/apiga-india/" target="_blank" rel="noopener noreferrer" class="btn btn-light"><i class="fab fa-linkedin"></i> Follow for updates</a>
+                    <a href="#2026" data-year="2026" class="btn btn-ghost-light"><i class="fas fa-clock-rotate-left"></i> See the 2026 program</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================== 2026 ===================== -->
+        <div id="program-2026" class="program-year hidden">
 
         <!-- Stats bar -->
         <div class="stats-bar" data-aos="fade-up">
@@ -436,6 +456,7 @@
 
             </div>
         </div>
+        </div>
 
     </div>
 </section>
@@ -446,6 +467,25 @@
 <script src="../js/main_component.js"></script>
 <script>
     AOS.init({ duration: 600, once: true });
+    // Edition switch: 2027 (coming soon) by default, #2026 opens last year's schedule.
+    function showYear(year) {
+        if (!document.getElementById('program-' + year)) year = '2027';
+        document.querySelectorAll('.program-year').forEach(el => el.classList.toggle('hidden', el.id !== 'program-' + year));
+        document.querySelectorAll('.year-switch [data-year]').forEach(el => {
+            const on = el.dataset.year === year;
+            el.classList.toggle('is-current', on);
+            el.setAttribute('aria-selected', String(on));
+        });
+        if (window.AOS) AOS.refresh();
+    }
+    document.querySelectorAll('[data-year]').forEach(el => el.addEventListener('click', (e) => {
+        e.preventDefault();
+        history.replaceState(null, '', '#' + el.dataset.year);
+        showYear(el.dataset.year);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }));
+    showYear(location.hash.slice(1));
+
     function showDay(dayId, btn) {
         document.querySelectorAll('.day-content').forEach(el => el.classList.add('hidden'));
         document.querySelectorAll('.day-tab').forEach(el => {
