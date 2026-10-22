@@ -1,5 +1,9 @@
 // Hero title morph: "APIGA INDIA 2027" <-> "Asia Pacific Internet Governance Academy".
 //
+// Plays once per page load, then rests on "APIGA INDIA 2027" until the page is
+// reloaded or revisited:
+//   1s rest -> ~1s expand -> 5s hold on the full form -> ~1s contract -> rest.
+//
 // Both states are laid out once, as stacked layers with fixed lines (see the
 // HERO TITLE MORPH section in css/style.css). This script only animates
 // transform and opacity, so the browser never reflows the title:
@@ -27,12 +31,12 @@
 
     const CAP_MS = 800;
     const TAIL_START = CAP_MS * 0.6;
-    const TAIL_MS = 380;
+    const TAIL_MS = 360;
     const STAGGER = 40;
     const FADE_MS = 320;
     const CROSSFADE_MS = 600;
-    const HOLD_SHORT = 4000;
-    const HOLD_LONG = 4500;
+    const START_DELAY = 1000;  // rest on the short title before expanding
+    const HOLD_LONG = 5000;    // time spent on the full form
 
     const POWER3_IN_OUT = 'cubic-bezier(0.65, 0, 0.35, 1)';
     const POWER2_OUT = 'cubic-bezier(0.33, 1, 0.68, 1)';
@@ -125,21 +129,24 @@
         });
     }
 
-    async function loop() {
-        for (;;) {
-            await hold(state === 'short' ? HOLD_SHORT : HOLD_LONG);
-            const next = state === 'short' ? 'long' : 'short';
-            try {
-                await animateTo(next);
-            } catch (e) {
-                // Rebuilt mid-morph (resize / font swap); build() already snapped to `next`.
-            }
-            state = next;
-            target = null;
-            if (staleLayout) {
-                staleLayout = false;
-                build();
-            }
+    async function play() {
+        await run('long', START_DELAY);
+        await run('short', HOLD_LONG);
+    }
+
+    // Wait `ms` (visible time only), then morph to `next`.
+    async function run(next, ms) {
+        await hold(ms);
+        try {
+            await animateTo(next);
+        } catch (e) {
+            // Rebuilt mid-morph (resize / font swap); build() already snapped to `next`.
+        }
+        state = next;
+        target = null;
+        if (staleLayout) {
+            staleLayout = false;
+            build();
         }
     }
 
@@ -167,7 +174,7 @@
 
     fontsReady.then(() => {
         build();
-        loop();
+        play();
         // A late font (e.g. the icon font) can shift metrics: re-measure, but never mid-morph.
         if (document.fonts) {
             document.fonts.addEventListener('loadingdone', () => {
